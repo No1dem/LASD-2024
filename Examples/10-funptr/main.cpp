@@ -15,8 +15,8 @@ enum class ComparisonType { LessThan, Equal, GreaterThen};
 
 // // Function pointer a la C++
 #include <functional>
-typedef function<ComparisonType(int, int)> CompareFunction;
-
+typedef function<ComparisonType(int, int)> CompareFunction;  //Creo un tipo CompareFunction che è un puntatore a funzione che ha in input 
+                                                             //due interi e ritorna un ComparisonType
 void quicksort(int*, uint, CompareFunction);
 void quicksort(int*, uint, uint, CompareFunction);
 uint partition(int*, uint, uint, CompareFunction);
@@ -50,14 +50,40 @@ ComparisonType OrdC(int a, int b) {
   return ComparisonType::Equal;
 }
 
+//Mio tentativo 
+
+ComparisonType OrdD(int a,int b){
+  if (a % 3 != b % 3) {
+    if ((a % 3 == 0) || (a % 3 == 1 && b % 3 > 1)) {
+      return ComparisonType::LessThan;
+    }
+    else 
+      return ComparisonType::GreaterThen;
+  } else if (a < b) {
+    return ComparisonType::LessThan;
+  } else if (a > b ) {
+    return ComparisonType::GreaterThen;
+  }
+  return ComparisonType::Equal;
+}
+
 int main() {
 
   int A[11] = {5, 7, 6, 8, 4, 9, 3, 10, 2, 0, 1};
 
   // quicksort(A, 11);
+  quicksort(A,11,OrdD);
+
+  for (uint i = 0; i < 11; i++) { cout << A[i] << ' '; }; cout << endl;
 
   quicksort(A, 11, OrdA);
+
+  for (uint i = 0; i < 11; i++) { cout << A[i] << ' '; }; cout << endl;
+
   quicksort(A, 11, OrdB);
+
+  for (uint i = 0; i < 11; i++) { cout << A[i] << ' '; }; cout << endl;
+
   quicksort(A, 11, OrdC);
 
   for (uint i = 0; i < 11; i++) { cout << A[i] << ' '; }; cout << endl;
@@ -96,6 +122,8 @@ uint partition(int* A, uint p, uint r) {
   return j;
 
 }
+
+//Quicksort con puntatore a funzione
 
 void quicksort(int* A, uint size, CompareFunction cmp) {
   quicksort(A, 0, size - 1, cmp);
