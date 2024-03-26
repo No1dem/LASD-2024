@@ -24,8 +24,8 @@ using namespace std;
 //   }
 
 //   ~A() {
-//     cout << "The object containing " << (*this) << "is destructed" << endl;
-//     delete[] str;
+//     cout << "The object containing " << (*this) << "is destructed" << endl;   //Gli oggetti vengono deallocati automaticamente dal compilatore
+//     delete[] str;															 // avendo allocato staticamente
 //   }
 
 //   char& operator[](const uint idx) {  //Ovveride operatore di indicizzazione. obj[i] restituisce l'i-esimo carattere di str 
@@ -148,7 +148,7 @@ using namespace std;
 
 //   B() { val += 20; std::cout << "B " << val << std::endl; } // Equivalently, you can add ": A()"
 
-//   B(const B& b) : A(b) { valx = b.valx; val += 20000; std::cout << "Copy B " << val << std::endl; } // Remove ": A(b)"
+//   B(const B& b) : A(b) { valx = b.valx; val += 20000; std::cout << "Copy B " << val << std::endl; } // Remove ": A(b)"   (serve a richiamare il copy constructor in A)
 
 //   ~B() { std::cout << "Delete B " << val << std::endl; }
 // };
