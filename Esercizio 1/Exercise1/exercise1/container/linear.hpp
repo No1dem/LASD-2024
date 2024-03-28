@@ -13,7 +13,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class LinearContainer {
+class LinearContainer /*!!!!!!!!!!*/{
   // Must extend PreOrderMappableContainer<Data>,
   //             PostOrderMappableContainer<Data>
 
@@ -28,21 +28,21 @@ protected:
 public:
 
   // Destructor
-  // ~LinearContainer() specifiers
+  virtual ~LinearContainer() = default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument); // Copy assignment of abstract types is not possible.
+  LinearContainer& operator=(const LinearContainer&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  // type operator=(argument); // Move assignment of abstract types is not possible.
+  LinearContainer& operator=(LinearContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers; // Comparison of abstract types is possible.
-  // type operator!=(argument) specifiers; // Comparison of abstract types is possible.
+  bool operator==(const LinearContainer& ) const noexcept = delete; // Comparison of abstract types is possible.
+  bool operator!=(const LinearContainer& ) const noexcept = delete; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 
