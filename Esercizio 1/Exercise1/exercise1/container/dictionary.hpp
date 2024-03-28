@@ -13,7 +13,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class DictionaryContainer {
+class DictionaryContainer : virtual public TestableContainer<Data>{
   // Must extend TestableContainer<Data>
 
 private:
@@ -27,37 +27,36 @@ protected:
 public:
 
   // Destructor
-  // ~DictionaryContainer() specifiers
-
+  virtual ~DictionaryContainer() = default; 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument); // Copy assignment of abstract types is not possible.
+  DictionaryContainer& operator=(const DictionaryContainer& ) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  // type operator=(argument); // Move assignment of abstract types is not possible.
+  DictionaryContainer& operator=(DictionaryContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers; // Comparison of abstract types is not possible.
-  // type operator!=(argument) specifiers; // Comparison of abstract types is not possible.
+  bool operator==(const DictionaryContainer& ) const noexcept = delete; // Comparison of abstract types is not possible.
+  bool operator!=(const DictionaryContainer& ) const noexcept = delete; // Comparison of abstract types is not possible.
 
   /* ************************************************************************ */
 
   // Specific member functions
 
-  // type Insert(argument) specifiers; // Copy of the value
-  // type Insert(argument) specifiers; // Move of the value
-  // type Remove(argument) specifiers;
+  bool Insert(const Data& ) = 0; // Copy of the value
+  bool Insert(Data&& ) noexcept = 0; // Move of the value
+  bool Remove(const Data& )  = 0;
 
-  // type InsertAll(argument) specifiers; // Copy of the value; From TraversableContainer; True if all are inserted
-  // type InsertAll(argument) specifiers; // Move of the value; From MappableContainer; True if all are inserted
-  // type RemoveAll(argument) specifiers; // From TraversableContainer; True if all are removed
+  bool InsertAll(const TraversableContainer& ) = 0; // Copy of the value; From TraversableContainer; True if all are inserted
+  bool InsertAll(TraversableContainer&& ) noexcept = 0;// Move of the value; From MappableContainer; True if all are inserted
+  bool RemoveAll(const TraversableContainer&) = 0; // From TraversableContainer; True if all are removed
 
-  // type InsertSome(argument) specifiers; // Copy of the value; From TraversableContainer; True if some is inserted
-  // type InsertSome(argument) specifiers; // Move of the value; From MappableContainer; True if some is inserted
-  // type RemoveSome(argument) specifiers; // From TraversableContainer; True if some is removed
+  bool InsertSome(const TraversableContainer& ) = 0 ; // Copy of the value; From TraversableContainer; True if some is inserted
+  bool InsertSome(TraversableContainer&& ) = 0 ; // Move of the value; From MappableContainer; True if some is inserted
+  bool RemoveSome(const TraversableContainer& ) = 0; // From TraversableContainer; True if some is removed
 
 };
 
