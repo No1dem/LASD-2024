@@ -34,7 +34,7 @@ public:
   Container& operator=(const Container&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  Container& operator=(const Container&&) = delete; // Move assignment of abstract types is not possible.
+  Container& operator=(const Container&&) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 

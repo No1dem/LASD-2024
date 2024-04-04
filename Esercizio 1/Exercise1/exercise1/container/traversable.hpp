@@ -17,7 +17,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class TraversableContainer : virtual public TestableContainer<Data>{
+class TraversableContainer : virtual public TestableContainer<Data>{   //Aggiusta il resto sotto 
   // Must extend TestableContainer<Data>
 
 private:
@@ -54,19 +54,19 @@ public:
 
   using TraverseFun = std::function<void(const Data &)>;  //Alias
 
-  void Traverse(const TraverseFun&) = 0; /*dubbi */
+  void Traverse(TraverseFun) const = 0; /*dubbi */
 
   template <typename Accumulator>
   using FoldFun = std::function<Accumulator(const Data &, const Accumulator &)>;
 
   template <typename Accumulator>
-  Accumulator Fold(const FoldFun<Accumulator>&, const Accumulator& ) const; /*dubbi*/
+  Accumulator Fold(FoldFun<Accumulator>,Accumulator) const; /*dubbi*/
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TestableContainer)
 
-  bool Exists(const Data& ) const noexcept override = 0; // Override TestableContainer member
+  inline bool Exists(const Data& ) const noexcept override; // Override TestableContainer member
   
 };
 
@@ -95,7 +95,7 @@ public:
   PreOrderTraversableContainer& operator=(const PreOrderTraversableContainer& ) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  PreOrderTraversableContainer& operator=(PreOrderTraversableContainer&& ) = delete; // Move assignment of abstract types is not possible.
+  PreOrderTraversableContainer& operator=(PreOrderTraversableContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -109,13 +109,13 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void PreOrderTraverse(const TraverseFun& ) const = 0;
+  void PreOrderTraverse(TraverseFun) const = 0;
 
   template <typename Accumulator>
   using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
   template <typename Accumulator>
-  Accumulator PreOrderFold(const FoldFun<Accumulator>&, const Accumulator&) const;
+  Accumulator PreOrderFold(FoldFun<Accumulator>, Accumulator) const;
 
   /* ************************************************************************ */
 

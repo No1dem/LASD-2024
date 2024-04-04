@@ -39,13 +39,13 @@ public:
   MappableContainer& operator=(const MappableContainer& ) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  MappableContainer& operator=(MappableContainer&& ) const noexcept = delete; // Move assignment of abstract types is not possible.
+  MappableContainer& operator=(MappableContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const MappableContainer& ) const noexcept; // Comparison of abstract types is not possible.
-  bool operator!=(const MappableContainer& ) const noexcept; // Comparison of abstract types is not possible.
+  bool operator==(const MappableContainer& ) const noexcept = delete; // Comparison of abstract types is not possible.
+  bool operator!=(const MappableContainer& ) const noexcept = delete; // Comparison of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -53,7 +53,7 @@ public:
 
   using MapFun = std::function<void(Data &)>;
 
-  void Map(const MapFun& ) = 0 ;
+  virtual void Map(const MapFun& ) = 0;
 
 };
 
@@ -83,7 +83,7 @@ public:
   PreOrderMappableContainer& operator=(const PreOrderMappableContainer&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  PreOrderMappableContainer& operator=(PreOrderMappableContainer&& ) = delete; // Move assignment of abstract types is not possible.
+  PreOrderMappableContainer& operator=(PreOrderMappableContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -135,7 +135,7 @@ public:
   PostOrderMappableContainer& operator=(const PostOrderMappableContainer&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  PostOrderMappableContainer& operator=(PostOrderMappableContainer&& ) = delete; // Move assignment of abstract types is not possible.
+  PostOrderMappableContainer& operator=(PostOrderMappableContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -188,7 +188,7 @@ public:
   InOrderMappableContainer& operator=(const InOrderMappableContainer&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  InOrderMappableContainer& operator=(InOrderMappableContainer&& ) = delete; // Move assignment of abstract types is not possible.
+  InOrderMappableContainer& operator=(InOrderMappableContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -241,7 +241,7 @@ public:
   BreadthMappableContainer& operator=(const BreadthMappableContainer&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  BreadthMappableContainer& operator=(BreadthMappableContainer&& ) = delete; // Move assignment of abstract types is not possible.
+  BreadthMappableContainer& operator=(BreadthMappableContainer&& ) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 

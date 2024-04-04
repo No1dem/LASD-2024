@@ -14,7 +14,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class Vector {
+class Vector : virtual {
   // Must extend ResizableContainer,
   //             LinearContainer<Data>
 

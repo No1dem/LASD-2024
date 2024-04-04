@@ -23,7 +23,7 @@ private:
 
 protected:
 
-  // ...
+  using Container::size;
 
 public:
 
@@ -41,21 +41,21 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const LinearContainer& ) const noexcept = delete; // Comparison of abstract types is possible.
-  bool operator!=(const LinearContainer& ) const noexcept = delete; // Comparison of abstract types is possible.
+  bool operator==(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
+  bool operator!=(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 
   // Specific member functions
 
-  virtual Data& operator[](const ulong ) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)
-  virtual Data& operator[](const ulong ) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
+  virtual const Data& operator[](ulong ) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)  (const dopo virtual è riferito al dato Data)
+  virtual Data& operator[](ulong ) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
 
-  virtual Data& Front() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
-  virtual Data& Front() = 0; // (mutable version; concrete function must throw std::length_error when empty)
+  inline virtual const Data& Front() const ; // (non-mutable version; concrete function must throw std::length_error when empty)
+  inline virtual Data& Front(); // (mutable version; concrete function must throw std::length_error when empty)
 
-  virtual Data& Back() const = 0;// (non-mutable version; concrete function must throw std::length_error when empty)
-  virtual Data& Back() = 0; // (mutable version; concrete function must throw std::length_error when empty)
+  inline virtual const Data& Back() const;// (non-mutable version; concrete function must throw std::length_error when empty)
+  inline virtual Data& Back(); // (mutable version; concrete function must throw std::length_error when empty)
 
   /* ************************************************************************ */
 
@@ -124,19 +124,19 @@ public:
   SortableLinearContainer& operator=(const SortableLinearContainer&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  SortableLinearContainer& operator=(SortableLinearContainer&&) const noexcept = delete; // Move assignment of abstract types is not be possible.
+  SortableLinearContainer& operator=(SortableLinearContainer&&) noexcept = delete; // Move assignment of abstract types is not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const SortableLinearContainer& ) const noexcept = delete; // Comparison of abstract types is possible.
-  bool operator!=(const SortableLinearContainer& ) const noexcept = delete; // Comparison of abstract types is possible.
+  bool operator==(const SortableLinearContainer& ) const noexcept; // Comparison of abstract types is possible.
+  bool operator!=(const SortableLinearContainer& ) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 
   // Specific member function
 
-  virtual void Sort() = 0;
+  virtual void Sort() noexcept;
 
 protected:
 
