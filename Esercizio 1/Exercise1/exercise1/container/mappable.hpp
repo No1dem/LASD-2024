@@ -53,7 +53,7 @@ public:
 
   using MapFun = std::function<void(Data &)>;
 
-  virtual void Map(const MapFun& ) = 0;
+  virtual void Map(MapFun) = 0;
 
 };
 
@@ -97,15 +97,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void PreOrderMap(const MapFun& ) const = 0;
+  virtual void PreOrderMap(MapFun) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  void Map(const MapFun& func) const override{
-    PreOrderMap(func);
-  }; // Override MappableContainer member
+  inline void Map(MapFun func) const override; // Override MappableContainer member
 
 };
 
@@ -149,15 +147,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void PostOrderMap(const MapFun& ) const = 0;
+  virtual void PostOrderMap(MapFun) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  void Map(const MapFun& func) const override{
-    PostOrderMap(func);
-  }; // Override MappableContainer member
+  inline void Map(MapFun func) const override;// Override MappableContainer member
   
 };
 
@@ -202,15 +198,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void InOrderMap(const MapFun& ) const = 0;
+  virtual void InOrderMap(MapFun) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  void Map(const MapFun& func) const override{
-    InOrderMap(func);
-  }; // Override MappableContainer member
+  inline void Map(MapFun func) const override; // Override MappableContainer member
   
 };
 
@@ -255,15 +249,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void BreadthMap(const MapFun& ) const = 0;
+  void BreadthMap(MapFun) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  void Map(const MapFun& func) const override{
-    BreadthMap(func);
-  }; // Override MappableContainer member
+  inline void Map(MapFun func) const override; // Override MappableContainer member
   
 };
 

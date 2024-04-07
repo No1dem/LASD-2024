@@ -17,7 +17,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class TraversableContainer : virtual public TestableContainer<Data>{   //Aggiusta il resto sotto 
+class TraversableContainer : virtual public TestableContainer<Data>{   
   // Must extend TestableContainer<Data>
 
 private:
@@ -54,13 +54,12 @@ public:
 
   using TraverseFun = std::function<void(const Data &)>;  //Alias
 
-  void Traverse(TraverseFun) const = 0; /*dubbi */
-
+  void Traverse(TraverseFun) const = 0; 
   template <typename Accumulator>
   using FoldFun = std::function<Accumulator(const Data &, const Accumulator &)>;
 
   template <typename Accumulator>
-  Accumulator Fold(FoldFun<Accumulator>,Accumulator) const; /*dubbi*/
+  inline Accumulator Fold(FoldFun<Accumulator>, Accumulator) const; 
 
   /* ************************************************************************ */
 
@@ -115,13 +114,13 @@ public:
   using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
   template <typename Accumulator>
-  Accumulator PreOrderFold(FoldFun<Accumulator>, Accumulator) const;
+  inline Accumulator PreOrderFold(FoldFun<Accumulator>, Accumulator) const;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TraversableContainer)
 
-  void Traverse(const TraverseFun& func) const override{
+  inline void Traverse(const TraverseFun& func) const override{
     PreOrderTraverse(func);
   }; // Override TraversableContainer member
   
@@ -167,19 +166,19 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void PostOrderTraverse(const TraverseFun& ) const = 0;
+  void PostOrderTraverse(TraverseFun) const = 0;
 
   template <typename Accumulator>
   using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
   template <typename Accumulator>
-  Accumulator PostOrderFold(const FoldFun<Accumulator>&, const Accumulator&) const;
+  inline Accumulator PostOrderFold(FoldFun<Accumulator>, Accumulator) const;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TraversableContainer)
 
-  void Traverse(const TraverseFun& func) const override{
+  inline void Traverse(const TraverseFun& func) const override{
     PostOrderFold(func);
   }; // Override TraversableContainer member
 
@@ -224,19 +223,19 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void InOrderTraverse(const TraverseFun& ) const = 0;
+  void InOrderTraverse(TraverseFun) const = 0;
 
   template <typename Accumulator>
   using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
   template <typename Accumulator>
-  Accumulator InOrderFold(const FoldFun<Accumulator>&, const Accumulator&) const;
+  inline Accumulator InOrderFold(FoldFun<Accumulator>, Accumulator) const;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TraversableContainer)
 
-  void Traverse(const TraverseFun& func) const override{
+  inline void Traverse(const TraverseFun& func) const override{
     InOrderTraverse(func);
   }; // Override TraversableContainer member
   
@@ -281,19 +280,19 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void BreadthTraverse(const TraverseFun& ) const = 0;
+  void BreadthTraverse(TraverseFun) const = 0;
 
   template <typename Accumulator>
   using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
   template <typename Accumulator>
-  Accumulator BreadthFold(const FoldFun<Accumulator>&, const Accumulator&) const;
+  inline Accumulator BreadthFold(FoldFun<Accumulator>, Accumulator) const;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TraversableContainer)
 
-  void Traverse(const TraverseFun& func) const override{
+  inline void Traverse(const TraverseFun& func) const override{
     BreadthTraverse(func);
   }; // Override TraversableContainer member
   

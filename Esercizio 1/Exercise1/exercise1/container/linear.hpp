@@ -48,10 +48,10 @@ public:
 
   // Specific member functions
 
-  virtual const Data& operator[](ulong ) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)  (const dopo virtual è riferito al dato Data)
-  virtual Data& operator[](ulong ) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
+  virtual const Data& operator[](unsigned long ) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)  
+  virtual Data& operator[](unsigned long ) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
 
-  inline virtual const Data& Front() const ; // (non-mutable version; concrete function must throw std::length_error when empty)
+  inline virtual const Data& Front() const; // (non-mutable version; concrete function must throw std::length_error when empty)
   inline virtual Data& Front(); // (mutable version; concrete function must throw std::length_error when empty)
 
   inline virtual const Data& Back() const;// (non-mutable version; concrete function must throw std::length_error when empty)
@@ -63,19 +63,19 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void Traverse(const TraverseFun ) const override; // Override TraversableContainer member
+  inline void Traverse(TraverseFun) const override; // Override TraversableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
-  void PreOrderTraverse(const TraverseFun ) const override; // Override PreOrderTraversableContainer member
+  inline void PreOrderTraverse(TraverseFun) const override; // Override PreOrderTraversableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderTraversableContainer)
 
-  void PostOrderTraverse(const TraverseFun ) const override; // Override PostOrderTraversableContainer member
+  inline void PostOrderTraverse(TraverseFun) const override; // Override PostOrderTraversableContainer member
 
   /* ************************************************************************ */
 
@@ -83,19 +83,19 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void Map(const MapFun) const override; // Override MappableContainer member
+  inline void Map(MapFun) const override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  void PreOrderMap(const MapFun ) const override; // Override PreOrderMappableContainer member
+  inline void PreOrderMap(MapFun) const override; // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  void PostOrderMap(const MapFun ) const override; // Override PostOrderMappableContainer member
+  inline void PostOrderMap(MapFun) const override; // Override PostOrderMappableContainer member
 
 };
 
@@ -142,7 +142,8 @@ protected:
 
   // Auxiliary member functions
 
-  // ...
+  void QuickSort(unsigned long l,unsigned long r);
+  unsigned long Partition(unsigned long l, unsigned long r);
 
 };
 
