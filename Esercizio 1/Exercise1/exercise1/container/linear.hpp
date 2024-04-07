@@ -41,8 +41,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
-  bool operator!=(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
+  inline bool operator==(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
+  inline bool operator!=(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 
