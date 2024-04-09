@@ -27,28 +27,28 @@ void Size(uint & testnum, uint & testerr, const lasd::Container & con, bool chk,
 
 /* ************************************************************************** */
 
-// // Auxiliary functions for TraversableContainer!
+// Auxiliary functions for TraversableContainer!
 
-// int FoldParity(const int & dat, const int & acc) {
-//   return ((acc + dat) % 2);
-// }
+int FoldParity(const int & dat, const int & acc) {
+  return ((acc + dat) % 2);
+}
 
-// std::string FoldStringConcatenate(const std::string & dat, const std::string & acc) {
-//   std::string newstr = acc;
-//   newstr.append(dat);
-//   return newstr;
-// }
+std::string FoldStringConcatenate(const std::string & dat, const std::string & acc) {
+  std::string newstr = acc;
+  newstr.append(dat);
+  return newstr;
+}
 
 /* ************************************************************************** */
 
-// // Auxiliary functions for MappableContainer!
+// Auxiliary functions for MappableContainer!
 
-// void MapStringAppend(std::string & dat, const std::string & par) {
-//   dat.append(par);
-// }
+void MapStringAppend(std::string & dat, const std::string & par) {
+  dat.append(par);
+}
 
-// void MapStringNonEmptyAppend(std::string & dat, const std::string & par) {
-//   if (!dat.empty()) { dat.append(par); }
-// }
+void MapStringNonEmptyAppend(std::string & dat, const std::string & par) {
+  if (!dat.empty()) { dat.append(par); }
+}
 
 /* ************************************************************************** */

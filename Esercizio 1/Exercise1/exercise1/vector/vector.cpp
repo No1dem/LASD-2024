@@ -136,7 +136,7 @@ void Vector<Data>::Resize(unsigned long NewSize) {
 
 //Operatore [] versione Non-Mutable
 template<typename Data>
-const Data& operator[](const unsigned long index) const {
+const Data& Vector<Data>::operator[](const unsigned long index) const {
     if(index > size){
         throw std::out_of_range("Out of bounds!");
     } 
@@ -148,7 +148,7 @@ const Data& operator[](const unsigned long index) const {
 
 //Operatore [] versione Mutable
 template<typename Data>
-Data& operator[](const unsigned long index) {
+Data& Vector<Data>::operator[](const unsigned long index) {
     if(index > size){
         throw std::out_of_range("Out of bounds!");
     } 
@@ -160,7 +160,7 @@ Data& operator[](const unsigned long index) {
 
 //Front versione Non-Mutable
 template<typename Data>
-const Data& Front() const{
+const Data& Vector<Data>::Front() const{
     if (size == 0){
         throw std::length_error("Vector is empty!");
     }
@@ -172,7 +172,7 @@ const Data& Front() const{
 
 //Front versione Mutable
 template<typename Data>
-Data& Front() {
+Data& Vector<Data>::Front() {
     if (size == 0){
         throw std::length_error("Vector is empty!");
     }
@@ -212,7 +212,7 @@ SortableVector<Data>::SortableVector(const unsigned long NewSize) : Vector<Data>
 
 
 template<typename Data>
-SortableVector<Data>::SortableVector(const TraversableContaienr<Data>& TravCont) : Vector<Data>(TravCont) {};
+SortableVector<Data>::SortableVector(const TraversableContainer<Data>& TravCont) : Vector<Data>(TravCont) {};
 
 
 template<typename Data>
@@ -223,6 +223,7 @@ SortableVector<Data>::SortableVector(MappableContainer<Data>&& MapCont) :  Vecto
 template<typename Data>
 SortableVector<Data>::SortableVector(const SortableVector<Data>& vector) : Vector<Data>(vector) {};
 
+
 //Move Constructor
 template<typename Data>
 SortableVector<Data>::SortableVector(SortableVector<Data>&& vector) noexcept : Vector<Data>(std::move(vector)) {};
@@ -231,7 +232,7 @@ SortableVector<Data>::SortableVector(SortableVector<Data>&& vector) noexcept : V
 //Copy Assignment
 template<typename Data>
 SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>& vector) {
-    Vector<Data>::operator(vector);
+    Vector<Data>::operator=(vector);
     return *this;
 }
 
@@ -239,7 +240,7 @@ SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>
 //Move Assignment
 template<typename Data>
 SortableVector<Data>& SortableVector<Data>::operator=(SortableVector<Data>&& vector) noexcept {
-    Vector<Data>::operator(std::move(vector));
+    Vector<Data>::operator=(std::move(vector));
     return *this;
 }
 
