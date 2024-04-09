@@ -2,7 +2,7 @@
 namespace lasd {
 
 /* ************************************************************************** */
-
+/*Vector*/
 
 //Constructor with a given dimension
 template<typename Date>
@@ -185,7 +185,7 @@ Data& Front() {
 //Back versione Non-Mutable
 template <typename Data>
 const Data& Vector<Data>::Back() const {
-    if(size==0) {
+    if(size == 0) {
         throw std::length_error("Vector is empty!");
     } else {
         return Elements[size-1];
@@ -196,14 +196,51 @@ const Data& Vector<Data>::Back() const {
 //Back versione mutable
 template <typename Data>
 Data& Vector<Data>::Back() {
-    if(size==0) {
+    if(size == 0) {
         throw std::length_error("Vector is empty!");
     } else {
         return Elements[size-1];
     }
 }
-
-
 /* ************************************************************************** */
+/*Sortable Vector*/
+
+
+// Specific constructors
+template<typename Data>
+SortableVector<Data>::SortableVector(const unsigned long NewSize) : Vector<Data>(NewSize) {};
+
+
+template<typename Data>
+SortableVector<Data>::SortableVector(const TraversableContaienr<Data>& TravCont) : Vector<Data>(TravCont) {};
+
+
+template<typename Data>
+SortableVector<Data>::SortableVector(MappableContainer<Data>&& MapCont) :  Vector<Data>(std::move(MapCont)) {};
+
+
+//Copy Contructor
+template<typename Data>
+SortableVector<Data>::SortableVector(const SortableVector<Data>& vector) : Vector<Data>(vector) {};
+
+//Move Constructor
+template<typename Data>
+SortableVector<Data>::SortableVector(SortableVector<Data>&& vector) noexcept : Vector<Data>(std::move(vector)) {};
+
+
+//Copy Assignment
+template<typename Data>
+SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>& vector) {
+    Vector<Data>::operator(vector);
+    return *this;
+}
+
+
+//Move Assignment
+template<typename Data>
+SortableVector<Data>& SortableVector<Data>::operator=(SortableVector<Data>&& vector) noexcept {
+    Vector<Data>::operator(std::move(vector));
+    return *this;
+}
 
 }
