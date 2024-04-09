@@ -47,7 +47,7 @@ Vector<Data>::Vector(const Vector<Data>& vector){
 
 //Move constructor
 template<typename Data>
-Vector<Data>::Vector(const Vector<Data>& vector) noexcept{
+Vector<Data>::Vector(Vector<Data>&& vector) noexcept{  /*controllla input*/
     std::swap(size,vector.size);
     std::swap(Elements,vector.Elements);
 }
@@ -81,20 +81,128 @@ Vector<Data>& Vector<Data>::operator=(Vector<Data>&& vector) {
 
 //Comparison ==
 template<typename Data>
-bool Vector<Data>::operator==(const Vector&) const noexcept{
-    
+bool Vector<Data>::operator==(const Vector& vector) const noexcept{
+    if(size != vector.size) {
+        return false;
+    } for(unsigned long index = 0; index < size; index++) {
+        if(Elements[index]!= vector.Elements[index]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 
 //Comparison !=
+template<typename Data>
+bool Vector<Data>::operator!=(const Vector& vector) const noexcept{
+    return !(*this == vector);
+}
 
 
 
 //Clear 
 template<typename Data>
-void Vector::Clear() override{
-
+void Vector<Data>::Clear() {
+    delete[] Elements;
+    size = 0;
+    Elements = nullptr;
 }
+
+
+//Resize 
+template<typename Data>
+void Vector<Data>::Resize(unsigned long NewSize) {
+    if(NewSize != size && NewSize > 0){
+        Data* temp = new Data[NewSize] {};
+        unsigned long min;
+        if (size < newSize){
+            min = size;
+        }
+        else{
+            min = NewSize;
+        }
+        for(unsigned long i = 0; i < min; i++) {
+            std::swap(Elements[i], temp[i]);
+        }
+        std::swap(Elements, temp);
+        size = NewSize;
+        delete[] temp;
+    }
+    else if (NewSize == 0){
+        Clear();
+    }
+}
+
+//Operatore [] versione Non-Mutable
+template<typename Data>
+const Data& operator[](const unsigned long index) const {
+    if(index > size){
+        throw std::out_of_range("Out of bounds!");
+    } 
+    else {
+        return Elements[index];
+    }
+}
+
+
+//Operatore [] versione Mutable
+template<typename Data>
+Data& operator[](const unsigned long index) {
+    if(index > size){
+        throw std::out_of_range("Out of bounds!");
+    } 
+    else {
+        return Elements[index];
+    }
+}
+
+
+//Front versione Non-Mutable
+template<typename Data>
+const Data& Front() const{
+    if (size == 0){
+        throw std::length_error("Vector is empty!");
+    }
+    else {
+        return Elements[0];
+    }
+}
+
+
+//Front versione Mutable
+template<typename Data>
+Data& Front() {
+    if (size == 0){
+        throw std::length_error("Vector is empty!");
+    }
+    else {
+        return Elements[0];
+    }
+}
+
+
+//Back versione Non-Mutable
+template <typename Data>
+const Data& Vector<Data>::Back() const {
+    if(size==0) {
+        throw std::length_error("Vector is empty!");
+    } else {
+        return Elements[size-1];
+    }
+}
+
+
+//Back versione mutable
+template <typename Data>
+Data& Vector<Data>::Back() {
+    if(size==0) {
+        throw std::length_error("Vector is empty!");
+    } else {
+        return Elements[size-1];
+    }
+}
+
 
 /* ************************************************************************** */
 

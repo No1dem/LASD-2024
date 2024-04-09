@@ -1,4 +1,4 @@
-
+  
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
@@ -64,7 +64,7 @@ public:
 
   // Comparison operators
   bool operator==(const Vector&) const noexcept;
-  bool operator!=(const Vector&) const noexcept;
+  bool operator!=(const Vector&) const noexcept;              
 
   /* ************************************************************************ */
 

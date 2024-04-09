@@ -2,6 +2,29 @@
 namespace lasd {
 
 /* ************************************************************************** */
+
+//Operatore ==
+template<typename Data>
+inline bool LinearContainer<Data>::operator==(const LinearContainer& LinCont) const noexcept{
+    if(size!=LinCont.size) {
+        return false;
+    } 
+    for(unsigned long i = 0; i<size; i++) {
+        if(operator[](i) != LinCont.operator[](i)){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+//Operatore !=
+template<typename Data>
+inline bool LinearContainer<Data>::operator!=(const LinearContainer& LinCont) const noexcept{
+    return !(*this == LinCont);
+}
+
+
 //Front versione Non-Mutable
 template<typename Data>
 inline const Data& LinearContainer<Data>::Front() const{
