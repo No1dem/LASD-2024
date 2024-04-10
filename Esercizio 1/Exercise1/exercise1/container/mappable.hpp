@@ -103,7 +103,7 @@ public:
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(MapFun func) const override; // Override MappableContainer member
+  inline void Map(MapFun) const override; // Override MappableContainer member
 
 };
 
@@ -153,7 +153,7 @@ public:
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(MapFun func) const override;// Override MappableContainer member
+  inline void Map(MapFun) const override;// Override MappableContainer member
   
 };
 
@@ -204,7 +204,7 @@ public:
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(MapFun func) const override; // Override MappableContainer member
+  inline void Map(MapFun) const override; // Override MappableContainer member
   
 };
 
@@ -255,7 +255,7 @@ public:
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(MapFun func) const override; // Override MappableContainer member
+  inline void Map(MapFun) const override; // Override MappableContainer member
   
 };
 

@@ -121,7 +121,7 @@ public:
 
   // Specific member function (inherited from TraversableContainer)
 
-  inline void Traverse(const TraverseFun& func) const override{
+  inline void Traverse(TraverseFun func) const override{
     PreOrderTraverse(func);
   }; // Override TraversableContainer member
   
@@ -179,8 +179,8 @@ public:
 
   // Specific member function (inherited from TraversableContainer)
 
-  inline void Traverse(const TraverseFun& func) const override {
-    PostOrderFold(func);
+  inline void Traverse(TraverseFun func) const override {
+    PostOrderTraverse(func);
   }; // Override TraversableContainer member
 
 };
@@ -236,7 +236,7 @@ public:
 
   // Specific member function (inherited from TraversableContainer)
 
-  inline void Traverse(const TraverseFun& func) const override{
+  inline void Traverse(TraverseFun func) const override{
     InOrderTraverse(func);
   }; // Override TraversableContainer member
   
@@ -293,7 +293,7 @@ public:
 
   // Specific member function (inherited from TraversableContainer)
 
-  inline void Traverse(const TraverseFun& func) const override {
+  inline void Traverse(TraverseFun func) const override {
     BreadthTraverse(func);
   }; // Override TraversableContainer member
   

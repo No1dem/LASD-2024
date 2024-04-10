@@ -50,13 +50,13 @@ public:
   virtual bool Insert(Data&& ) noexcept = 0; // Move of the value
   virtual bool Remove(const Data& )  = 0;
 
-  bool InsertAll(const TraversableContainer<Data>& ); // Copy of the value; From TraversableContainer; True if all are inserted
-  bool InsertAll(MappableContainer<Data>&& ) noexcept;// Move of the value; From MappableContainer; True if all are inserted
-  bool RemoveAll(const TraversableContainer<Data>&); // From TraversableContainer; True if all are removed
+  inline bool InsertAll(const TraversableContainer<Data>& ); // Copy of the value; From TraversableContainer; True if all are inserted
+  inline bool InsertAll(MappableContainer<Data>&& ) noexcept;// Move of the value; From MappableContainer; True if all are inserted
+  inline bool RemoveAll(const TraversableContainer<Data>&); // From TraversableContainer; True if all are removed
 
-  bool InsertSome(const TraversableContainer<Data>& ); // Copy of the value; From TraversableContainer; True if some is inserted
-  bool InsertSome(MappableContainer<Data>&& ) noexcept; // Move of the value; From MappableContainer; True if some is inserted
-  bool RemoveSome(const TraversableContainer<Data>& ); // From TraversableContainer; True if some is removed
+  inline bool InsertSome(const TraversableContainer<Data>& ); // Copy of the value; From TraversableContainer; True if some is inserted
+  inline bool InsertSome(MappableContainer<Data>&& ) noexcept; // Move of the value; From MappableContainer; True if some is inserted
+  inline bool RemoveSome(const TraversableContainer<Data>& ); // From TraversableContainer; True if some is removed
 
 };
 

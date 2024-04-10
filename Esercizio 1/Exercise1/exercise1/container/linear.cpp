@@ -56,6 +56,11 @@ inline Data& LinearContainer<Data>::Back() {
     return operator[](size-1);
 }
 
+//Traverse 
+template<typename Data>
+inline void LinearContainer<Data>::Traverse(TraverseFun fun) const {
+    PreOrderTraverse(fun);
+}
 
 template <typename Data>
 inline void LinearContainer<Data>::PreOrderTraverse(TraverseFun fun) const{
@@ -73,9 +78,9 @@ inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun) const{
     }
 }
 
-
+//Map
 template<typename Data>
-inline void LinearContainer<Data>::Map(MapFun fun) const{
+inline void LinearContainer<Data>::Map(MapFun fun) const {
     PreOrderMap(fun);
 }
 
@@ -94,6 +99,21 @@ inline void LinearContainer<Data>::PostOrderMap(MapFun fun) const {
     while (index > 0){
         fun(operator[](--index));
     }
+}
+
+/************************************************/
+/*SortableLinearContainer*/
+
+// Operatore ==
+template <typename Data>
+bool SortableLinearContainer<Data>::operator==(const SortableLinearContainer<Data>& SorCont) const noexcept {
+  return LinearContainer<Data>::operator==(SorCont);
+}
+
+// Operatore !=
+template <typename Data>
+bool SortableLinearContainer<Data>::operator!=(const SortableLinearContainer<Data>& SorCont) const noexcept {
+    return !(operator==(SorCont));
 }
 
 

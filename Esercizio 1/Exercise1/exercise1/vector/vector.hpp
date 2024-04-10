@@ -42,10 +42,10 @@ public:
   /* ************************************************************************ */
 
   // Copy constructor
-  Vector(const Vector&);
+  Vector(const Vector<Data>&);
 
   // Move constructor
-  Vector(Vector&& ) noexcept;
+  Vector(Vector<Data>&& ) noexcept;
 
   /* ************************************************************************ */
 
@@ -55,7 +55,7 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  Vector& operator=(const Vector&);
+  Vector& operator=(const Vector<Data>&);
 
   // Move assignment
   Vector& operator=(Vector &&) noexcept;
@@ -121,17 +121,17 @@ public:
   /* ************************************************************************ */
 
   // Specific constructors
-  SortableVector (const unsigned long) ; // A vector with a given initial dimension
-  SortableVector (const TraversableContainer<Data>& ); // A vector obtained from a TraversableContainer
-  SortableVector (MappableContainer<Data>&&); // A vector obtained from a MappableContainer
+  inline SortableVector (const unsigned long) ; // A vector with a given initial dimension
+  inline SortableVector (const TraversableContainer<Data>& ); // A vector obtained from a TraversableContainer
+  inline SortableVector (MappableContainer<Data>&&); // A vector obtained from a MappableContainer
 
   /* ************************************************************************ */
 
   // Copy constructor
-  SortableVector(const SortableVector<Data>&);
+  inline SortableVector(const SortableVector<Data>&);
 
   // Move constructor
-  SortableVector(SortableVector<Data>&&) noexcept;
+  inline SortableVector(SortableVector<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
@@ -141,10 +141,10 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  SortableVector& operator=(const SortableVector<Data>&);
+  inline SortableVector& operator=(const SortableVector<Data>&);
 
   // Move assignment
-  SortableVector& operator=(SortableVector<Data>&&) noexcept;
+  inline SortableVector& operator=(SortableVector<Data>&&) noexcept;
 
 protected:
 

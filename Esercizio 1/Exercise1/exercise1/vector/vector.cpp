@@ -208,30 +208,30 @@ Data& Vector<Data>::Back() {
 
 // Specific constructors
 template<typename Data>
-SortableVector<Data>::SortableVector(const unsigned long NewSize) : Vector<Data>(NewSize) {};
+inline SortableVector<Data>::SortableVector(const unsigned long NewSize) : Vector<Data>(NewSize) {};
 
 
 template<typename Data>
-SortableVector<Data>::SortableVector(const TraversableContainer<Data>& TravCont) : Vector<Data>(TravCont) {};
+inline SortableVector<Data>::SortableVector(const TraversableContainer<Data>& TravCont) : Vector<Data>(TravCont) {};
 
 
 template<typename Data>
-SortableVector<Data>::SortableVector(MappableContainer<Data>&& MapCont) :  Vector<Data>(std::move(MapCont)) {};
+inline SortableVector<Data>::SortableVector(MappableContainer<Data>&& MapCont) :  Vector<Data>(std::move(MapCont)) {};
 
 
 //Copy Contructor
 template<typename Data>
-SortableVector<Data>::SortableVector(const SortableVector<Data>& vector) : Vector<Data>(vector) {};
+inline SortableVector<Data>::SortableVector(const SortableVector<Data>& vector) : Vector<Data>(vector) {};
 
 
 //Move Constructor
 template<typename Data>
-SortableVector<Data>::SortableVector(SortableVector<Data>&& vector) noexcept : Vector<Data>(std::move(vector)) {};
+inline SortableVector<Data>::SortableVector(SortableVector<Data>&& vector) noexcept : Vector<Data>(std::move(vector)) {};
 
 
 //Copy Assignment
 template<typename Data>
-SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>& vector) {
+inline SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>& vector) {
     Vector<Data>::operator=(vector);
     return *this;
 }
@@ -239,7 +239,7 @@ SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>
 
 //Move Assignment
 template<typename Data>
-SortableVector<Data>& SortableVector<Data>::operator=(SortableVector<Data>&& vector) noexcept {
+inline SortableVector<Data>& SortableVector<Data>::operator=(SortableVector<Data>&& vector) noexcept {
     Vector<Data>::operator=(std::move(vector));
     return *this;
 }
