@@ -100,7 +100,7 @@ protected:
 /* ************************************************************************** */
 
 template <typename Data>
-class SortableVector : virtual public Vecotr<Data>,virtual public SortableLinearContainer<Data>{
+class SortableVector : virtual public Vector<Data>,virtual public SortableLinearContainer<Data>{
   // Must extend Vector<Data>,
   //             SortableLinearContainer<Data>
 
@@ -110,8 +110,8 @@ private:
 
 protected:
 
-  using Container::size;
-  Data* Elements = nullptr;
+  // using Container::size;
+  // Data* Elements = nullptr;
 
 public:
 

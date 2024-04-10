@@ -5,7 +5,7 @@ namespace lasd {
 /*Vector*/
 
 //Constructor with a given dimension
-template<typename Date>
+template<typename Data>
 Vector<Data>::Vector(const unsigned long NewSize){
     size = NewSize;
     Elements = new Data[size] {}; 
@@ -41,7 +41,7 @@ template<typename Data>
 Vector<Data>::Vector(const Vector<Data>& vector){
     size = vector.size;
     Elements = new Data[size] {};
-    std::copy(vector.Elements, vector.Elements + size, Elements)
+    std::copy(vector.Elements, vector.Elements + size, Elements);
 }
 
 
@@ -72,7 +72,7 @@ Vector<Data>& Vector<Data>::operator=(const Vector<Data>& vector) {
 
 //Move Assignment
 template <typename Data>
-Vector<Data>& Vector<Data>::operator=(Vector<Data>&& vector) {
+Vector<Data>& Vector<Data>::operator=(Vector<Data>&& vector) noexcept{
     std::swap(vector.size, size);
     std::swap(vector.Elements, Elements);
     return *this;
@@ -116,7 +116,7 @@ void Vector<Data>::Resize(unsigned long NewSize) {
     if(NewSize != size && NewSize > 0){
         Data* temp = new Data[NewSize] {};
         unsigned long min;
-        if (size < newSize){
+        if (size < NewSize){
             min = size;
         }
         else{

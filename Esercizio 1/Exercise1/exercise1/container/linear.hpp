@@ -111,7 +111,7 @@ private:
 
 protected:
 
-  // ...
+  using Container::size;
 
 public:
 
@@ -142,8 +142,8 @@ protected:
 
   // Auxiliary member functions
 
-  void QuickSort(unsigned long l,unsigned long r);
-  unsigned long Partition(unsigned long l, unsigned long r);
+  void QuickSort(unsigned long l,unsigned long r) noexcept;
+  unsigned long Partition(unsigned long l, unsigned long r) noexcept;
 
 };
 

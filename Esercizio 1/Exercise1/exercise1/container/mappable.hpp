@@ -53,7 +53,7 @@ public:
 
   using MapFun = std::function<void(Data &)>;
 
-  virtual void Map(MapFun) = 0;
+  virtual void Map(MapFun) const = 0;
 
 };
 
