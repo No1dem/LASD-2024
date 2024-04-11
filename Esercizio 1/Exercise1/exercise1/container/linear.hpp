@@ -83,19 +83,19 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  inline void Map(MapFun) const override; // Override MappableContainer member
+  inline void Map(const MapFun) override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  void PreOrderMap(MapFun) const override; // Override PreOrderMappableContainer member
+  void PreOrderMap(const MapFun) override; // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  void PostOrderMap(MapFun) const override; // Override PostOrderMappableContainer member
+  void PostOrderMap(const MapFun) override; // Override PostOrderMappableContainer member
 
 };
 

@@ -15,7 +15,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class List {
+class List : virtual public ClearableContainer, virtual public LinearContainer<Data>, virtual public DictionaryContainer<Data>{
   // Must extend ClearableContainer,
   //             LinearContainer<Data>,
   //             DictionaryContainer<Data>
@@ -26,12 +26,17 @@ private:
 
 protected:
 
-  // using Container::???;
+  using Container::size;
 
   struct Node {
 
-    // Data
-    // ...
+
+
+    Data element;
+    Node* next = nullptr;
+   
+    Node* head = nullptr;
+    Node* tail = nullptr;
 
     /* ********************************************************************** */
 

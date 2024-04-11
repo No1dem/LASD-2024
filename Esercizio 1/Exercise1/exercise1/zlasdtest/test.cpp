@@ -34,7 +34,7 @@ void lasdtest() {
   // ftestnum += loctestnum; ftesterr += loctesterr;
 
   cout << endl << "Exercise 1 (Simple Test) (Errors/Tests: " << stesterr << "/" << stestnum << ")";
-  cout << endl << "Exercise 1 (Full Test) (Errors/Tests: " << ftesterr << "/" << ftestnum << ")" << endl;
+  // cout << endl << "Exercise 1 (Full Test) (Errors/Tests: " << ftesterr << "/" << ftestnum << ")" << endl;
 
   cout << endl << "Goodbye!" << endl;
 }
