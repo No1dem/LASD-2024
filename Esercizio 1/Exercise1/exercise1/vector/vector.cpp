@@ -136,8 +136,8 @@ void Vector<Data>::Resize(unsigned long NewSize) {
 
 //Operatore [] versione Non-Mutable
 template<typename Data>
-const Data& Vector<Data>::operator[](const unsigned long index) const {
-    if(index > size){
+const Data& Vector<Data>::operator[](unsigned long index) const {
+    if(index >= size){
         throw std::out_of_range("Out of bounds!");
     } 
     else {
@@ -148,8 +148,8 @@ const Data& Vector<Data>::operator[](const unsigned long index) const {
 
 //Operatore [] versione Mutable
 template<typename Data>
-Data& Vector<Data>::operator[](const unsigned long index) {
-    if(index > size){
+Data& Vector<Data>::operator[](unsigned long index) {
+    if(index >= size){
         throw std::out_of_range("Out of bounds!");
     } 
     else {

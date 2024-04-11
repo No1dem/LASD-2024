@@ -82,8 +82,8 @@ public:
 
   // Specific member functions (inherited from LinearContainer)
 
-  const Data& operator[](const unsigned long) const override; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
-  Data& operator[](const unsigned long) override; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
+  const Data& operator[](unsigned long) const override; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
+  Data& operator[](unsigned long) override; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
 
   const Data& Front() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
   Data& Front() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
@@ -110,8 +110,8 @@ private:
 
 protected:
 
-  // using Container::size;
-  // Data* Elements = nullptr;
+  using Container::size;
+  
 
 public:
 

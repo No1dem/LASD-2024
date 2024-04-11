@@ -86,7 +86,7 @@ inline void LinearContainer<Data>::Map(MapFun fun) const {
 
 
 template <typename Data>
-inline void LinearContainer<Data>::PreOrderMap(MapFun fun) const {
+void LinearContainer<Data>::PreOrderMap(MapFun fun) const {
     for (unsigned long index = 0; index < size ; ++index){
         fun(operator[](index));
     }    
@@ -94,7 +94,7 @@ inline void LinearContainer<Data>::PreOrderMap(MapFun fun) const {
 
 
 template <typename Data>
-inline void LinearContainer<Data>::PostOrderMap(MapFun fun) const {
+void LinearContainer<Data>::PostOrderMap(MapFun fun) const {
     unsigned long index = size;
     while (index > 0){
         fun(operator[](--index));
@@ -135,16 +135,16 @@ void SortableLinearContainer<Data>::QuickSort(unsigned long l,unsigned long r) n
 
 template<typename Data>
 unsigned long SortableLinearContainer<Data>::Partition(unsigned long l, unsigned long r) noexcept{
-    Data x = LinearContainer<Data>::operator[](l);
+    Data x = operator[](l);
     unsigned long i = l - 1;
     unsigned long j = r + 1;
 
     do{
         do { j--; }
-        while (x < LinearContainer<Data>::operator[](j));
+        while (x < operator[](j));
         do { i++; }
-        while (x > LinearContainer<Data>::operator[](i));
-        if(i < j){ std::swap(LinearContainer<Data>::operator[](i),LinearContainer<Data>::operator[](j)); }
+        while (x > operator[](i));
+        if(i < j){ std::swap(operator[](i),operator[](j)); }
     }
     while (i < j);
     return j;
