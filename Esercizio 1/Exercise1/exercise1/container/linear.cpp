@@ -80,13 +80,13 @@ inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun) const{
 
 //Map
 template<typename Data>
-inline void LinearContainer<Data>::Map(const MapFun fun) {
+inline void LinearContainer<Data>::Map(MapFun fun) {
     PreOrderMap(fun);
 }
 
 
 template <typename Data>
-void LinearContainer<Data>::PreOrderMap(const MapFun fun) {
+void LinearContainer<Data>::PreOrderMap(MapFun fun) {
     for (unsigned long index = 0; index < size ; ++index){
         fun(operator[](index));
     }    
@@ -94,7 +94,7 @@ void LinearContainer<Data>::PreOrderMap(const MapFun fun) {
 
 
 template <typename Data>
-void LinearContainer<Data>::PostOrderMap(const MapFun fun) {
+void LinearContainer<Data>::PostOrderMap(MapFun fun) {
     unsigned long index = size;
     while (index > 0){
         fun(operator[](--index));
