@@ -1,3 +1,4 @@
+
   
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
@@ -55,10 +56,10 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  Vector& operator=(const Vector<Data>&);
+  Vector<Data>& operator=(const Vector<Data>&);
 
   // Move assignment
-  Vector& operator=(Vector &&) noexcept;
+  Vector<Data>& operator=(Vector<Data> &&) noexcept;
 
   /* ************************************************************************ */
 
@@ -141,10 +142,10 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  inline SortableVector& operator=(const SortableVector<Data>&);
+  inline SortableVector<Data>& operator=(const SortableVector<Data>&);
 
   // Move assignment
-  inline SortableVector& operator=(SortableVector<Data>&&) noexcept;
+  inline SortableVector<Data>& operator=(SortableVector<Data>&&) noexcept;
 
 protected:
 

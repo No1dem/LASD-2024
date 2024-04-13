@@ -35,14 +35,12 @@ protected:
     Data element;
     Node* next = nullptr;
    
-    Node* head = nullptr;
-    Node* tail = nullptr;
 
     /* ********************************************************************** */
 
     // Specific constructors
     inline Node(const Data& dato) : element(dato) {};
-    inline Node(Data&&) noexcept : element(std::move(dato)) {}; 
+    inline Node(Data&& dato) noexcept : element(std::move(dato)) {}; 
 
     /* ********************************************************************** */
 
@@ -71,7 +69,10 @@ protected:
 
   };
 
-  // ...
+  Node* head = nullptr;
+  Node* tail = nullptr;
+
+  
 
 public:
 

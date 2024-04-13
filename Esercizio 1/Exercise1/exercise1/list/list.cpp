@@ -79,9 +79,7 @@ template<typename Data>
 List& List<Data>::operator=(const List<Data>& list){
     if (this != &list){
         List<Data> tmp(list);
-        std::swap(size, list.size);
-        std::swap(head, list.head);
-        std::swap(tail, list.tail);
+        std::swap(*this, tmp);
     }
     return *this;
 }

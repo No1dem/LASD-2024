@@ -81,7 +81,7 @@ Vector<Data>& Vector<Data>::operator=(Vector<Data>&& vector) noexcept{
 
 //Comparison ==
 template<typename Data>
-bool Vector<Data>::operator==(const Vector& vector) const noexcept{
+bool Vector<Data>::operator==(const Vector<Data>& vector) const noexcept{
     if(size != vector.size) {
         return false;
     } for(unsigned long index = 0; index < size; index++) {
@@ -95,7 +95,7 @@ bool Vector<Data>::operator==(const Vector& vector) const noexcept{
 
 //Comparison !=
 template<typename Data>
-bool Vector<Data>::operator!=(const Vector& vector) const noexcept{
+bool Vector<Data>::operator!=(const Vector<Data>& vector) const noexcept{
     return !(*this == vector);
 }
 
@@ -136,7 +136,7 @@ void Vector<Data>::Resize(unsigned long NewSize) {
 
 //Operatore [] versione Non-Mutable
 template<typename Data>
-const Data& Vector<Data>::operator[](unsigned long index) const {
+const Data& Vector<Data>::operator[](const unsigned long index) const {
     if(index >= size){
         throw std::out_of_range("Out of bounds!");
     } 
@@ -148,7 +148,7 @@ const Data& Vector<Data>::operator[](unsigned long index) const {
 
 //Operatore [] versione Mutable
 template<typename Data>
-Data& Vector<Data>::operator[](unsigned long index) {
+Data& Vector<Data>::operator[](const unsigned long index) {
     if(index >= size){
         throw std::out_of_range("Out of bounds!");
     } 
