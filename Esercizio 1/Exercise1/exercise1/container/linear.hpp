@@ -41,7 +41,7 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  inline bool operator==(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
+  bool operator==(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
   inline bool operator!=(const LinearContainer& ) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
@@ -51,11 +51,11 @@ public:
   virtual const Data& operator[](const unsigned long) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)  
   virtual Data& operator[](const unsigned long) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
 
-  inline virtual const Data& Front() const; // (non-mutable version; concrete function must throw std::length_error when empty)
+  virtual inline const Data& Front() const; // (non-mutable version; concrete function must throw std::length_error when empty)
   inline virtual Data& Front(); // (mutable version; concrete function must throw std::length_error when empty)
 
-  inline virtual const Data& Back() const;// (non-mutable version; concrete function must throw std::length_error when empty)
-  inline virtual Data& Back(); // (mutable version; concrete function must throw std::length_error when empty)
+  virtual inline const Data& Back() const;// (non-mutable version; concrete function must throw std::length_error when empty)
+  virtual inline Data& Back(); // (mutable version; concrete function must throw std::length_error when empty)
 
   /* ************************************************************************ */
 
@@ -104,7 +104,6 @@ public:
 template <typename Data>
 class SortableLinearContainer : virtual public LinearContainer<Data>{
   // Must extend LinearContainer<Data>
-  template <typename> friend class SortableLinearContainer;
 private:
 
   // ...
@@ -143,8 +142,8 @@ protected:
 
   // Auxiliary member functions
 
-  void QuickSort(unsigned long l,unsigned long r) noexcept;
-  unsigned long Partition(unsigned long l, unsigned long r) noexcept;
+  void QuickSort(unsigned long ,unsigned long ) noexcept;
+  unsigned long Partition(unsigned long , unsigned long ) noexcept;
 
 };
 

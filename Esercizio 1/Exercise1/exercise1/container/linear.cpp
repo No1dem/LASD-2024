@@ -5,7 +5,7 @@ namespace lasd {
 
 //Operatore ==
 template<typename Data>
-inline bool LinearContainer<Data>::operator==(const LinearContainer& LinCont) const noexcept{
+bool LinearContainer<Data>::operator==(const LinearContainer& LinCont) const noexcept{
     if(size!=LinCont.size) {
         return false;
     } 
