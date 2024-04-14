@@ -395,6 +395,8 @@ void List<Data>::PostOrderTraverse(TraverseFun fun, Node* currNode) const {
   PostOrderTraverse(fun, currNode->next);
   fun(currNode->element);
 }
+
+
 template <typename Data>
 void List<Data>::PreOrderMap(MapFun fun, Node* currNode) const {
   if (currNode == nullptr)
@@ -402,6 +404,7 @@ void List<Data>::PreOrderMap(MapFun fun, Node* currNode) const {
   fun(currNode->element);
   PreOrderMap(fun, currNode->next);
 }
+
 
 template <typename Data>
 void List<Data>::PostOrderMap(MapFun fun, Node* currNode) const {
