@@ -64,8 +64,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const Vector&) const noexcept;
-  bool operator!=(const Vector&) const noexcept;              
+  bool operator==(const Vector<Data>&) const noexcept;
+  bool operator!=(const Vector<Data>&) const noexcept;              
 
   /* ************************************************************************ */
 

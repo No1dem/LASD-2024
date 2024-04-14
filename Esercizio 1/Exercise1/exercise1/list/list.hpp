@@ -53,7 +53,9 @@ protected:
     /* ********************************************************************** */
 
     // Destructor
-    virtual ~Node() = default;
+    virtual ~Node() {
+      delete next;
+    };
 
     /* ********************************************************************** */
 
@@ -96,21 +98,23 @@ public:
   /* ************************************************************************ */
 
   // Destructor
-  virtual ~List();
+  virtual ~List() {
+    delete head;
+  }
 
   /* ************************************************************************ */
 
   // Copy assignment
-  List& operator=(const List<Data>&);
+  List<Data>& operator=(const List<Data>&);
 
   // Move assignment
-  List& operator=(List<Data>&&) noexcept;
+  List<Data>& operator=(List<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
   // Comparison operators
   bool operator==(const List<Data>&) const noexcept;
-  bool operator!=(const List<Data>&) const noexcept;
+  inline bool operator!=(const List<Data>&) const noexcept;
 
   /* ************************************************************************ */
 
@@ -119,8 +123,8 @@ public:
   void InsertAtFront(const Data&); // Copy of the value
   void InsertAtFront(Data&&) noexcept; // Move of the value
 
-  void RemoveFromFront(const Data&); // (must throw std::length_error when empty)
-  Data FrontNRemove(); // (must throw std::length_error when empty)
+  void RemoveFromFront(); // (must throw std::length_error when empty)
+  inline Data FrontNRemove(); // (must throw std::length_error when empty)
 
   void InsertAtBack(const Data&); // Copy of the value
   void InsertAtBack(Data&&) noexcept; // Move of the value
@@ -129,9 +133,11 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  virtal void Clear() override; // Override ClearableContainer member
+  void Clear() override; // Override ClearableContainer member
 
   /* ************************************************************************ */
+
+  using TestableContainer<Data>::Exists;
 
   // Specific member functions (inherited from DictionaryContainer)
 
@@ -146,11 +152,11 @@ public:
   const Data& operator[](const unsigned long) const override; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
   Data& operator[](const unsigned long) override; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
 
-  const Data& Front() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
-  Data& Front() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
+  inline const Data& Front() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
+  inline Data& Front() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
 
-  const Data& Back() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
-  Data& Back() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
+  inline const Data& Back() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
+  inline Data& Back() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
 
   /* ************************************************************************ */
 
@@ -158,19 +164,25 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void Traverse(TraverseFun) const override; // Override TraversableContainer member
+  inline void Traverse(TraverseFun fun)  const override{
+    PreOrderTraverse(fun);
+  } // Override TraversableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
-  void PreOrderTraverse(TraverseFun) const override; // Override PreOrderTraversableContainer member
+  inline void PreOrderTraverse(TraverseFun fun) const override {
+    PreOrderTraverse(fun, head);
+  }// Override PreOrderTraversableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderTraversableContainer)
 
-  void PostOrderTraverse(TraverseFun) const override; // Override PostOrderTraversableContainer member
+  inline void PostOrderTraverse(TraverseFun fun) const override {
+    PostOrderTraverse(fun, head);
+  } // Override PostOrderTraversableContainer member
 
   /* ************************************************************************ */
 
@@ -178,24 +190,36 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void Map(Mapfun) override; // Override MappableContainer member
+  inline void Map(MapFun fun) override {
+    PreOrderMap(fun);
+  } // Override MappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  void PreOrderMap(MapFun) override; // Override PreOrderMappableContainer member
+  inline void PreOrderMap(MapFun fun) override {
+    PreOrderMap(fun, head);
+  } // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  void PostOrderMap(MapFun) override; // Override PostOrderMappableContainer member
+  inline void PostOrderMap(MapFun fun) override {
+    PostOrderMap(fun, head);
+  } // Override PostOrderMappableContainer member
 
 protected:
 
   // Auxiliary functions, if necessary!
-   bool Exists(const Data&) const noexcept;
+  void PreOrderTraverse(TraverseFun, Node*) const;
+
+  void PostOrderTraverse(TraverseFun, Node*) const;
+
+  void PreOrderMap(MapFun, Node*) const;
+
+  void PostOrderMap(MapFun, Node*) const;
 
 };
 
