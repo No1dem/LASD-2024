@@ -79,12 +79,12 @@ public:
 
   // Specific member functions (inherited from Queue)
 
-  inline const Data& Head() const override; // Override Queue member (non-mutable version; must throw std::length_error when empty)
-  inline Data& Head() override; // Override Queue member (mutable version; must throw std::length_error when empty)
-  inline void Dequeue() override; // Override Queue member (must throw std::length_error when empty)
-  inline Data HeadNDequeue() override; // Override Queue member (must throw std::length_error when empty)
-  inline void Enqueue(const Data&) override; // Override Queue member (copy of the value)
-  inline void Enqueue(Data&&) noexcept override; // Override Queue member (move of the value)
+  const Data& Head() const override; // Override Queue member (non-mutable version; must throw std::length_error when empty)
+  Data& Head() override; // Override Queue member (mutable version; must throw std::length_error when empty)
+  void Dequeue() override; // Override Queue member (must throw std::length_error when empty)
+  Data HeadNDequeue() override; // Override Queue member (must throw std::length_error when empty)
+  void Enqueue(const Data&) override; // Override Queue member (copy of the value)
+  void Enqueue(Data&&) noexcept override; // Override Queue member (move of the value)
 
   /* ************************************************************************ */
 
@@ -103,7 +103,8 @@ public:
 protected:
 
   // Auxiliary functions, if necessary!
-
+  void IncreaseSize();
+  void DecreaseSize();
 };
 
 /* ************************************************************************** */
