@@ -47,7 +47,7 @@ Vector<Data>::Vector(const Vector<Data>& vector){
 
 //Move constructor
 template<typename Data>
-Vector<Data>::Vector(Vector<Data>&& vector) noexcept{  /*controllla input*/
+Vector<Data>::Vector(Vector<Data>&& vector) noexcept{ 
     std::swap(size,vector.size);
     std::swap(Elements,vector.Elements);
 }

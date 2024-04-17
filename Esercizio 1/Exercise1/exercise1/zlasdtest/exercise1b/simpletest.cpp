@@ -250,9 +250,9 @@ void stestQueueInt(Que & que, uint & testnum, uint & testerr) {
 }
 void stestQueueInt(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
-//   lasd::QueueVec<int> quevec;
-//   cout << endl << "Begin of QueueVec<int> Test:" << endl;
-//   stestQueueInt(quevec, loctestnum, loctesterr);
+  lasd::QueueVec<int> quevec;
+  cout << endl << "Begin of QueueVec<int> Test:" << endl;
+  stestQueueInt(quevec, loctestnum, loctesterr);
   lasd::QueueLst<int> quelst;
   cout << endl << "Begin of QueueLst<int> Test:" << endl;
   stestQueueInt(quelst, loctestnum, loctesterr);
@@ -287,9 +287,9 @@ void stestQueueFloat(Que & que, uint & testnum, uint & testerr) {
 }
 void stestQueueFloat(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
-//   lasd::QueueVec<double> quevec;
-//   cout << endl << "Begin of QueueVec<double> Test:" << endl;
-//   stestQueueFloat(quevec, loctestnum, loctesterr);
+  lasd::QueueVec<double> quevec;
+  cout << endl << "Begin of QueueVec<double> Test:" << endl;
+  stestQueueFloat(quevec, loctestnum, loctesterr);
   lasd::QueueLst<double> quelst;
   cout << endl << "Begin of QueueLst<double> Test:" << endl;
   stestQueueFloat(quelst, loctestnum, loctesterr);
@@ -322,9 +322,9 @@ void stestQueueString(Que & que, uint & testnum, uint & testerr) {
 }
 void stestQueueString(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
-//   lasd::QueueVec<string> quevec;
-//   cout << endl << "Begin of QueueVec<string> Test:" << endl;
-//   stestQueueString(quevec, loctestnum, loctesterr);
+  lasd::QueueVec<string> quevec;
+  cout << endl << "Begin of QueueVec<string> Test:" << endl;
+  stestQueueString(quevec, loctestnum, loctesterr);
   lasd::QueueLst<string> quelst;
   cout << endl << "Begin of QueueLst<string> Test:" << endl;
   stestQueueString(quelst, loctestnum, loctesterr);
@@ -334,10 +334,10 @@ void stestQueueString(uint & testnum, uint & testerr) {
     SetAt(loctestnum, loctesterr, vec, true, 0, string("A"));
     SetAt(loctestnum, loctesterr, vec, true, 1, string("B"));
 
-    // EnqueueM(loctestnum, loctesterr, quevec, string("A"));
-    // EnqueueM(loctestnum, loctesterr, quevec, string("B"));
-    // lasd::QueueVec<string> newquevec(vec);
-    // EqualQueue(loctestnum, loctesterr, quevec, newquevec, true);
+    EnqueueM(loctestnum, loctesterr, quevec, string("A"));
+    EnqueueM(loctestnum, loctesterr, quevec, string("B"));
+    lasd::QueueVec<string> newquevec(vec);
+    EqualQueue(loctestnum, loctesterr, quevec, newquevec, true);
 
     EnqueueM(loctestnum, loctesterr, quelst, string("A"));
     EnqueueM(loctestnum, loctesterr, quelst, string("B"));

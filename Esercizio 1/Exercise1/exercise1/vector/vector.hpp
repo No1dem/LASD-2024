@@ -59,7 +59,7 @@ public:
   Vector<Data>& operator=(const Vector<Data>&);
 
   // Move assignment
-  Vector<Data>& operator=(Vector<Data> &&) noexcept;
+  Vector<Data>& operator=(Vector<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
