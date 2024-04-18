@@ -6,9 +6,9 @@
 #include "../container/container.hpp"
 #include "../container/linear.hpp"
 
-// #include "../stack/stack.hpp"
-// #include "../../stack/vec/stackvec.hpp"
-// #include "../../stack/lst/stacklst.hpp"
+#include "../stack/stack.hpp"
+#include "../../stack/vec/stackvec.hpp"
+#include "../../stack/lst/stacklst.hpp"
 
 #include "../queue/queue.hpp"
 #include "../../queue/vec/queuevec.hpp"

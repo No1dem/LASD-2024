@@ -6,7 +6,7 @@
 
 #include "../queue.hpp"
 #include "../../vector/vector.hpp"
-#define DEFAULT_SIZE 4
+
 /* ************************************************************************** */
 
 namespace lasd {
@@ -20,7 +20,10 @@ class QueueVec : virtual public Queue<Data>,virtual public Vector<Data>{
 
 private:
 
-  // ...
+static const int DEFAULT_SIZE = 4;
+static const int INCREASE_FACTOR = 2;
+static const int DECREASE_FACTOR = 2;
+  
 
 protected:
 

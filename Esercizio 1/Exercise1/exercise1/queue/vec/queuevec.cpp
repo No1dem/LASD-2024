@@ -13,7 +13,7 @@ QueueVec<Data>::QueueVec() : Vector<Data>(DEFAULT_SIZE) {
 //Specific constructor (TraversableContainer)
 template<typename Data>
 inline QueueVec<Data>::QueueVec(const TraversableContainer<Data>& TravCon) {
-    size = TravCon.Size()*2;
+    size = TravCon.Size()*INCREASE_FACTOR;
     sentinel = size-1;
     Elements = new Data[size] {};
     TravCon.Traverse([this](const Data& data) {
@@ -26,7 +26,7 @@ inline QueueVec<Data>::QueueVec(const TraversableContainer<Data>& TravCon) {
 //Specific constructor (MappableContainer)
 template<typename Data>
 inline QueueVec<Data>::QueueVec(MappableContainer<Data>&& MapCon) noexcept {
-    size = MapCon.Size()*2;
+    size = MapCon.Size()*INCREASE_FACTOR;
     sentinel = size-1;
     Elements = new Data[size] {};
     MapCon.Map([this](Data& data) {
@@ -91,7 +91,6 @@ bool QueueVec<Data>::operator==(const QueueVec<Data>& qv) const noexcept {
 
     for (unsigned long i = 0; i < Size(); ++i) {
 
-        //Calcolo degli indici reali nel vettore
         unsigned long idx1 = (head + i) % size;
         unsigned long idx2 = (qv.head + i) % qv.size;
 
@@ -216,7 +215,7 @@ void QueueVec<Data>::Clear() {
 template<typename Data>
 void QueueVec<Data>::IncreaseSize(){
     if(tail<head) {
-        Data* tmp = new Data[2*size] {};
+        Data* tmp = new Data[INCREASE_FACTOR*size] {};
         unsigned long i = 0;
         for(unsigned long j = head; j<size; ++j) {
             std::swap(Elements[j], tmp[i++]);
@@ -227,22 +226,21 @@ void QueueVec<Data>::IncreaseSize(){
         std::swap(Elements, tmp);
         head = 0;
         tail = i;
-        size = size*2;
+        size = size*INCREASE_FACTOR;
         sentinel = size-1;
         delete[] tmp;
     } else {
-        Vector<Data>::Resize(size*2);
+        Vector<Data>::Resize(size*INCREASE_FACTOR);
         sentinel = size-1;
     }
 }
-
 
 
 //DecreaseSize
 template<typename Data>
 void QueueVec<Data>::DecreaseSize(){
       if(tail<head) {
-        Data* tmp = new Data[size/2] {};
+        Data* tmp = new Data[size/DECREASE_FACTOR] {};
         unsigned long i = 0;
         for(unsigned long j = head; j<size; ++j) {
             std::swap(Elements[j], tmp[i++]);
@@ -253,11 +251,11 @@ void QueueVec<Data>::DecreaseSize(){
         std::swap(Elements, tmp);
         head = 0;
         tail = i;
-        size = size/2;
+        size = size/DECREASE_FACTOR;
         sentinel = size-1;
         delete[] tmp;
     } else {
-        Data* tmp = new Data[size/2] {};
+        Data* tmp = new Data[size/DECREASE_FACTOR] {};
         unsigned long i = 0;
         for(unsigned long j = head; j<tail; ++j) {
             std::swap(Elements[j], tmp[i++]);
@@ -265,7 +263,7 @@ void QueueVec<Data>::DecreaseSize(){
         std::swap(Elements, tmp);
         head = 0;
         tail = i;
-        size = size/2;
+        size = size/DECREASE_FACTOR;
         sentinel = size-1;
         delete[] tmp;
     }
