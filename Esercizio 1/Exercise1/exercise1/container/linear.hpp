@@ -3,6 +3,7 @@
 #define LINEAR_HPP
 
 /* ************************************************************************** */
+#include <stdexcept>
 
 #include "mappable.hpp"
 

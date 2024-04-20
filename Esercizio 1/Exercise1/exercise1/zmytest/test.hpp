@@ -21,8 +21,8 @@ void test();
 
 
 //menù
-// template <typename T>
-// void menuStack(lasd::Stack<T>&);
+template <typename T>
+void menuStack(lasd::Stack<T>&);
 
 template <typename T>
 void menuQueue(lasd::Queue<T>&);
@@ -67,17 +67,17 @@ template <>
 void popolaLst(lasd::List<std::string>&);
 
 //Stack
-// template <typename T>
-// void popolaStk(lasd::Stack<T>&) {};
+template <typename T>
+void popolaStk(lasd::Stack<T>&) {};
 
-// template <>
-// void popolaStk(lasd::Stack<int>&);
+template <>
+void popolaStk(lasd::Stack<int>&);
 
-// template <>
-// void popolaStk(lasd::Stack<double>&);
+template <>
+void popolaStk(lasd::Stack<double>&);
 
-// template <>
-// void popolaStk(lasd::Stack<std::string>&);
+template <>
+void popolaStk(lasd::Stack<std::string>&);
 
 //Queue
 template <typename T>

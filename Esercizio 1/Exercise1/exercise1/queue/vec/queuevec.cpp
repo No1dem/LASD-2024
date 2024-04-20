@@ -238,35 +238,32 @@ void QueueVec<Data>::IncreaseSize(){
 
 //DecreaseSize
 template<typename Data>
-void QueueVec<Data>::DecreaseSize(){
-      if(tail<head) {
-        Data* tmp = new Data[size/DECREASE_FACTOR] {};
-        unsigned long i = 0;
+void QueueVec<Data>::DecreaseSize() {
+    Data* tmp = new Data[size/DECREASE_FACTOR] {};
+    unsigned long i = 0;
+
+    if(tail<head) {
+
         for(unsigned long j = head; j<size; ++j) {
             std::swap(Elements[j], tmp[i++]);
         }
         for(unsigned long j = 0; j<tail; ++j) {
             std::swap(Elements[j], tmp[i++]);
         }
-        std::swap(Elements, tmp);
-        head = 0;
-        tail = i;
-        size = size/DECREASE_FACTOR;
-        sentinel = size-1;
-        delete[] tmp;
+        
     } else {
-        Data* tmp = new Data[size/DECREASE_FACTOR] {};
-        unsigned long i = 0;
+
         for(unsigned long j = head; j<tail; ++j) {
             std::swap(Elements[j], tmp[i++]);
         }
-        std::swap(Elements, tmp);
-        head = 0;
-        tail = i;
-        size = size/DECREASE_FACTOR;
-        sentinel = size-1;
-        delete[] tmp;
     }
+
+    std::swap(Elements, tmp);
+    head = 0;
+    tail = i;
+    size = size/DECREASE_FACTOR;
+    sentinel = size-1;
+    delete[] tmp;
 }
 
 /* ************************************************************************** */

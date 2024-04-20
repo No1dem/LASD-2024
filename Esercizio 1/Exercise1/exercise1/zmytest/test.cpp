@@ -50,37 +50,37 @@ void test() {
         }
     }
     else if(struttura=="3") {
-        if(tipo=="1") {
-            // lasd::StackVec<int> stk;
-            // popolaStk(stk);
-            // menuStack(stk);
-        }
-        else if(tipo=="2") {
-            // lasd::StackVec<double> stk;
-            // popolaStk(stk);
-            // menuStack(stk);
-        }
-        else if(tipo=="3") {
-            // lasd::StackVec<std::string> stk;
-            // popolaStk(stk);
-            // menuStack(stk);
-        }
+        // if(tipo=="1") {
+        //     lasd::StackVec<int> stk;
+        //     popolaStk(stk);
+        //     menuStack(stk);
+        // }
+        // else if(tipo=="2") {
+        //     lasd::StackVec<double> stk;
+        //     popolaStk(stk);
+        //     menuStack(stk);
+        // }
+        // else if(tipo=="3") {
+        //     lasd::StackVec<std::string> stk;
+        //     popolaStk(stk);
+        //     menuStack(stk);
+        // }
     }
     else if(struttura=="4") {
         if(tipo=="1") {
-            // lasd::StackLst<int> stk;
-            // popolaStk(stk);
-            // menuStack(stk);
+            lasd::StackLst<int> stk;
+            popolaStk(stk);
+            menuStack(stk);
         }
         else if(tipo=="2") {
-            // lasd::StackLst<double> stk;
-            // popolaStk(stk);
-            // menuStack(stk);
+            lasd::StackLst<double> stk;
+            popolaStk(stk);
+            menuStack(stk);
         }
         else if(tipo=="3") {
-            // lasd::StackLst<std::string> stk;
-            // popolaStk(stk);
-            // menuStack(stk);
+            lasd::StackLst<std::string> stk;
+            popolaStk(stk);
+            menuStack(stk);
         }
     }
     else if(struttura=="5") {
@@ -120,63 +120,63 @@ void test() {
 }
 
 
-//Menu Stack
-// template <typename T>
-// void menuStack(lasd::Stack<T>& stk) {
-//     NextActionStack:
-//     std::cout << "\n\n~*~#~*~ Menù Stack ~*~#~*~" << std::endl;
-//     std::cout << "1: Size" << std::endl;
-//     std::cout << "2: Empty" << std::endl;
-//     std::cout << "3: Push" << std::endl;
-//     std::cout << "4: Pop" << std::endl;
-//     std::cout << "5: Top" << std::endl;
-//     std::cout << "6: TopNPop" << std::endl;
-//     std::cout << "7: Clear" << std::endl;
-//     std::cout << "0: Indietro" << std::endl;
-//     std::cout << "\nInserisci il numero corrispondente alla scelta: ";
-//     invalidStack:
-//     std::cout << "\n\n";
-//     std::string scelta = "";
-//     std::getline(std::cin, scelta);
-//     if(scelta=="1") {
-//         std::cout << "\nLo stack ha size: " << stk.Size() << std::endl;
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="2") {
-//         bool res;
-//         std::cout << "\nLo Stack " << ((res = stk.Empty()) ? "è vuoto" : "non è vuoto")  <<std::endl;
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="3") {
-//         funPush(stk);
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="4") {
-//         funPop(stk);
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="5") {
-//         funTop(stk);
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="6") {
-//         funTopPop(stk);
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="7") {
-//         stk.Clear();
-//         std::cout << "\nStack svuotato" << std::endl;
-//         goto NextActionStack;
-//     }
-//     else if(scelta=="0") {
-//         stk.Clear();
-//         return;
-//     }
-//     else {
-//         std::cout << "\nScelta non valida riprova:" << std::endl;
-//         goto invalidStack;
-//     }
-// }
+// Menu Stack
+template <typename T>
+void menuStack(lasd::Stack<T>& stk) {
+    NextActionStack:
+    std::cout << "\n\n~*~#~*~ Menù Stack ~*~#~*~" << std::endl;
+    std::cout << "1: Size" << std::endl;
+    std::cout << "2: Empty" << std::endl;
+    std::cout << "3: Push" << std::endl;
+    std::cout << "4: Pop" << std::endl;
+    std::cout << "5: Top" << std::endl;
+    std::cout << "6: TopNPop" << std::endl;
+    std::cout << "7: Clear" << std::endl;
+    std::cout << "0: Indietro" << std::endl;
+    std::cout << "\nInserisci il numero corrispondente alla scelta: ";
+    invalidStack:
+    std::cout << "\n\n";
+    std::string scelta = "";
+    std::getline(std::cin, scelta);
+    if(scelta=="1") {
+        std::cout << "\nLo stack ha size: " << stk.Size() << std::endl;
+        goto NextActionStack;
+    }
+    else if(scelta=="2") {
+        bool res;
+        std::cout << "\nLo Stack " << ((res = stk.Empty()) ? "è vuoto" : "non è vuoto")  <<std::endl;
+        goto NextActionStack;
+    }
+    else if(scelta=="3") {
+        funPush(stk);
+        goto NextActionStack;
+    }
+    else if(scelta=="4") {
+        funPop(stk);
+        goto NextActionStack;
+    }
+    else if(scelta=="5") {
+        funTop(stk);
+        goto NextActionStack;
+    }
+    else if(scelta=="6") {
+        funTopPop(stk);
+        goto NextActionStack;
+    }
+    else if(scelta=="7") {
+        stk.Clear();
+        std::cout << "\nStack svuotato" << std::endl;
+        goto NextActionStack;
+    }
+    else if(scelta=="0") {
+        stk.Clear();
+        return;
+    }
+    else {
+        std::cout << "\nScelta non valida riprova:" << std::endl;
+        goto invalidStack;
+    }
+}
 
 
 //Menu queue
@@ -408,7 +408,7 @@ void funFront(lasd::LinearContainer<T>& con) {
     try{
         data = con.Front();
         std::cout << "\nIl dato restituito è " << data << std::endl;
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }
     return;
@@ -420,7 +420,7 @@ void funBack(lasd::LinearContainer<T>& con) {
     try{
         data = con.Back();
         std::cout << "\nIl dato restituito è " << data << std::endl;
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }
     return;
@@ -473,7 +473,7 @@ void funPop(lasd::Stack<T>& stk) {
     try {
         stk.Pop();
         std::cout << "Pop effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }
 }
@@ -484,7 +484,7 @@ void funDequeue(lasd::Queue<T>& que) {
     try {
         que.Dequeue();
         std::cout << "Dequeue effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }
 
@@ -495,7 +495,7 @@ void funTop(lasd::Stack<T>& stk) {
        std::cout << "\nEffettuo Top..." << std::endl;
     try {
         std::cout << stk.Top() << " Pop effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     } 
 }
@@ -505,7 +505,7 @@ void funHead(lasd::Queue<T>& que) {
        std::cout << "\nEffettuo Head..." << std::endl;
     try {
         std::cout << que.Head() << " Head effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }     
 }
@@ -515,7 +515,7 @@ void funTopPop(lasd::Stack<T>& stk) {
        std::cout << "\nEffettuo TopNPop..." << std::endl;
     try {
         std::cout << stk.TopNPop() << " TopNPop effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }     
 }
@@ -525,7 +525,7 @@ void funHeadNDequeue(lasd::Queue<T>& que) {
        std::cout << "\nEffettuo HeadNDequeue..." << std::endl;
     try {
         std::cout << que.HeadNDequeue() << " HeadNDequeue effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }        
 }
@@ -575,7 +575,7 @@ void funFrontNRemove(lasd::List<T>& lst) {
        std::cout << "\nEffettuo FrontNRemove..." << std::endl;
     try {
         std::cout << lst.FrontNRemove() << " FrontNRemove effettuata con successo!" << std::endl; 
-    } catch(std::length_error ex) {
+    } catch(std::length_error& ex) {
         std::cout << ex.what() << std::endl;
     }     
 }
@@ -710,26 +710,26 @@ void popolaLst(lasd::List<std::string>& lst) {
     }
 }
 
-// template <>
-// void popolaStk(lasd::Stack<int>& stk) {
-//     for(int i:generaInt()) {
-//         stk.Push(i);
-//     }
-// }
+template <>
+void popolaStk(lasd::Stack<int>& stk) {
+    for(int i:generaInt()) {
+        stk.Push(i);
+    }
+}
 
-// template <>
-// void popolaStk(lasd::Stack<double>& stk) {
-//     for(double i:generaDouble()) {
-//         stk.Push(i);
-//     }
-// }
+template <>
+void popolaStk(lasd::Stack<double>& stk) {
+    for(double i:generaDouble()) {
+        stk.Push(i);
+    }
+}
 
-// template <>
-// void popolaStk(lasd::Stack<std::string>& stk) {
-//     for(std::string i:generaString()) {
-//         stk.Push(i);
-//     }
-// }
+template <>
+void popolaStk(lasd::Stack<std::string>& stk) {
+    for(std::string i:generaString()) {
+        stk.Push(i);
+    }
+}
 
 template <>
 void popolaQue(lasd::Queue<int>& que) {
