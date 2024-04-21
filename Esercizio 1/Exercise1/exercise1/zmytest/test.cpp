@@ -50,21 +50,21 @@ void test() {
         }
     }
     else if(struttura=="3") {
-        // if(tipo=="1") {
-        //     lasd::StackVec<int> stk;
-        //     popolaStk(stk);
-        //     menuStack(stk);
-        // }
-        // else if(tipo=="2") {
-        //     lasd::StackVec<double> stk;
-        //     popolaStk(stk);
-        //     menuStack(stk);
-        // }
-        // else if(tipo=="3") {
-        //     lasd::StackVec<std::string> stk;
-        //     popolaStk(stk);
-        //     menuStack(stk);
-        // }
+        if(tipo=="1") {
+            lasd::StackVec<int> stk;
+            popolaStk(stk);
+            menuStack(stk);
+        }
+        else if(tipo=="2") {
+            lasd::StackVec<double> stk;
+            popolaStk(stk);
+            menuStack(stk);
+        }
+        else if(tipo=="3") {
+            lasd::StackVec<std::string> stk;
+            popolaStk(stk);
+            menuStack(stk);
+        }
     }
     else if(struttura=="4") {
         if(tipo=="1") {

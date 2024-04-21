@@ -116,15 +116,18 @@ void Vector<Data>::Resize(unsigned long NewSize) {
     if(NewSize != size && NewSize > 0){
         Data* temp = new Data[NewSize] {};
         unsigned long min;
+
         if (size < NewSize){
             min = size;
         }
         else{
             min = NewSize;
         }
+
         for(unsigned long i = 0; i < min; i++) {
             std::swap(Elements[i], temp[i]);
         }
+        
         std::swap(Elements, temp);
         size = NewSize;
         delete[] temp;
