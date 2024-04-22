@@ -140,11 +140,17 @@ unsigned long SortableLinearContainer<Data>::Partition(unsigned long l, unsigned
     unsigned long j = r + 1;
 
     do{
-        do { j--; }
+        do { 
+            j--; 
+        }
         while (x < operator[](j));
-        do { i++; }
+        do { 
+            i++;
+        }
         while (x > operator[](i));
-        if(i < j){ std::swap(operator[](i),operator[](j)); }
+        if(i < j){ 
+            std::swap(operator[](i),operator[](j)); 
+        }
     }
     while (i < j);
     return j;

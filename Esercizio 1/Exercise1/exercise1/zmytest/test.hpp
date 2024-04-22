@@ -14,162 +14,150 @@
 #include <string>
 #include <iostream>
 
+using namespace std;
+
 /* ************************************************************************** */
 
-//test
 void test();
 
 
-//menù
-template <typename T>
-void menuStack(lasd::Stack<T>&);
+/*******************************************************************************/
+template <typename Data>
+void menuStack(lasd::Stack<Data>&);
 
-template <typename T>
-void menuQueue(lasd::Queue<T>&);
+template <typename Data>
+void menuQueue(lasd::Queue<Data>&);
 
-template <typename T>
-void menuList(lasd::List<T>&);
+template <typename Data>
+void menuList(lasd::List<Data>&);
 
-template <typename T>
-void menuVector(lasd::Vector<T>&);
+template <typename Data>
+void menuVector(lasd::Vector<Data>&);
 
 
-//selettori
-std::string selezionaStruttura();
-std::string selezionaTipo();
+/********************************************************************************/
+string selezionaStruttura();
 
+string selezionaTipo();
+
+unsigned long selezionaDimensione();
+
+
+/********************************************************************************/
 //popolamento
 
 //vector
-template <typename T>
-void popolaVec(lasd::Vector<T>&) {};
+template <typename Data>
+void popolaVector(lasd::Vector<Data>&, unsigned long);
 
-template <>
-void popolaVec(lasd::Vector<int>&);
+void popolaVector(lasd::Vector<int>&, unsigned long);
 
-template <>
-void popolaVec(lasd::Vector<double>&);
+void popolaVector(lasd::Vector<double>&, unsigned long);
 
-template <>
-void popolaVec(lasd::Vector<std::string>&);
+void popolaVector(lasd::Vector<string>&, unsigned long);
 
 //list
-template <typename T>
-void popolaLst(lasd::List<T>&) {};
+template <typename Data>
+void popolaList(lasd::List<Data>&, unsigned long);
 
-template <>
-void popolaLst(lasd::List<int>&);
+void popolaList(lasd::List<int>&, unsigned long);
 
-template <>
-void popolaLst(lasd::List<double>&);
+void popolaList(lasd::List<double>&, unsigned long);
 
-template <>
-void popolaLst(lasd::List<std::string>&);
+void popolaList(lasd::List<string>&, unsigned long);
 
 //Stack
-template <typename T>
-void popolaStk(lasd::Stack<T>&) {};
+template <typename Data>
+void popolaStack(lasd::Stack<Data>&, unsigned long) ;
 
-template <>
-void popolaStk(lasd::Stack<int>&);
+void popolaStack(lasd::Stack<int>&, unsigned long);
 
-template <>
-void popolaStk(lasd::Stack<double>&);
+void popolaStack(lasd::Stack<double>&, unsigned long);
 
-template <>
-void popolaStk(lasd::Stack<std::string>&);
+void popolaStack(lasd::Stack<string>&, unsigned long);
 
 //Queue
-template <typename T>
-void popolaQue(lasd::Queue<T>&) {};
+template <typename Data>
+void popolaQueue(lasd::Queue<Data>&, unsigned long);
 
-template <>
-void popolaQue(lasd::Queue<int>&);
+void popolaQueue(lasd::Queue<int>&, unsigned long);
 
-template <>
-void popolaQue(lasd::Queue<double>&);
+void popolaQueue(lasd::Queue<double>&, unsigned long);
 
-template <>
-void popolaQue(lasd::Queue<std::string>&);
+void popolaQueue(lasd::Queue<string>&, unsigned long);
 
-
+/***************************************************************/
 //Operazioni
-template <typename T>
-void funEmpty(lasd::LinearContainer<T>&) {};
+template <typename Data>
+void funEmpty(lasd::LinearContainer<Data>&) {};
 
-template <typename T>
-void funSize(lasd::LinearContainer<T>&) {};
+template <typename Data>
+void funSize(lasd::LinearContainer<Data>&) {};
 
-template <typename T>
-void funFront(lasd::LinearContainer<T>&);
+template <typename Data>
+void funFront(lasd::LinearContainer<Data>&);
 
-template <typename T>
-void funBack(lasd::LinearContainer<T>&);
+template <typename Data>
+void funBack(lasd::LinearContainer<Data>&);
 
-template <typename T>
-void funExists(lasd::LinearContainer<T>&);
+template <typename Data>
+void funExists(lasd::LinearContainer<Data>&);
 
-template <typename T>
-void funSort(lasd::Vector<T>&);
+template <typename Data>
+void funSort(lasd::SortableLinearContainer<Data>&);
 
-template <typename T>
-void funPush(lasd::Stack<T>&);
+template <typename Data>
+void funPush(lasd::Stack<Data>&);
 
-template <typename T>
-void funEnqueue(lasd::Queue<T>&);
+template <typename Data>
+void funEnqueue(lasd::Queue<Data>&);
 
-template <typename T>
-void funPop(lasd::Stack<T>&);
+template <typename Data>
+void funPop(lasd::Stack<Data>&);
 
-template<typename T>
-void funDequeue(lasd::Queue<T>&);
+template<typename Data>
+void funDequeue(lasd::Queue<Data>&);
 
-template <typename T>
-void funTop(lasd::Stack<T>&);
+template <typename Data>
+void funTop(lasd::Stack<Data>&);
 
-template <typename T>
-void funHead(lasd::Queue<T>&);
+template <typename Data>
+void funHead(lasd::Queue<Data>&);
 
-template <typename T>
-void funTopPop(lasd::Stack<T>&);
+template <typename Data>
+void funTopPop(lasd::Stack<Data>&);
 
-template <typename T>
-void funHeadNDequeue(lasd::Queue<T>&);
+template <typename Data>
+void funHeadNDequeue(lasd::Queue<Data>&);
 
-template <typename T>
-void funInsertD(lasd::DictionaryContainer<T>&);
+template <typename Data>
+void funInsertD(lasd::DictionaryContainer<Data>&);
 
-template <typename T>
-void funRemoveD(lasd::DictionaryContainer<T>&);
+template <typename Data>
+void funRemoveD(lasd::DictionaryContainer<Data>&);
 
-template <typename T>
-void funInsertAtBack(lasd::List<T>&);
+template <typename Data>
+void funInsertAtBack(lasd::List<Data>&);
 
-template <typename T>
-void funInsertAtFront(lasd::List<T>&);
+template <typename Data>
+void funInsertAtFront(lasd::List<Data>&);
 
-template <typename T>
-void funFrontNRemove(lasd::List<T>&);
+template <typename Data>
+void funFrontNRemove(lasd::List<Data>&);
 
-template <typename T>
-std::vector<T> generaDati() {};
+template <typename Data>
+vector<Data> generaDati(unsigned long) {};
 
-std::vector<int> generaInt();
+vector<int> generaInt(unsigned long);
 
-std::vector<double> generaDouble();
+vector<double> generaDouble(unsigned long);
 
-std::vector<std::string> generaString();
+vector<string> generaString(unsigned long);
 
-template <typename T>
-void MapPrint(const T& dat) {
-  std::cout << dat << " ";
+template <typename Data>
+void MapPrint(const Data& dat) {
+  cout << dat << " ";
 }
-
-
-
-
-
-
 
 /* ************************************************************************** */
 

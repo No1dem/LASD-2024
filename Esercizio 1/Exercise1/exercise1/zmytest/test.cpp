@@ -5,450 +5,482 @@
 #include <random>
 
 
-//Main menu
+using namespace std;
+
+//Menu principale
 void test() {
-    std::cout << "~*~#~*~ Menù Principale ~*~#~*~" << std::endl;
-    std::cout << "\n\n\nPer uscire inserisci 0 altrimenti inserisci un qualsiasi carattere: ";
-    std::string ex = "";
-    std::getline(std::cin, ex);
-    if(ex=="0") return;
+    cout << "\n\n######## Menù Principale #########" << endl;
 
-    std::string struttura = selezionaStruttura();
-    std::string tipo = selezionaTipo();
-    if(struttura=="1") {
-        if(tipo=="1") {
-            lasd::Vector<int> vec(10);
-            popolaVec(vec);
-            menuVector(vec);
+    string alt = selezionaStruttura();
+    string tipo = selezionaTipo();
+    unsigned long dim = selezionaDimensione();
+
+    if(alt == "1") {
+        if(tipo == "1") {
+            lasd::Vector<int> vector(dim);
+            popolaVector(vector, dim);
+            menuVector(vector);
 
         }
-        else if(tipo=="2") {
-            lasd::Vector<double> vec(10);
-            popolaVec(vec);
-            menuVector(vec);
+        else if(tipo == "2") {
+            lasd::Vector<double> vector(dim);
+            popolaVector(vector, dim);
+            menuVector(vector);
         }
-        else if(tipo=="3") {
-            lasd::Vector<std::string> vec(10);
-            popolaVec(vec);
-            menuVector(vec);
+        else if(tipo == "3") {
+            lasd::Vector<std::string> vector(dim);
+            popolaVector(vector, dim);
+            menuVector(vector);
         }
-    } else if(struttura=="2") {
-        if(tipo=="1") {
-            lasd::List<int> lst;
-            popolaLst(lst);
-            menuList(lst);
+    } else if(alt == "2") {
+        if(tipo == "1") {
+            lasd::List<int> list;
+            popolaList(list, dim);
+            menuList(list);
         }
-        else if(tipo=="2") {
-            lasd::List<double> lst;
-            popolaLst(lst);
-            menuList(lst);
+        else if(tipo == "2") {
+            lasd::List<double> list;
+            popolaList(list, dim);
+            menuList(list);
         }
-        else if(tipo=="3") {
-            lasd::List<std::string> lst;
-            popolaLst(lst);
-            menuList(lst);
-        }
-    }
-    else if(struttura=="3") {
-        if(tipo=="1") {
-            lasd::StackVec<int> stk;
-            popolaStk(stk);
-            menuStack(stk);
-        }
-        else if(tipo=="2") {
-            lasd::StackVec<double> stk;
-            popolaStk(stk);
-            menuStack(stk);
-        }
-        else if(tipo=="3") {
-            lasd::StackVec<std::string> stk;
-            popolaStk(stk);
-            menuStack(stk);
+        else if(tipo == "3") {
+            lasd::List<std::string> list;
+            popolaList(list, dim);
+            menuList(list);
         }
     }
-    else if(struttura=="4") {
-        if(tipo=="1") {
-            lasd::StackLst<int> stk;
-            popolaStk(stk);
-            menuStack(stk);
+    else if(alt == "3") {
+        if(tipo == "1") {
+            lasd::StackVec<int> stack;
+            popolaStack(stack, dim);
+            menuStack(stack);
         }
-        else if(tipo=="2") {
-            lasd::StackLst<double> stk;
-            popolaStk(stk);
-            menuStack(stk);
+        else if(tipo == "2") {
+            lasd::StackVec<double> stack;
+            popolaStack(stack, dim);
+            menuStack(stack);
         }
-        else if(tipo=="3") {
-            lasd::StackLst<std::string> stk;
-            popolaStk(stk);
-            menuStack(stk);
-        }
-    }
-    else if(struttura=="5") {
-        if(tipo=="1") {
-            lasd::QueueVec<int> que;
-            popolaQue(que);
-            menuQueue(que);
-        }
-        else if(tipo=="2") {
-            lasd::QueueVec<double> que;
-            popolaQue(que);
-            menuQueue(que);
-        }
-        else if(tipo=="3") {
-            lasd::QueueVec<std::string> que;
-            popolaQue(que);
-            menuQueue(que);
+        else if(tipo == "3") {
+            lasd::StackVec<string> stack;
+            popolaStack(stack, dim);
+            menuStack(stack);
         }
     }
-    else if(struttura=="6") {
-            if(tipo=="1") {
-            lasd::QueueLst<int> que;
-            popolaQue(que);
-            menuQueue(que);
+    else if(alt == "4") {
+        if(tipo == "1") {
+            lasd::StackLst<int> stack;
+            popolaStack(stack, dim);
+            menuStack(stack);
         }
-        else if(tipo=="2") {
-            lasd::QueueLst<double> que;
-            popolaQue(que);
-            menuQueue(que);
+        else if(tipo == "2") {
+            lasd::StackLst<double> stack;
+            popolaStack(stack, dim);
+            menuStack(stack);
         }
-        else if(tipo=="3") {
-            lasd::QueueLst<std::string> que;
-            popolaQue(que);
-            menuQueue(que);
+        else if(tipo == "3") {
+            lasd::StackLst<std::string> stack;
+            popolaStack(stack, dim);
+            menuStack(stack);
+        }
+    }
+    else if(alt == "5") {
+        if(tipo == "1") {
+            lasd::QueueVec<int> queue;
+            popolaQueue(queue, dim);
+            menuQueue(queue);
+        }
+        else if(tipo == "2") {
+            lasd::QueueVec<double> queue;
+            popolaQueue(queue, dim);
+            menuQueue(queue);
+        }
+        else if(tipo == "3") {
+            lasd::QueueVec<string> queue;
+            popolaQueue(queue, dim);
+            menuQueue(queue);
+        }
+    }
+    else if(alt == "6") {
+            if(tipo == "1") {
+            lasd::QueueLst<int> queue;
+            popolaQueue(queue, dim);
+            menuQueue(queue);
+        }
+        else if(tipo == "2") {
+            lasd::QueueLst<double> queue;
+            popolaQueue(queue, dim);
+            menuQueue(queue);
+        }
+        else if(tipo == "3") {
+            lasd::QueueLst<string> queue;
+            popolaQueue(queue, dim);
+            menuQueue(queue);
         } 
     }
 }
 
 
-// Menu Stack
-template <typename T>
-void menuStack(lasd::Stack<T>& stk) {
-    NextActionStack:
-    std::cout << "\n\n~*~#~*~ Menù Stack ~*~#~*~" << std::endl;
-    std::cout << "1: Size" << std::endl;
-    std::cout << "2: Empty" << std::endl;
-    std::cout << "3: Push" << std::endl;
-    std::cout << "4: Pop" << std::endl;
-    std::cout << "5: Top" << std::endl;
-    std::cout << "6: TopNPop" << std::endl;
-    std::cout << "7: Clear" << std::endl;
-    std::cout << "0: Indietro" << std::endl;
-    std::cout << "\nInserisci il numero corrispondente alla scelta: ";
-    invalidStack:
-    std::cout << "\n\n";
-    std::string scelta = "";
-    std::getline(std::cin, scelta);
-    if(scelta=="1") {
-        std::cout << "\nLo stack ha size: " << stk.Size() << std::endl;
-        goto NextActionStack;
-    }
-    else if(scelta=="2") {
-        bool res;
-        std::cout << "\nLo Stack " << ((res = stk.Empty()) ? "è vuoto" : "non è vuoto")  <<std::endl;
-        goto NextActionStack;
-    }
-    else if(scelta=="3") {
-        funPush(stk);
-        goto NextActionStack;
-    }
-    else if(scelta=="4") {
-        funPop(stk);
-        goto NextActionStack;
-    }
-    else if(scelta=="5") {
-        funTop(stk);
-        goto NextActionStack;
-    }
-    else if(scelta=="6") {
-        funTopPop(stk);
-        goto NextActionStack;
-    }
-    else if(scelta=="7") {
-        stk.Clear();
-        std::cout << "\nStack svuotato" << std::endl;
-        goto NextActionStack;
-    }
-    else if(scelta=="0") {
-        stk.Clear();
-        return;
-    }
-    else {
-        std::cout << "\nScelta non valida riprova:" << std::endl;
-        goto invalidStack;
+/*************************************************************/
+
+//Stack Menù
+template <typename Data>
+void menuStack(lasd::Stack<Data>& stack) {
+    char alt;
+    
+    while (true) {
+        cout << "\n\n######## Menù Stack ########" << endl;
+        cout << "1: Size" << endl;
+        cout << "2: Clear" << endl;
+        cout << "3: Empty" << endl;
+        cout << "4: Push" << endl;
+        cout << "5: Pop" << endl;
+        cout << "6: Top" << endl;
+        cout << "7: TopNPop" << endl;
+        cout << "0: Torna al menù principale" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        cout << "\n\n";
+        
+        cin >> alt;
+        cin.ignore();
+        
+        switch (alt) {
+            case '1': {
+                cout << "\nLa size dello stack è: " << stack.Size() << endl;
+                break;
+            }
+            case '2': {
+                stack.Clear();
+                cout << "\nStack svuotato con successo !" << endl;
+                break;
+            }
+            case '3': {
+                bool isEmpty = stack.Empty();
+                cout << "\nLo Stack " << (isEmpty ? "è vuoto" : "non è vuoto") << endl;
+                break;
+            }
+            case '4': {
+                funPush(stack);
+                break;
+            }
+            case '5': {
+                funPop(stack);
+                break;
+            }
+            case '6': {
+                funTop(stack);
+                break;
+            }
+            case '7': {
+                funTopPop(stack);
+                break;
+            }
+            case '0': {
+                stack.Clear();
+                return;
+            }
+            default: {
+                cout << "\nValore non valido, riprova:" << endl;
+                break;
+            }
+        }
     }
 }
 
 
-//Menu queue
-template <typename T>
-void menuQueue(lasd::Queue<T>& que) {
-    NextActionQueue:
-    std::cout << "\n\n~*~#~*~ Menù Queue ~*~#~*~" << std::endl;
-    std::cout << "1: Size" << std::endl;
-    std::cout << "2: Empty" << std::endl;
-    std::cout << "3: Enqueue" << std::endl;
-    std::cout << "4: Dequeue" << std::endl;
-    std::cout << "5: Head" << std::endl;
-    std::cout << "6: HeadNDequeue" << std::endl;
-    std::cout << "7: Clear" << std::endl;
-    std::cout << "0: Indietro" << std::endl;
-    std::cout << "\nInserisci il numero corrispondente alla scelta: ";
-    invalidQueue:
-    std::string scelta = "";
-    std::getline(std::cin, scelta);
-    std::cout << "\n\n";
-    if(scelta=="1") {
-        std::cout << "\nLa queue ha size: " << que.Size() << std::endl;
-        goto NextActionQueue;
-    }
-    else if(scelta=="2") {
-        bool res;
-        std::cout << "\nLa Queue " << ((res = que.Empty()) ? "è vuota" : "non è vuota")  <<std::endl;
-        goto NextActionQueue;
-    }
-    else if(scelta=="3") {
-        funEnqueue(que);
-        goto NextActionQueue;
-    }
-    else if(scelta=="4") {
-        funDequeue(que);
-        goto NextActionQueue;
-    }
-    else if(scelta=="5") {
-        funHead(que);
-        goto NextActionQueue;
-    }
-    else if(scelta=="6") {
-        funHeadNDequeue(que);
-        goto NextActionQueue;
-    }
-    else if(scelta=="7") {
-        que.Clear();
-        std::cout << "\nQueue svuotata" << std::endl;  
-        goto NextActionQueue;     
-    }
-    else if(scelta=="0") {
-        que.Clear();
-        return;
-    }
-    else {
-        std::cout << "\nScelta non valida riprova:" << std::endl;
-        goto invalidQueue;        
+
+
+//List Menù
+template <typename Data>
+void menuList(lasd::List<Data>& list) {
+    char alt;
+    
+    while (true) {
+        cout << "\n\n########### Menù Lista #############" << endl;
+        cout << "a: Stampa Lista" << endl;
+        cout << "b: Empty" << endl;
+        cout << "c: Size" << endl;
+        cout << "d: Front" << endl;
+        cout << "e: Back" << endl;
+        cout << "f: Exists" << endl;
+        cout << "g: Insert At Back" << endl;
+        cout << "h: Insert At Front" << endl;
+        cout << "i: Insert Dictionary" << endl;
+        cout << "j: Remove Dictionary" << endl;
+        cout << "k: FrontNRemove" << endl;
+        cout << "l: Clear" << endl;
+        cout << "0: Indietro" << endl;
+        cout << "\nInserisci la lettera corrispondente alla scelta: ";
+        cout << "\n\n";
+        
+        cin >> alt;
+        cin.ignore();
+        
+        switch (alt) {
+            case 'a': {
+                cout << "\nStampa della lista: " << endl;
+                list.Map(&MapPrint<Data>);
+                break;
+            }
+            case 'b': {
+                bool isEmpty = list.Empty();
+                cout << "\nLa Lista " << (isEmpty ? "è vuota" : "non è vuota") << endl;
+                break;        
+            }
+            case 'c': {
+                cout << "\nLa size della Lista è: " << list.Size() << endl;
+                break;        
+            }
+            case 'd': {
+                funFront(list);
+                break; 
+            }
+            case 'e': {
+                funBack(list);
+                break; 
+            }
+            case 'f': {
+                funExists(list);
+                break;
+            }
+            case 'g': {
+                funInsertAtBack(list);
+                break;
+            }
+            case 'h': {
+                funInsertAtFront(list);
+                break;
+            }
+            case 'i': {
+                funInsertD(list);
+                break;
+            }
+            case 'j': {
+                funRemoveD(list);
+                break;
+            }
+            case 'k': {
+                funFrontNRemove(list);
+                break;
+            }
+            case 'l': {
+                list.Clear();
+                cout << "\nLista svuotata con successo !" << endl;
+                break;         
+            }
+            case '0': {
+                list.Clear();
+                return;
+            }
+            default: {
+                cout << "\nScelta non valida, riprova:" << endl;
+                break;
+            }
+        }
     }
 }
 
-template <typename T>
-void menuList(lasd::List<T>& lst) {
-    NextActionList:
-    std::cout << "\n\n~*~#~*~ Menù Lista ~*~#~*~" << std::endl;
-    std::cout << "1: Stampa Lista" << std::endl;
-    std::cout << "2: Size" << std::endl;
-    std::cout << "3: Empty" << std::endl;
-    std::cout << "4: Front" << std::endl;
-    std::cout << "5: Back" << std::endl;
-    std::cout << "6: Exists" << std::endl;
-    std::cout << "7: Insert Dictionary" << std::endl;
-    std::cout << "8: Remove Dictionary" << std::endl;
-    std::cout << "9: Insert At Back" << std::endl;
-    std::cout << "a: Insert At Front" << std::endl;
-    std::cout << "b: FrontNRemove" << std::endl;
-    std::cout << "c: Clear" << std::endl;
-    std::cout << "0: Indietro" << std::endl;
-    std::cout << "\nInserisci il carattere corrispondente alla scelta: ";
-    invalidList:
-    std::string scelta = "";
-    std::getline(std::cin, scelta);
-    std::cout << "\n\n";
-    if(scelta=="1") {
-        std::cout << "\nStampo la lista: " << std::endl;
-        lst.Map(&MapPrint<T>);
-        goto NextActionList;
-    }
-    else if(scelta=="2") {
-        std::cout << "\nLa lista ha size: " << lst.Size() << std::endl;
-        goto NextActionList;        
-    }
-    else if(scelta=="3") {
-        bool res;
-        std::cout << "\nLa Lista " << ((res = lst.Empty()) ? "è vuota" : "non è vuota")  <<std::endl;
-        goto NextActionList;        
-    }
-    else if(scelta=="4") {
-        funFront(lst);
-        goto NextActionList; 
-    }
-    else if(scelta=="5") {
-        funBack(lst);
-        goto NextActionList; 
-    }
-    else if(scelta=="6") {
-        funExists(lst);
-        goto NextActionList;
-    }
-    else if(scelta=="7") {
-        funInsertD(lst);
-        goto NextActionList;
-    }
-    else if(scelta=="8") {
-        funRemoveD(lst);
-        goto NextActionList;
-    }
-    else if(scelta=="9") {
-        funInsertAtBack(lst);
-        goto NextActionList;
-    }
-    else if(scelta=="a") {
-        funInsertAtFront(lst);
-        goto NextActionList;
-    }
-    else if(scelta=="b") {
-        funFrontNRemove(lst);
-        goto NextActionList;
-    }
-    else if(scelta=="c") {
-        lst.Clear();
-        std::cout << "\nLista svuotata" << std::endl;
-        goto NextActionList;         
-    }
-    else if(scelta=="0") {
-        lst.Clear();
-        return;
-    }
-    else {
-        std::cout << "\nScelta non valida riprova:" << std::endl;
-        goto invalidList;
+template <typename Data>
+void menuQueue(lasd::Queue<Data>& queue) {
+    char alt;
+    
+    while (true) {
+        cout << "\n\n########### Menù Queue ############" << endl;
+        cout << "1: Size" << endl;
+        cout << "2: Clear" << endl;
+        cout << "3: Empty" << endl;
+        cout << "4: Enqueue" << endl;
+        cout << "5: Dequeue" << endl;
+        cout << "6: Head" << endl;
+        cout << "7: HeadNDequeue" << endl;
+        cout << "0: Torna al menù principale" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        cout << "\n\n";
+        
+        cin >> alt;
+        cin.ignore();
+        
+        switch (alt) {
+            case '1': {
+                cout << "\nLa queue ha size: " << queue.Size() << endl;
+                break;
+            }
+            case '2': {
+                queue.Clear();
+                cout << "\nQueue svuotata" << endl;
+                break;
+            }
+            case '3': {
+                bool isEmpty = queue.Empty();
+                cout << "\nLa Queue " << (isEmpty ? "è vuota" : "non è vuota") << endl;
+                break;
+            }
+            case '4': {
+                funEnqueue(queue);
+                break;
+            }
+            case '5': {
+                funDequeue(queue);
+                break;
+            }
+            case '6': {
+                funHead(queue);
+                break;
+            }
+            case '7': {
+                funHeadNDequeue(queue);
+                break;
+            }
+            case '0': {
+                queue.Clear();
+                return;
+            }
+            default: {
+                cout << "\nScelta non valida, riprova:" << endl;
+                break;
+            }
+        }
     }
 }
 
-template <typename T>
-void menuVector(lasd::Vector<T>& vec) {
-    NextActionVector:
-    std::cout << "\n\n~*~#~*~ Menù Vector ~*~#~*~" << std::endl;
-    std::cout << "1: Stampa Vector" << std::endl;
-    std::cout << "2: Size" << std::endl;
-    std::cout << "3: Empty" << std::endl;
-    std::cout << "4: Front" << std::endl;
-    std::cout << "5: Back" << std::endl;
-    std::cout << "6: Exists" << std::endl;
-    std::cout << "7: Sort" << std::endl;
-    std::cout << "8: Clear" << std::endl;
-    std::cout << "0: Indietro" << std::endl;
-    std::cout << "\nInserisci il numero corrispondente alla scelta: ";
-    invalidVector:
-    std::string scelta = "";
-    std::cout << "\n\n";
-    std::getline(std::cin, scelta);
-    if(scelta=="1") {
-        std::cout << "\nStampo il vettore: " << std::endl;
-        vec.Map(&MapPrint<T>);
-        std::cout << "\n\n";
-        goto NextActionVector;
-    }
-    else if(scelta=="2") {
-        std::cout << "\nIl vettore ha size: " << vec.Size() << std::endl;
-        goto NextActionVector;  
-    }
-    else if(scelta=="3") {
-        bool res;
-        std::cout << "\nIl vettore " << ((res = vec.Empty()) ? "è vuoto" : "non è vuoto")  <<std::endl;
-        goto NextActionVector;          
-    }
-    else if(scelta=="4") {
-        funFront(vec);
-        goto NextActionVector; 
-    }
-    else if(scelta=="5") {
-        funBack(vec);
-        goto NextActionVector; 
-    }
-    else if(scelta=="6") {
-        funExists(vec);
-        goto NextActionVector; 
-    }
-    else if(scelta=="7") {
-        funSort(vec);
-        goto NextActionVector; 
-    }
-    else if(scelta=="8") {
-        vec.Clear();
-        std::cout << "\nvettore svuotato" << std::endl;
-        goto NextActionVector;
-    }
-    else if(scelta=="0") {
-        vec.Clear();
-        return;
-    }
-    else {
-        std::cout << "\nScelta non valida riprova:" << std::endl;
-        goto invalidVector;        
-    }
 
+
+//Vector Menù
+template <typename Data>
+void menuVector(lasd::Vector<Data>& vector) {
+    char alt;
+    
+    while (true) {
+        cout << "\n\n########## Menù Vector ############" << endl;
+        cout << "1: Stampa Vector" << endl;
+        cout << "2: Clear" << endl;
+        cout << "3: Size" << endl;
+        cout << "4: Empty" << endl;
+        cout << "5: Front" << endl;
+        cout << "6: Back" << endl;
+        cout << "7: Exists" << endl;
+        cout << "8: Sort" << endl;
+        cout << "0: Torna al menù principale" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        cout << "\n\n";
+        
+        cin >> alt;
+        cin.ignore();
+        
+        switch (alt) {
+            case '1': {
+                cout << "\nStampa del vettore: " << endl;
+                vector.Map(&MapPrint<Data>);
+                break;
+            }
+            case '2': {
+                vector.Clear();
+                cout << "\nVettore svuotato con successo !" << endl;
+                break;
+            }
+            case '3': {
+                cout << "\nLa size del Vettore è: " << vector.Size() << endl;
+                break;  
+            }
+            case '4': {
+                bool isEmpty = vector.Empty();
+                cout << "\nIl vettore " << (isEmpty ? "è vuoto" : "non è vuoto") << endl;
+                break;        
+            }
+            case '5': {
+                funFront(vector);
+                break; 
+            }
+            case '6': {
+                funBack(vector);
+                break; 
+            }
+            case '7': {
+                funExists(vector);
+                break; 
+            }
+            case '8': {
+                lasd::SortableVector<Data> sortableVector(vector);
+                funSort(sortableVector);
+                break; 
+            }
+            case '0': {
+                vector.Clear();
+                return;
+            }
+            default: {
+                cout << "\nScelta non valida, riprova:" << endl;
+                break;
+            }
+        }
+    }
 }
 
+
+/**************************************************************/
 //Funzioni
-template <typename T>
-void funExists(lasd::LinearContainer<T>& con) {
-    T value;
-    bool resta = false;
+template <typename Data>
+void funExists(lasd::LinearContainer<Data>& con) {
+    Data data;
+    bool repeat = false;
     do {
-        std::cout << "\nInserisci il valore che vuoi controllare: ";
-        std::cin >> value;
-        std::string text = con.Exists(value) ? ("L'elemento è nel container.") : ("L'elemento non è nel container.");
-        std::cout << text << std::endl;
-        std::cout << "Vuoi controllare un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);
+        cout << "\nInserisci il valore da cercare: ";
+        cin >> data;
+        string message = con.Exists(data) ? ("L'elemento è nel container.") : ("L'elemento non è nel container.");
+        cout << message << endl;
+        cout << "Vuoi cercare un altro elemento? (y/n): ";
+        char ans;
+        cin >> ans;
+        repeat = (ans == 'y');
+    } while (repeat);
 }
 
-template <typename T>
-void funFront(lasd::LinearContainer<T>& con) {
-    T data;
+template <typename Data>
+void funFront(lasd::LinearContainer<Data>& con) {
+    Data data;
     try{
         data = con.Front();
-        std::cout << "\nIl dato restituito è " << data << std::endl;
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << "\nRisultato: " << data << endl;
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }
     return;
 }
 
-template <typename T>
-void funBack(lasd::LinearContainer<T>& con) {
-    T data;
+template <typename Data>
+void funBack(lasd::LinearContainer<Data>& con) {
+    Data data;
     try{
         data = con.Back();
-        std::cout << "\nIl dato restituito è " << data << std::endl;
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << "\nRisultato" << data << endl;
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }
     return;
 }
 
-template <typename T>
-void funSort(lasd::Vector<T>& con) {
-    // std::cout << "\nContainer prima dell'ordinamento:" << std::endl;
-    // con.Map(&MapPrint<T>);
-    // std::cout << "\nContainer dopo l'ordinamento:" << std::endl;
-    // con.Sort();
-    // con.Map(&MapPrint<T>);
+template <typename Data>
+void funSort(lasd::SortableLinearContainer<Data>& con) {
+    cout << "\nPrima :" << endl;
+    con.Map(&MapPrint<Data>);
+    cout << "\nDopo :" << endl;
+    con.Sort();
+    con.Map(&MapPrint<Data>);
 }
 
-template <typename T>
-void funPush(lasd::Stack<T>& stk) {
-    T value;
-    bool resta = false;
+template <typename Data>
+void funPush(lasd::Stack<Data>& stack) {
+    Data data;
+    bool repeat = false;
     do {
-        std::cout << "\nInserisci il valore che vuoi inserire nello stack: ";
-        std::cin >> value;
-        stk.Push(value);
-        std::cout << " Inserito!" << std::endl;
-        std::cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);
+        cout << "\nInserisci il valore che vuoi inserire nello stack: ";
+        cin >> data;
+        stack.Push(data);
+        cout << " Inserito!" << endl;
+        cout << "Vuoi inserire un altro elemento? (y/n): ";
+        char ans;
+        cin >> ans;
+        repeat = (ans == 'y');
+    } while (repeat);
 }
 
 template <typename T>
@@ -613,185 +645,189 @@ void funInsertAtFront(lasd::List<T>& lst) {
 }
 
 
+/*******************************************************************/
 
-//Selettori
-std::string selezionaStruttura() {
-    std::cout << "Scegli il tipo di struttura dati:" << std::endl;
-    std::cout << "1: Vettore" << std::endl;
-    std::cout << "2: Lista" << std::endl;
-    std::cout << "3: StackVec" << std::endl;
-    std::cout << "4: StackLst" << std::endl;
-    std::cout << "5: CodaVec" << std::endl;
-    std::cout << "6: CodaLst" << std::endl;
-    std::cout << "\nInserisci il numero corrispondente alla scelta: ";
-    invalidStruct:
-    std::string scelta = "0";
-    std::getline(std::cin, scelta);
+string selezionaStruttura() {
+    cout << "Scegli il tipo di struttura dati:" << endl;
+    cout << "1: Vettore" << endl;
+    cout << "2: Lista" << endl;
+    cout << "3: StackVec" << endl;
+    cout << "4: StackLst" << endl;
+    cout << "5: CodaVec" << endl;
+    cout << "6: CodaLst" << endl;
+    cout << "\nInserisci il numero corrispondente alla scelta: ";
 
-    if(scelta=="1" || scelta=="2" || scelta=="3" || scelta=="4" || scelta=="5" || scelta=="6") return scelta;
-    else{
-        std::cout << "\nScelta non valida riprova:" << std::endl;
-        goto invalidStruct;
+    string scelta;
+    bool sceltaValida = false;
+
+    while (!sceltaValida) {
+        getline(cin, scelta);
+
+        if (scelta == "1" || scelta == "2" || scelta == "3" || scelta == "4" || scelta == "5" || scelta == "6") {
+            sceltaValida = true;
+        } else {
+            cout << "\nValore non valido, riprova: ";
+        }
     }
+    return scelta;
 }
 
-std::string selezionaTipo() {
-    std::cout << "Scegli il tipo di dati:" << std::endl;
-    std::cout << "1: int" << std::endl;
-    std::cout << "2: double" << std::endl;
-    std::cout << "3: string" << std::endl;
-    std::cout << "\nInserisci il numero corrispondente alla scelta: ";
-    invalidType:
-    std::string scelta = "0";
-    std::getline(std::cin, scelta);
+string selezionaTipo() {
+    cout << "Scegli il tipo di dati:" << endl;
+    cout << "1: int" << endl;
+    cout << "2: double" << endl;
+    cout << "3: string" << endl;
+    cout << "\nInserisci un numero per selezionare: ";
 
-    if(scelta=="1" || scelta=="2" || scelta=="3") return scelta;
-    else{
-        std::cout << "\nScelta non valida riprova:" << std::endl;
-        goto invalidType;
+    string scelta;
+    bool sceltaValida = false;
+
+    while (!sceltaValida) {
+        getline(cin, scelta);
+
+        if (scelta == "1" || scelta == "2" || scelta == "3") {
+            sceltaValida = true;
+        } else {
+            cout << "\nValore non valido, riprova: ";
+        }
     }
-}
-
-
-
-
-
-
-
-
-
-//Popolazione
-template <>
-void popolaVec(lasd::Vector<int>& vec) {
-    unsigned int j = 0;
-    for(int i: generaInt()) {
-        vec[j] = i;
-        j++;
-    }
-}
-
-template <>
-void popolaVec(lasd::Vector<double>& vec) {
-    unsigned int j = 0;
-    for(double i: generaDouble()) {
-        vec[j] = i;
-        j++;
-    }
-}
-
-template <>
-void popolaVec(lasd::Vector<std::string>& vec) {
-    unsigned int j = 0;
-    for(std::string i: generaString()) {
-        vec[j] = i;
-        j++;
-    }
+    return scelta;
 }
 
 
-template <>
-void popolaLst(lasd::List<int>& lst) {
-    for(int i:generaInt()) {
-        lst.InsertAtBack(i);
-    }
+unsigned long selezionaDimensione() {
+    unsigned long dim = 0;
+    cout << "\nInserisci la dimensione della struttura scelta: " << endl;
+    cin >> dim;
+    return dim;    
 }
-
-template <>
-void popolaLst(lasd::List<double>& lst) {
-    for(double i:generaDouble()) {
-        lst.InsertAtBack(i);
-    }
-}
-
-template <>
-void popolaLst(lasd::List<std::string>& lst) {
-    for(std::string i:generaString()) {
-        lst.InsertAtBack(i);
-    }
-}
-
-template <>
-void popolaStk(lasd::Stack<int>& stk) {
-    for(int i:generaInt()) {
-        stk.Push(i);
-    }
-}
-
-template <>
-void popolaStk(lasd::Stack<double>& stk) {
-    for(double i:generaDouble()) {
-        stk.Push(i);
-    }
-}
-
-template <>
-void popolaStk(lasd::Stack<std::string>& stk) {
-    for(std::string i:generaString()) {
-        stk.Push(i);
-    }
-}
-
-template <>
-void popolaQue(lasd::Queue<int>& que) {
-    for(int i:generaInt()) {
-        que.Enqueue(i);
-    }
-}
-
-template <>
-void popolaQue(lasd::Queue<double>& que) {
-    for(double i:generaDouble()) {
-        que.Enqueue(i);
-    }
-}
-
-template <>
-void popolaQue(lasd::Queue<std::string>& que) {
-    for(std::string i:generaString()) {
-        que.Enqueue(i);
-    }
-}
-
+/******************************************************/
 
 //Generatori
-std::vector<int> generaInt() {
-    std::default_random_engine generator(std::random_device{}());
-    std::uniform_int_distribution<int> distx(0, 100);
+vector<int> generaInt(unsigned long dim) {
+    default_random_engine generator(random_device{}());
+    uniform_int_distribution<int> dist(0, 100);
 
-    std::vector<int> vec;
+    vector<int> vec;
 
-    for(unsigned long i = 0; i<10; i++) {
-        vec.push_back(distx(generator));
+    for(unsigned long i = 0; i<dim; i++) {
+        vec.push_back(dist(generator));
     }
-    std::cout << "\nGenerazione casuale completata\n" << std::endl;
+    cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
     return vec;
 }
 
-std::vector<double> generaDouble() {
-    std::default_random_engine generator(std::random_device{}());
-    std::uniform_real_distribution<double> distx(0.0, 100.0);
+vector<double> generaDouble(unsigned long dim) {
+    default_random_engine generator(random_device{}());
+    uniform_real_distribution<double> dist(0.0, 100.0);
 
-    std::vector<double> vec;
+    vector<double> vec;
 
-    for(unsigned long i = 0; i<10; i++) {
-        vec.push_back(distx(generator));
+    for(unsigned long i = 0; i<dim; i++) {
+        vec.push_back(dist(generator));
     }
-    std::cout << "\nGenerazione casuale completata\n" << std::endl;
+    cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
     return vec;
 }
 
-std::vector<std::string> generaString() {
-    char alphabet[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-    std::default_random_engine generator(std::random_device{}());
-    std::uniform_int_distribution<int> distx(0, 25);
+    vector<string> generaString(unsigned long dim) {
+    char lettere[52] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+                         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    default_random_engine generator(random_device{}());
+    uniform_int_distribution<int> dist(0, 51);
 
-    std::vector<std::string> vec;
+    vector<string> vec;
 
-    for(unsigned long i = 0; i<10; i++) {
-        std::string str = "";
-        str = str + alphabet[distx(generator)];
+    for(unsigned long i = 0; i<dim; i++) {
+        string str = "";
+        str = str + lettere[dist(generator)];
         vec.push_back(str);
     }
-    std::cout << "\nGenerazione casuale completata\n" << std::endl;
+    cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
     return vec;
 }
+
+
+
+/******************************************************/
+
+void popolaVector(lasd::Vector<int>& vector, unsigned long dim) {
+    unsigned int j = 0;
+    for(int i: generaInt(dim)) {
+        vector[j] = i;
+        j++;
+    }
+}
+
+void popolaVector(lasd::Vector<double>& vector, unsigned long dim) {
+    unsigned int j = 0;
+    for(double i: generaDouble(dim)) {
+        vector[j] = i;
+        j++;
+    }
+}
+
+void popolaVector(lasd::Vector<string>& vector, unsigned long dim) {
+    unsigned int j = 0;
+    for(string i: generaString(dim)) {
+        vector[j] = i;
+        j++;
+    }
+}
+
+void popolaList(lasd::List<int>& list, unsigned long dim) {
+    for(int i: generaInt(dim)) {
+        list.InsertAtBack(i);
+    }
+}
+
+void popolaList(lasd::List<double>& list, unsigned long dim) {
+    for(double i: generaDouble(dim)) {
+        list.InsertAtBack(i);
+    }
+}
+
+void popolaList(lasd::List<string>& list, unsigned long dim) {
+    for(string i: generaString(dim)) {
+        list.InsertAtBack(i);
+    }
+}
+
+void popolaStack(lasd::Stack<int>& stack, unsigned long dim) {
+    for(int i: generaInt(dim)) {
+        stack.Push(i);
+    }
+}
+
+void popolaStack(lasd::Stack<double>& stack, unsigned long dim) {
+    for(double i: generaDouble(dim)) {
+        stack.Push(i);
+    }
+}
+
+void popolaStack(lasd::Stack<std::string>& stack, unsigned long dim) {
+    for(string i: generaString(dim)) {
+        stack.Push(i);
+    }
+}
+
+void popolaQueue(lasd::Queue<int>& queue, unsigned long dim) {
+    for(int i: generaInt(dim)) {
+        queue.Enqueue(i);
+    }
+}
+
+void popolaQueue(lasd::Queue<double>& queue, unsigned long dim) {
+    for(double i: generaDouble(dim)) {
+        queue.Enqueue(i);
+    }
+}
+
+void popolaQueue(lasd::Queue<string>& queue, unsigned long dim) {
+    for(string i: generaString(dim)) {
+        queue.Enqueue(i);
+    }
+}
+
+
+/********************************************************************************/
