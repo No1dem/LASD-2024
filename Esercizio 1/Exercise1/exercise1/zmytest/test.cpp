@@ -218,7 +218,7 @@ void menuList(lasd::List<Data>& list) {
         switch (alt) {
             case 'a': {
                 cout << "\nStampa della lista: " << endl;
-                list.Map(&MapPrint<Data>);
+                list.Map(&Print<Data>);
                 break;
             }
             case 'b': {
@@ -369,7 +369,7 @@ void menuVector(lasd::Vector<Data>& vector) {
         switch (alt) {
             case '1': {
                 cout << "\nStampa del vettore: " << endl;
-                vector.Map(&MapPrint<Data>);
+                vector.Map(&Print<Data>);
                 break;
             }
             case '2': {
@@ -435,6 +435,35 @@ void funExists(lasd::LinearContainer<Data>& con) {
 }
 
 template <typename Data>
+void funEnqueue(lasd::Queue<Data>& queue) {
+    Data data;
+    bool repeat = false;
+    do {
+        cout << "\nInserisci il valore che vuoi inserire nella queue: ";
+        cin >> data;
+        queue.Enqueue(data);
+        cout << " Inserito!" << endl;
+        cout << "Vuoi inserire un altro elemento? (y/n): ";
+        char ans;
+        cin >> ans;
+        repeat = (ans == 'y');
+    } while (repeat);    
+}
+
+
+template<typename Data>
+void funDequeue(lasd::Queue<Data>& queue) {
+    try {
+        queue.Dequeue();
+        cout << "Dequeue effettuata con successo!" << endl; 
+    } catch(length_error& e) {
+        cout << e.what() << endl;
+    }
+
+}
+
+
+template <typename Data>
 void funFront(lasd::LinearContainer<Data>& con) {
     Data data;
     try{
@@ -446,26 +475,33 @@ void funFront(lasd::LinearContainer<Data>& con) {
     return;
 }
 
+
 template <typename Data>
 void funBack(lasd::LinearContainer<Data>& con) {
     Data data;
     try{
         data = con.Back();
-        cout << "\nRisultato" << data << endl;
+        cout << "\nRisultato: " << data << endl;
     } catch(length_error& e) {
         cout << e.what() << endl;
     }
     return;
 }
 
+
 template <typename Data>
 void funSort(lasd::SortableLinearContainer<Data>& con) {
-    cout << "\nPrima :" << endl;
-    con.Map(&MapPrint<Data>);
-    cout << "\nDopo :" << endl;
+    if (con.Size() == 0) {
+        cout << "Il container è vuoto !";
+        return;
+    }
+    cout << "\nPrima :\n" << endl;
+    con.Map(&Print<Data>);
+    cout << "\nDopo :\n" << endl;
     con.Sort();
-    con.Map(&MapPrint<Data>);
+    con.Map(&Print<Data>);
 }
+
 
 template <typename Data>
 void funPush(lasd::Stack<Data>& stack) {
@@ -483,84 +519,56 @@ void funPush(lasd::Stack<Data>& stack) {
     } while (repeat);
 }
 
-template <typename T>
-void funEnqueue(lasd::Queue<T>& que) {
-    T value;
-    bool resta = false;
-    do {
-        std::cout << "\nInserisci il valore che vuoi inserire nella queue: ";
-        std::cin >> value;
-        que.Enqueue(value);
-        std::cout << " Inserito!" << std::endl;
-        std::cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);    
-}
 
-template <typename T>
-void funPop(lasd::Stack<T>& stk) {
-    std::cout << "\nEffettuo Pop..." << std::endl;
+template <typename Data>
+void funPop(lasd::Stack<Data>& stack) {
     try {
-        stk.Pop();
-        std::cout << "Pop effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        stack.Pop();
+        cout << "Pop effettuata con successo!" << endl; 
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }
 }
 
-template<typename T>
-void funDequeue(lasd::Queue<T>& que) {
-        std::cout << "\nEffettuo Dequeue..." << std::endl;
-    try {
-        que.Dequeue();
-        std::cout << "Dequeue effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
-    }
 
-}
 
-template <typename T>
-void funTop(lasd::Stack<T>& stk) {
-       std::cout << "\nEffettuo Top..." << std::endl;
+template <typename Data>
+void funTop(lasd::Stack<Data>& stack) {
     try {
-        std::cout << stk.Top() << " Pop effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << stack.Top() << " Pop effettuata con successo!" << endl; 
+    } catch(std::length_error& e) {
+        cout << e.what() << endl;
     } 
 }
 
-template <typename T>
-void funHead(lasd::Queue<T>& que) {
-       std::cout << "\nEffettuo Head..." << std::endl;
+template <typename Data>
+void funHead(lasd::Queue<Data>& queue) {
     try {
-        std::cout << que.Head() << " Head effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << queue.Head() << " Head effettuata con successo!" << endl; 
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }     
 }
 
-template <typename T>
-void funTopPop(lasd::Stack<T>& stk) {
-       std::cout << "\nEffettuo TopNPop..." << std::endl;
+template <typename Data>
+void funTopPop(lasd::Stack<Data>& stack) {
     try {
-        std::cout << stk.TopNPop() << " TopNPop effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << stack.TopNPop() << " TopNPop effettuata con successo!" << endl; 
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }     
 }
 
-template <typename T>
-void funHeadNDequeue(lasd::Queue<T>& que) {
-       std::cout << "\nEffettuo HeadNDequeue..." << std::endl;
+template <typename Data>
+void funHeadNDequeue(lasd::Queue<Data>& queue) {
     try {
-        std::cout << que.HeadNDequeue() << " HeadNDequeue effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << queue.HeadNDequeue() << " HeadNDequeue effettuata con successo!" << endl; 
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }        
 }
+
+
 
 template <typename T>
 void funInsertD(lasd::DictionaryContainer<T>& con) {
@@ -604,7 +612,6 @@ void funRemoveD(lasd::DictionaryContainer<T>& con) {
 
 template <typename T>
 void funFrontNRemove(lasd::List<T>& lst) {
-       std::cout << "\nEffettuo FrontNRemove..." << std::endl;
     try {
         std::cout << lst.FrontNRemove() << " FrontNRemove effettuata con successo!" << std::endl; 
     } catch(std::length_error& ex) {
@@ -705,43 +712,46 @@ unsigned long selezionaDimensione() {
 
 //Generatori
 vector<int> generaInt(unsigned long dim) {
+    vector<int> vec(dim);
+
     default_random_engine generator(random_device{}());
     uniform_int_distribution<int> dist(0, 100);
 
-    vector<int> vec;
 
     for(unsigned long i = 0; i<dim; i++) {
-        vec.push_back(dist(generator));
+        vec[i] = dist(generator);
     }
     cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
     return vec;
 }
 
 vector<double> generaDouble(unsigned long dim) {
+    vector<double> vec(dim);
+
     default_random_engine generator(random_device{}());
     uniform_real_distribution<double> dist(0.0, 100.0);
 
-    vector<double> vec;
 
     for(unsigned long i = 0; i<dim; i++) {
-        vec.push_back(dist(generator));
+        vec[i] = dist(generator);
     }
     cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
     return vec;
 }
 
-    vector<string> generaString(unsigned long dim) {
+vector<string> generaString(unsigned long dim) {
+    vector<string> vec(dim);    
+
     char lettere[52] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
                          'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     default_random_engine generator(random_device{}());
     uniform_int_distribution<int> dist(0, 51);
 
-    vector<string> vec;
 
     for(unsigned long i = 0; i<dim; i++) {
         string str = "";
         str = str + lettere[dist(generator)];
-        vec.push_back(str);
+        vec[i]=str;
     }
     cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
     return vec;
@@ -750,6 +760,8 @@ vector<double> generaDouble(unsigned long dim) {
 
 
 /******************************************************/
+
+//Popolamento
 
 void popolaVector(lasd::Vector<int>& vector, unsigned long dim) {
     unsigned int j = 0;

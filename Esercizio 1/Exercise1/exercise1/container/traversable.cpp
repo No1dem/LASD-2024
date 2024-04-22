@@ -17,8 +17,8 @@ template <typename Data>
 inline bool TraversableContainer<Data>::Exists(const Data& val) const noexcept{
     bool exists = false;
     Traverse(
-        [val, &exists](const Data& dato){
-            exists |= (dato == val);   //exists = exists || (dot == val)
+        [val, &exists](const Data& data){
+            exists |= (data == val);   //exists = exists || (dot == val)
         }
     );
     return exists;

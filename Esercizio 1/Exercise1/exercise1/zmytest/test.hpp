@@ -155,7 +155,7 @@ vector<double> generaDouble(unsigned long);
 vector<string> generaString(unsigned long);
 
 template <typename Data>
-void MapPrint(const Data& dat) {
+void Print(const Data& dat) {
   cout << dat << " ";
 }
 
