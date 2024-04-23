@@ -18,7 +18,7 @@ using namespace std;
 
 /* ************************************************************************** */
 
-void test();
+void mytest();
 
 
 /*******************************************************************************/
@@ -38,15 +38,15 @@ void menuVector(lasd::Vector<Data>&);
 /********************************************************************************/
 string selezionaStruttura();
 
-string selezionaTipo();
+string selezionaDato();
 
 unsigned long selezionaDimensione();
 
 
 /********************************************************************************/
-//popolamento
+//Popolamento
 
-//vector
+//Vector
 template <typename Data>
 void popolaVector(lasd::Vector<Data>&, unsigned long);
 
@@ -56,7 +56,7 @@ void popolaVector(lasd::Vector<double>&, unsigned long);
 
 void popolaVector(lasd::Vector<string>&, unsigned long);
 
-//list
+//List
 template <typename Data>
 void popolaList(lasd::List<Data>&, unsigned long);
 
@@ -88,12 +88,6 @@ void popolaQueue(lasd::Queue<string>&, unsigned long);
 
 /***************************************************************/
 //Operazioni
-template <typename Data>
-void funEmpty(lasd::LinearContainer<Data>&) {};
-
-template <typename Data>
-void funSize(lasd::LinearContainer<Data>&) {};
-
 template <typename Data>
 void funFront(lasd::LinearContainer<Data>&);
 
@@ -131,12 +125,6 @@ template <typename Data>
 void funHeadNDequeue(lasd::Queue<Data>&);
 
 template <typename Data>
-void funInsertD(lasd::DictionaryContainer<Data>&);
-
-template <typename Data>
-void funRemoveD(lasd::DictionaryContainer<Data>&);
-
-template <typename Data>
 void funInsertAtBack(lasd::List<Data>&);
 
 template <typename Data>
@@ -146,19 +134,24 @@ template <typename Data>
 void funFrontNRemove(lasd::List<Data>&);
 
 template <typename Data>
-vector<Data> generaDati(unsigned long) {};
+void funInsertDictionary(lasd::DictionaryContainer<Data>&);
 
+template <typename Data>
+void funRemoveDictionary(lasd::DictionaryContainer<Data>&);
+
+/**************************************************************/
+//Generatori
 vector<int> generaInt(unsigned long);
 
 vector<double> generaDouble(unsigned long);
 
 vector<string> generaString(unsigned long);
 
+/* ************************************************************************** */
+
 template <typename Data>
 void Print(const Data& dat) {
   cout << dat << " ";
 }
-
-/* ************************************************************************** */
 
 #endif

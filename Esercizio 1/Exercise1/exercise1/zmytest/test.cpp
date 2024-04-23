@@ -1,18 +1,17 @@
 #include "test.hpp"
 
 #include <iostream>
-#include <string>
 #include <random>
-
+#include <string>
 
 using namespace std;
 
 //Menu principale
-void test() {
+void mytest() {
     cout << "\n\n######## Menù Principale #########" << endl;
 
     string alt = selezionaStruttura();
-    string tipo = selezionaTipo();
+    string tipo = selezionaDato();
     unsigned long dim = selezionaDimensione();
 
     if(alt == "1") {
@@ -251,11 +250,11 @@ void menuList(lasd::List<Data>& list) {
                 break;
             }
             case 'i': {
-                funInsertD(list);
+                funInsertDictionary(list);
                 break;
             }
             case 'j': {
-                funRemoveD(list);
+                funRemoveDictionary(list);
                 break;
             }
             case 'k': {
@@ -420,36 +419,35 @@ void menuVector(lasd::Vector<Data>& vector) {
 //Funzioni
 template <typename Data>
 void funExists(lasd::LinearContainer<Data>& con) {
-    Data data;
-    bool repeat = false;
+    char ans;
     do {
         cout << "\nInserisci il valore da cercare: ";
+        Data data;
         cin >> data;
-        string message = con.Exists(data) ? ("L'elemento è nel container.") : ("L'elemento non è nel container.");
-        cout << message << endl;
+        
+        cout << (con.Exists(data) ? "L'elemento è nel container." : "L'elemento non è nel container.") << endl;
+        
         cout << "Vuoi cercare un altro elemento? (y/n): ";
-        char ans;
         cin >> ans;
-        repeat = (ans == 'y');
-    } while (repeat);
+    } while (tolower(ans) == 'y');
 }
+
 
 template <typename Data>
 void funEnqueue(lasd::Queue<Data>& queue) {
-    Data data;
-    bool repeat = false;
+    char ans;
+    
     do {
         cout << "\nInserisci il valore che vuoi inserire nella queue: ";
+        Data data;
         cin >> data;
         queue.Enqueue(data);
         cout << " Inserito!" << endl;
+        
         cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char ans;
         cin >> ans;
-        repeat = (ans == 'y');
-    } while (repeat);    
+    } while (tolower(ans) == 'y');
 }
-
 
 template<typename Data>
 void funDequeue(lasd::Queue<Data>& queue) {
@@ -468,7 +466,7 @@ void funFront(lasd::LinearContainer<Data>& con) {
     Data data;
     try{
         data = con.Front();
-        cout << "\nRisultato: " << data << endl;
+        cout << "\nRisultato : " << data << endl;
     } catch(length_error& e) {
         cout << e.what() << endl;
     }
@@ -481,7 +479,7 @@ void funBack(lasd::LinearContainer<Data>& con) {
     Data data;
     try{
         data = con.Back();
-        cout << "\nRisultato: " << data << endl;
+        cout << "\nRisultato : " << data << endl;
     } catch(length_error& e) {
         cout << e.what() << endl;
     }
@@ -505,19 +503,19 @@ void funSort(lasd::SortableLinearContainer<Data>& con) {
 
 template <typename Data>
 void funPush(lasd::Stack<Data>& stack) {
-    Data data;
-    bool repeat = false;
+    char ans;
     do {
         cout << "\nInserisci il valore che vuoi inserire nello stack: ";
+        Data data;
         cin >> data;
         stack.Push(data);
         cout << " Inserito!" << endl;
+        
         cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char ans;
         cin >> ans;
-        repeat = (ans == 'y');
-    } while (repeat);
+    } while (tolower(ans) == 'y');
 }
+
 
 
 template <typename Data>
@@ -536,7 +534,7 @@ template <typename Data>
 void funTop(lasd::Stack<Data>& stack) {
     try {
         cout << stack.Top() << " Pop effettuata con successo!" << endl; 
-    } catch(std::length_error& e) {
+    } catch(length_error& e) {
         cout << e.what() << endl;
     } 
 }
@@ -570,85 +568,84 @@ void funHeadNDequeue(lasd::Queue<Data>& queue) {
 
 
 
-template <typename T>
-void funInsertD(lasd::DictionaryContainer<T>& con) {
-    T value;
-    bool resta = false;
+template <typename Data>
+void funInsertDictionary(lasd::DictionaryContainer<Data>& con) {
+    char ans;
     do {
-        std::cout << "\nInserisci il valore che vuoi inserire nel dizionario: ";
-        std::cin >> value;
-        if(con.Insert(value)) {
-            std::cout << " Inserito!" << std::endl;
+        cout << "\nInserisci il valore da inserire nel dizionario: ";
+        Data data;
+        cin >> data;
+        
+        if (con.Insert(data)) {
+            cout << " Valore inserito con successo !" << endl;
         } else {
-            std::cout << " Valore non Inserito!" << std::endl;
+            cout << " Il valore non è stato inserito !" << endl;
         }
         
-        std::cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);     
+        cout << "Vuoi inserire un altro elemento? (y/n): ";
+        cin >> ans;
+    } while (tolower(ans) == 'y');
 }
 
-template <typename T>
-void funRemoveD(lasd::DictionaryContainer<T>& con) {
-    T value;
-    bool resta = false;
+
+template <typename Data>
+void funRemoveDictionary(lasd::DictionaryContainer<Data>& con) {
+    char ans;
     do {
-        std::cout << "\nInserisci il valore che vuoi rimuovere dal dizionario: ";
-        std::cin >> value;
-        if(con.Remove(value)) {
-            std::cout << " Rimosso!" << std::endl;
+        cout << "\nInserisci il valore da rimuovere dal dizionario: ";
+        Data data;
+        cin >> data;
+        
+        if (con.Remove(data)) {
+            cout << "Valore rimosso con successo !" << endl;
         } else {
-            std::cout << " Valore non rimosso!" << std::endl;
+            cout << "Il valore non è stato rimosso!" << endl;
         }
         
-        std::cout << "Vuoi rimuovere un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);     
+        cout << "Vuoi rimuovere un altro elemento? (y/n): ";
+        cin >> ans;
+    } while (tolower(ans) == 'y');
 }
 
-template <typename T>
-void funFrontNRemove(lasd::List<T>& lst) {
+
+template <typename Data>
+void funFrontNRemove(lasd::List<Data>& list) {
     try {
-        std::cout << lst.FrontNRemove() << " FrontNRemove effettuata con successo!" << std::endl; 
-    } catch(std::length_error& ex) {
-        std::cout << ex.what() << std::endl;
+        cout << list.FrontNRemove() << "La FrontNRemove è stata effettuata con successo!" << endl; 
+    } catch(length_error& e) {
+        cout << e.what() << endl;
     }     
 }
 
-template <typename T>
-void funInsertAtBack(lasd::List<T>& lst) {
-    T value;
-    bool resta = false;
+template <typename Data>
+void funInsertAtBack(lasd::List<Data>& list) {
+    char ans;
     do {
-        std::cout << "\nInserisci il valore che vuoi inserire nella lista: ";
-        std::cin >> value;
-        lst.InsertAtBack(value);
-        std::cout << " Inserito in coda!" << std::endl;
-        std::cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);   
+        cout << "\nInserisci il valore che vuoi inserire nella lista: ";
+        Data data;
+        cin >> data;
+        list.InsertAtBack(data);
+        cout << " Inserito in coda!" << endl;
+        
+        cout << "Vuoi inserire un altro elemento? (y/n): ";
+        cin >> ans;
+    } while (tolower(ans) == 'y');
 }
 
-template <typename T>
-void funInsertAtFront(lasd::List<T>& lst) {
-    T value;
-    bool resta = false;
+
+template <typename Data>
+void funInsertAtFront(lasd::List<Data>& list) {
+    char ans;
     do {
-        std::cout << "\nInserisci il valore che vuoi inserire nella lista: ";
-        std::cin >> value;
-        lst.InsertAtFront(value);
-        std::cout << " Inserito in testa!" << std::endl;
-        std::cout << "Vuoi inserire un altro elemento? (y/n): ";
-        char res;
-        std::cin >> res;
-        resta = (res == 'y');
-    } while (resta);     
+        cout << "\nInserisci il valore che vuoi inserire nella lista: ";
+        Data data;
+        cin >> data;
+        list.InsertAtFront(data);
+        cout << " Inserito in testa!" << endl;
+        
+        cout << "Vuoi inserire un altro elemento? (y/n): ";
+        cin >> ans;
+    } while (tolower(ans) == 'y');
 }
 
 
@@ -679,7 +676,7 @@ string selezionaStruttura() {
     return scelta;
 }
 
-string selezionaTipo() {
+string selezionaDato() {
     cout << "Scegli il tipo di dati:" << endl;
     cout << "1: int" << endl;
     cout << "2: double" << endl;
@@ -705,7 +702,13 @@ string selezionaTipo() {
 unsigned long selezionaDimensione() {
     unsigned long dim = 0;
     cout << "\nInserisci la dimensione della struttura scelta: " << endl;
-    cin >> dim;
+    do { 
+        cin >> dim;
+        if (dim > 50000) {
+            cout << "\n\nDimensione troppo lunga, riprova !\n";
+        }
+    } while (dim > 50000);
+   
     return dim;    
 }
 /******************************************************/
@@ -726,17 +729,17 @@ vector<int> generaInt(unsigned long dim) {
 }
 
 vector<double> generaDouble(unsigned long dim) {
-    vector<double> vec(dim);
+    vector<double> vector(dim);
 
     default_random_engine generator(random_device{}());
     uniform_real_distribution<double> dist(0.0, 100.0);
 
 
     for(unsigned long i = 0; i<dim; i++) {
-        vec[i] = dist(generator);
+        vector[i] = dist(generator);
     }
     cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
-    return vec;
+    return vector;
 }
 
 vector<string> generaString(unsigned long dim) {

@@ -1,6 +1,5 @@
 #include "zmytest/test.hpp"
 #include "zlasdtest/test.hpp"
-#include "thread"
 #include "string"
 #include <iostream>
 
@@ -20,12 +19,10 @@ int main() {
         getline(cin, alt);
 
         if (alt == "1") {
-            test();
+            mytest();
             cout << "\n\nRitorno al menù principale...\n\n" << endl;
         } else if (alt == "2") {
-            lasdtest();
-            cout << "\n\nTest completati!\n\nRitorno al menù principale...\n\n" << endl;
-            
+            lasdtest();            
         } else if (alt == "3") {
             break; 
         } else {
@@ -33,7 +30,7 @@ int main() {
         }
     }
 
-    cout << "\n\nProgramma terminato.\n\nAntonio De Martino\nN86004701" << endl;
+    cout << "\n\nProgramma terminato.\n\n - Antonio De Martino\n Matricola: N86004701" << endl;
     return 0;
 }
 
