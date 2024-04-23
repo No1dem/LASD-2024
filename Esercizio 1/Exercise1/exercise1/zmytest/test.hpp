@@ -20,7 +20,6 @@ using namespace std;
 
 void mytest();
 
-
 /*******************************************************************************/
 template <typename Data>
 void menuStack(lasd::Stack<Data>&);
@@ -150,8 +149,8 @@ vector<string> generaString(unsigned long);
 /* ************************************************************************** */
 
 template <typename Data>
-void Print(const Data& dat) {
-  cout << dat << " ";
+void Print(const Data& data) {
+  cout << data << " ";
 }
 
 #endif

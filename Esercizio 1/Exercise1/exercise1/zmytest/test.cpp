@@ -27,7 +27,7 @@ void mytest() {
             menuVector(vector);
         }
         else if(tipo == "3") {
-            lasd::Vector<std::string> vector(dim);
+            lasd::Vector<string> vector(dim);
             popolaVector(vector, dim);
             menuVector(vector);
         }
@@ -43,7 +43,7 @@ void mytest() {
             menuList(list);
         }
         else if(tipo == "3") {
-            lasd::List<std::string> list;
+            lasd::List<string> list;
             popolaList(list, dim);
             menuList(list);
         }
@@ -493,9 +493,9 @@ void funSort(lasd::SortableLinearContainer<Data>& con) {
         cout << "Il container è vuoto !";
         return;
     }
-    cout << "\nPrima :\n" << endl;
+    cout << "\nPrima :\n\n" << endl;
     con.Map(&Print<Data>);
-    cout << "\nDopo :\n" << endl;
+    cout << "\nDopo :\n\n" << endl;
     con.Sort();
     con.Map(&Print<Data>);
 }
@@ -533,7 +533,7 @@ void funPop(lasd::Stack<Data>& stack) {
 template <typename Data>
 void funTop(lasd::Stack<Data>& stack) {
     try {
-        cout << stack.Top() << " Pop effettuata con successo!" << endl; 
+        cout << stack.Top() << " Top effettuata con successo!" << endl; 
     } catch(length_error& e) {
         cout << e.what() << endl;
     } 
@@ -765,84 +765,97 @@ vector<string> generaString(unsigned long dim) {
 /******************************************************/
 
 //Popolamento
-
 void popolaVector(lasd::Vector<int>& vector, unsigned long dim) {
     unsigned int j = 0;
-    for(int i: generaInt(dim)) {
-        vector[j] = i;
+    std::vector<int> generatedValues = generaInt(dim);
+    for(unsigned int i=0; i<dim; i++) {
+        vector[j] = generatedValues[i];
         j++;
     }
 }
 
+
 void popolaVector(lasd::Vector<double>& vector, unsigned long dim) {
     unsigned int j = 0;
-    for(double i: generaDouble(dim)) {
-        vector[j] = i;
-        j++;
+    std::vector<double> generatedValues = generaDouble(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        vector[j] = generatedValues[i];
+        ++j;
     }
 }
 
 void popolaVector(lasd::Vector<string>& vector, unsigned long dim) {
     unsigned int j = 0;
-    for(string i: generaString(dim)) {
-        vector[j] = i;
-        j++;
+    std::vector<string> generatedValues = generaString(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        vector[j] = generatedValues[i];
+        ++j;
     }
 }
 
 void popolaList(lasd::List<int>& list, unsigned long dim) {
-    for(int i: generaInt(dim)) {
-        list.InsertAtBack(i);
+    std::vector<int> generatedValues = generaInt(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        list.InsertAtBack(generatedValues[i]);
     }
 }
 
 void popolaList(lasd::List<double>& list, unsigned long dim) {
-    for(double i: generaDouble(dim)) {
-        list.InsertAtBack(i);
+    std::vector<double> generatedValues = generaDouble(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        list.InsertAtBack(generatedValues[i]);
     }
 }
 
 void popolaList(lasd::List<string>& list, unsigned long dim) {
-    for(string i: generaString(dim)) {
-        list.InsertAtBack(i);
+    std::vector<string> generatedValues = generaString(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        list.InsertAtBack(generatedValues[i]);
     }
 }
 
 void popolaStack(lasd::Stack<int>& stack, unsigned long dim) {
-    for(int i: generaInt(dim)) {
-        stack.Push(i);
+    std::vector<int> generatedValues = generaInt(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        stack.Push(generatedValues[i]);
     }
 }
 
 void popolaStack(lasd::Stack<double>& stack, unsigned long dim) {
-    for(double i: generaDouble(dim)) {
-        stack.Push(i);
+    std::vector<double> generatedValues = generaDouble(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        stack.Push(generatedValues[i]);
     }
 }
 
 void popolaStack(lasd::Stack<std::string>& stack, unsigned long dim) {
-    for(string i: generaString(dim)) {
-        stack.Push(i);
+    std::vector<string> generatedValues = generaString(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        stack.Push(generatedValues[i]);
     }
 }
 
 void popolaQueue(lasd::Queue<int>& queue, unsigned long dim) {
-    for(int i: generaInt(dim)) {
-        queue.Enqueue(i);
+    std::vector<int> generatedValues = generaInt(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        queue.Enqueue(generatedValues[i]);
     }
 }
 
 void popolaQueue(lasd::Queue<double>& queue, unsigned long dim) {
-    for(double i: generaDouble(dim)) {
-        queue.Enqueue(i);
+    std::vector<double> generatedValues = generaDouble(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        queue.Enqueue(generatedValues[i]);
     }
 }
 
 void popolaQueue(lasd::Queue<string>& queue, unsigned long dim) {
-    for(string i: generaString(dim)) {
-        queue.Enqueue(i);
+    std::vector<string> generatedValues = generaString(dim);
+    for(unsigned int i = 0; i < dim; ++i) {
+        queue.Enqueue(generatedValues[i]);
     }
 }
+
 
 
 /********************************************************************************/
