@@ -702,12 +702,13 @@ string selezionaDato() {
 unsigned long selezionaDimensione() {
     unsigned long dim = 0;
     cout << "\nInserisci la dimensione della struttura scelta: " << endl;
+    bool riprova = false;
     do { 
         cin >> dim;
         if (dim > 50000) {
-            cout << "\n\nDimensione troppo lunga, riprova !\n";
+            cout << "\n\nDimensione troppo grande, riprova !\n";
         }
-    } while (dim > 50000);
+    } while (riprova == true);
    
     return dim;    
 }

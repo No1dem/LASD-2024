@@ -12,7 +12,7 @@ int main() {
 
     while (true) {
         cout << "--------Test LASD 2024--------" << endl;
-        cout << " \n  Esercizio 1\n ";
+        cout << "\n  Esercizio 1\n" << endl;
         cout << "1: Test personale " << endl;
         cout << "2: Test professore" << endl;
         cout << "3: Esci" << endl;

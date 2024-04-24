@@ -86,7 +86,7 @@ void popolaQueue(lasd::Queue<double>&, unsigned long);
 void popolaQueue(lasd::Queue<string>&, unsigned long);
 
 /***************************************************************/
-//Operazioni
+//Funzioni
 template <typename Data>
 void funFront(lasd::LinearContainer<Data>&);
 
