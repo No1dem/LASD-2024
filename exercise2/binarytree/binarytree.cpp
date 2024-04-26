@@ -6,7 +6,6 @@ namespace lasd {
 
 
 //Operator ==
-
 template<typename Data>
 bool BinaryTree<Data>::Node::operator==(const Node& node) const noexcept {
     if (node.Element() != this->Element()) {
@@ -17,23 +16,19 @@ bool BinaryTree<Data>::Node::operator==(const Node& node) const noexcept {
     bool onlyRightChild = (node.HasRightChild() && this->HasRightChild());
     bool rightNLeftChild = onlyLeftChild && onlyRightChild;
 
-    if (onlyLeftChild) {
+    if (rightNLeftChild) {
+        if((this->LeftChild() == node->LeftChild()) && (this->RightChild() == node->RightChild())) {   //Ricorsione
+            return true;
+        }
+    } else if (onlyLeftChild) {
         if(this->LeftChild() == node->LeftChild()) {
             return true;
         }
-        return false;
     }
     else if (onlyRightChild) {
         if(this->RightChild() == node->RightChild()) {
             return true;
         }
-        return false;
-    }
-    else if (rightNLeftChild) {
-        if((this->LeftChild() == node->LeftChild()) && (this->RightChild() == node->RightChild())) {   //Ricorsione
-            return true;
-        }
-        return false;
     }
     return false;
 }
@@ -139,6 +134,7 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun fun, const Node& node) const 
 /* ************************************************************************** */
 //MutableBinaryTree
 
+//PreOrderMap
 template<typename Data>
 void MutableBinaryTree<Data>::PreOrderMap(MapFun fun, MutableNode& node) {
     if (node != nullptr) {
@@ -156,7 +152,7 @@ void MutableBinaryTree<Data>::PreOrderMap(MapFun fun, MutableNode& node) {
 
 
 
-
+//PostOrderMap
 template<typename Data>
 void MutableBinaryTree<Data>::PostOrderMap(MapFun fun, MutableNode& node) {
     if (node != nullptr) {
@@ -176,7 +172,7 @@ void MutableBinaryTree<Data>::PostOrderMap(MapFun fun, MutableNode& node) {
 
 
 
-
+//InOrderMap
 template<typename Data>
 void MutableBinaryTree<Data>::InOrderMap(MapFun fun, MutableNode& node) {
     if (node != nullptr) {
@@ -194,7 +190,7 @@ void MutableBinaryTree<Data>::InOrderMap(MapFun fun, MutableNode& node) {
 }
 
 
-//BreadthTraverse
+//BreadthMap
 template<typename Data>
 void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode& node) {
     if (node != nullptr) {
@@ -218,4 +214,238 @@ void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode& node) {
     }
 }
 
+/**************************************************************************/
+//BTPreOrderIterator
+
+
+//Specific constructor
+template<typename Data>
+BTPreOrderIterator<Data>::BTPreOrderIterator(const BinaryTree<Data> bt) {
+    if (bt.Size() != 0) {
+        root = &bt.Root();
+        currNode = root;
+    }
+}
+
+
+//Copy constructor 
+template<typename Data>
+BTPreOrderIterator<Data>::BTPreOrderIterator(const BTPreOrderIterator<Data>& iterator) {
+        root = iterator.root;
+        currNode = iterator.currNode;
+        stk = iterator.stk;
+}
+
+
+//Move constructor
+template<typename Data>
+BTPreOrderIterator<Data>::BTPreOrderIterator(BTPreOrderIterator<Data>&& iterator) noexcept {
+        std::swap(root, iterator.root);
+        std::swap(currNode, iterator.currNode);
+        std::swap(stk, iterator.stk);
+}
+
+// Copy assignment
+template<typename Data>
+BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator=(const BTPreOrderIterator<Data>& iterator) {
+    root = iterator.root;
+    stk = iterator.stk;
+    currNode = iterator.currNode;
+    return *this;
+}
+
+// Move assignment
+template<typename Data>
+BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator=(BTPreOrderIterator<Data>&& iterator) noexcept {
+    std::swap(root, iterator.root);
+    std::swap(stk, iterator.stk); 
+    std::swap(currNode, iterator.currNode);
+    return *this;
+}
+
+
+//Operator *
+template<typename Data>
+inline const Data& BTPreOrderIterator<Data>::operator*() const {
+    if (Terminated()) {
+        throw std::out_of_range("Iterator terminated !");
+    }
+    return currNode->Element;
+}
+
+
+
+//Operator ++
+template <typename Data>
+BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator++() {
+    if(Terminated()) {
+        throw std::out_of_range("Iterator terminated !");
+    }
+
+    bool onlyLeftChild = currNode->HasLeftChild();
+    bool onlyRightChild = currNode->HasRightChild();
+    bool leftNRightChild = onlyLeftChild && onlyRightChild;
+    
+    if(leftNRightChild) {
+        currNode = &(currNode->LeftChild());
+
+        stk.Push(&(currNode->RightChild()));
+
+    } else if (onlyLeftChild) {
+        currNode = &(currNode->LeftChild());
+
+    } else if (onlyRightChild) {
+        currNode = &(currNode->RightChild());
+
+    } else if (!stk.Empty()) {
+        currNode = stk.TopNPop();
+
+    } else {
+        currNode = nullptr;
+
+    }
+    return *this;
+}
+
+//Reset
+template <typename Data>
+inline void BTPreOrderIterator<Data>::Reset() noexcept {
+    stk.Clear();
+    currNode = root;
+}
+
+
+/************************************************************************/
+//BTPreOrderMutableIterator 
+template<typename Data>
+inline Data& BTPreOrderMutableIterator<Data>::operator*() {
+    if(this->Terminated()) {
+      throw std::out_of_range("Iterator Terminated!");
+    } 
+    return const_cast<Data&>(currNode->Element());
+}
+
+/************************************************************************/
+//BTPostOrderIterator
+
+
+//Specific constructor
+template<typename Data>
+BTPostOrderIterator<Data>::BTPostOrderIterator(const BinaryTree<Data>& bt) {
+    if(bt.Size() != 0) {
+        root = &bt.Root();
+        currNode = root;
+        LeftMostLeaf();
+    }
+}
+
+// Copy constructor
+template<typename Data>
+BTPostOrderIterator<Data>::BTPostOrderIterator(const BTPostOrderIterator& it) {
+    root = it.root;
+    currNode = it.currNode;
+    stk = it.stk;
+}
+
+
+
+//Move constructor
+template<typename Data>
+BTPostOrderIterator<Data>::BTPostOrderIterator(BTPostOrderIterator&& it) noexcept {
+    std::swap(root, it.root);
+    std::swap(currNode, it.currNode);
+    std::swap(stk, it.stk);
+}
+
+
+//Copy assignemnt
+template<typename Data>
+BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator=(const BTPostOrderIterator& it) {
+    root = it.root;
+    currNode = it.currNode;
+    stk = it.stk;
+    return *this;
+}
+
+
+
+
+//Move assignment
+template<typename Data>
+BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator=(BTPostOrderIterator&& it) noexcept {
+    std::swap(root, it.root);
+    std::swap(currNode, it.currNode);
+    std::swap(stk, it.stk);
+    return *this;
+}
+
+//Operator *
+template<typename Data>
+const Data& BTPostOrderIterator<Data>::operator*() const {
+    if(Terminated()) {
+      throw std::out_of_range("Iterator terminated!");
+    }
+    return currNode->Element();
+}
+
+
+//Operator ++
+template<typename Data>
+BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator++() {
+    if (!Terminated()) {
+        if (stk.Empty()) {
+            currNode = nullptr;
+        } else {
+            currNode = &stk.Top();
+            if (currNode->HasRightChild() && (&currNode->RightChild() != currNode)) {
+                stk.Push(currNode);
+                currNode = currNode->RightChild();
+                LeftMostLeaf();
+            } else {
+                stk.Pop();
+            }
+        } 
+        return *this;
+    }
+    throw std::out_of_range("Iterator terminated !");
+}
+
+
+
+//Reset
+template<typename Data>
+void BTPostOrderIterator<Data>::Reset() noexcept {
+    currNode = root;
+    stk.Clear();
+    LeftMostLeaf();
+}
+
+//GetMostLeftNode
+template <typename Data>
+void BTPostOrderIterator<Data>::LeftMostLeaf() {
+    while (currNode->HasLeftChild() || currNode->HasRightChild()) {
+        if (currNode->HasLeftChild()) {
+            stk.Push(currNode);
+            currNode = &currNode->LeftChild();
+        } else {
+            stk.Push(currNode);
+            currNode = &currNode->RightChild();
+        }
+    }
+}
+
+/********************************************************************************/
+//BTPostOrderMutableIterator
+
+//Operator *
+template<typename Data>
+Data& BTPostOrderMutableIterator<Data>::operator*() {
+    if(currNode != nullptr) {
+        return const_cast<Data&>(currNode->Element());
+    } else {
+        throw std::out_of_range("Iterator terminated !");
+    }
+}
+
+/*******************************************************************************/
 }
