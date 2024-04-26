@@ -448,4 +448,243 @@ Data& BTPostOrderMutableIterator<Data>::operator*() {
 }
 
 /*******************************************************************************/
+//BTInOrderIterator
+
+//Specific constructor
+template<typename Data>
+BTInOrderIterator<Data>::BTInOrderIterator(const BinaryTree<Data>& bt) {
+    if (bt.Size() != 0) {
+        root = &bt.Root();
+        currNode = root;
+        LeftMostNode();
+    }
+}
+
+
+
+//Copy constructor
+template<typename Data>
+BTInOrderIterator<Data>::BTInOrderIterator(const BTInOrderIterator& it) {
+    root = it.root;
+    currNode = it.currNode;
+    stk = it.stk;
+}
+
+
+
+//Move constructor
+template<typename Data>
+BTInOrderIterator<Data>::BTInOrderIterator(BTInOrderIterator&& it) noexcept {
+    std::swap(root, it.root);
+    std::swap(currNode, it.currNode);
+    std::swap(stk, it.stk);
+}
+
+
+
+//Copy assignment
+template<typename Data>
+BTInOrderIterator<Data>& BTInOrderIterator<Data>::operator=(const BTInOrderIterator& it) {
+    root = it.root;
+    currNode = it.currNode;
+    stk = it.stk;
+    return *this;
+}
+
+
+//Move assigment 
+template<typename Data>
+BTInOrderIterator<Data>& BTInOrderIterator<Data>::operator=(BTInOrderIterator&& it) noexcept {
+    std::swap(root, it.root);
+    std::swap(currNode, it.currNode);
+    std::swap(stk, it.stk);
+    return *this;
+}
+
+
+
+//Operator *
+template<typename Data>
+const Data& BTInOrderIterator<Data>::operator*() const {
+    if(!Terminated()) {
+      return currNode->Element();
+    } else {
+      throw std::out_of_range("Iterator terminated !");
+    }
+}
+
+
+
+//Operator ++
+template<typename Data>
+BTInOrderIterator<Data>& BTInOrderIterator<Data>::operator++() {
+    if(!Terminated()) {
+        if (currNode->HasRightChild()) {
+            currNode = &(currNode->RightChild());
+            LeftMostNode();
+        } else {
+            if (stk.Empty()) {
+                currNode = nullptr;
+            } else {
+                currNode = stk.TopNPop();
+            }   
+        }
+        return *this;
+    }
+    throw std::out_of_range("Iterator terminated !");
+}
+
+
+
+
+
+//Reset 
+template<typename Data>
+void BTInOrderIterator<Data>::Reset() noexcept {
+    stk.Clear();
+    currNode = root;
+    LeftMostNode();
+}
+
+
+
+//LeftMostNode
+template<typename Data>
+void BTInOrderIterator<Data>::LeftMostNode() {
+    if (!Terminated()) {
+        while (currNode->HasLeftChild()) {
+            stk.Push(currNode);
+            currNode = currNode->LeftChild();
+        }
+    }
+}
+
+/*******************************************************************************/
+//BTInOrderMutableIterator
+
+//Operator *
+template<typename Data>
+Data& BTInOrderMutableIterator<Data>::operator*() {
+    if(currNode != nullptr) {
+      return const_cast<Data&>(currNode->Element());
+    } else {
+      throw std::out_of_range("Iterator terminated !");
+    }
+} 
+
+/*******************************************************************************/
+//BTBreadthIterator
+
+// Specific constructors
+template<typename Data>
+BTBreadthIterator<Data>::BTBreadthIterator(const BinaryTree<Data>& bt) {
+    if(bt.Size() != 0) {
+      root = &(bt.Root());
+      currNode = root;
+    }
+}
+
+
+
+//Copy Constructor
+template<typename Data>
+BTBreadthIterator<Data>::BTBreadthIterator(const BTBreadthIterator& it) {
+    root = it.root;
+    currNode = it.currNode;
+    que = it.que;
+}
+
+
+
+
+//Move Constructor
+template<typename Data>
+BTBreadthIterator<Data>::BTBreadthIterator(BTBreadthIterator&& it) noexcept {
+    std::swap(root, it.root);
+    std::swap(currNode, it.currNode);
+    std::swap(que, it.que);
+}
+
+
+
+
+//Copy assignment
+template<typename Data>
+BTBreadthIterator<Data>& BTBreadthIterator<Data>::operator=(const BTBreadthIterator& it) {
+    root = it.root;
+    currNode = it.currNode;
+    que = it.que;
+    return *this;
+}
+
+
+
+
+//Move assignment
+template<typename Data>
+BTBreadthIterator<Data>& BTBreadthIterator<Data>::operator=(BTBreadthIterator&& it) noexcept {
+    std::swap(root, it.root);
+    std::swap(currNode, it.currNode);
+    std::swap(que, it.que);
+    return *this;
+}
+
+
+
+//Operator *
+template<typename Data>
+const Data& BTBreadthIterator<Data>::operator*() const {
+    if(!Terminated()) {
+      return currNode->Element();
+    } else {
+      throw std::out_of_range("Iterator terminated !");
+    }
+}
+
+
+//Operator ++
+template<typename Data>
+BTBreadthIterator<Data>& BTBreadthIterator<Data>::operator++() {
+    if (!Terminated()) {
+        if (currNode->HasLeftChild()) {
+            que.Enqueue(&(currNode->LeftChild()));
+        }
+        if (currNode->HasRightChild()) {
+            que.Enqueue(&(currNode->RightChild()));
+        }
+        if (que.Empty()) {
+            currNode = nullptr;
+        } else {
+            currNode = que.HeadNDequeue();
+        }
+        return *this;
+    }
+    throw std::out_of_range("Iterator terminated !");
+}
+
+
+
+//Reset
+template<typename Data>
+void BTBreadthIterator<Data>::Reset() noexcept {
+    currNode = root;
+    que.Clear();
+}
+
+/*******************************************************************************/
+//BTBreadthMutableIterator
+
+
+//Operator *
+template<typename Data>
+Data& BTBreadthMutableIterator<Data>::operator*() {
+    if (this->Terminated()) {
+        throw std::out_of_range("Iterator terminated !");
+    } 
+    return const_cast<Data&>(currNode->Element()); 
+}
+
+
+
+
 }
