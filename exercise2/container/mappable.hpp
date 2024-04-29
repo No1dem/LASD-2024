@@ -249,7 +249,7 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void BreadthMap(const MapFun) = 0;
+  virtual void BreadthMap(const MapFun) = 0;
 
   /* ************************************************************************ */
 

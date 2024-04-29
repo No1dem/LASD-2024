@@ -17,16 +17,16 @@ bool BinaryTree<Data>::Node::operator==(const Node& node) const noexcept {
     bool rightNLeftChild = onlyLeftChild && onlyRightChild;
 
     if (rightNLeftChild) {
-        if((this->LeftChild() == node->LeftChild()) && (this->RightChild() == node->RightChild())) {   //Ricorsione
+        if((this->LeftChild() == node.LeftChild()) && (this->RightChild() == node.RightChild())) {   //Ricorsione
             return true;
         }
     } else if (onlyLeftChild) {
-        if(this->LeftChild() == node->LeftChild()) {
+        if(this->LeftChild() == node.LeftChild()) {
             return true;
         }
     }
     else if (onlyRightChild) {
-        if(this->RightChild() == node->RightChild()) {
+        if(this->RightChild() == node.RightChild()) {
             return true;
         }
     }
@@ -220,7 +220,7 @@ void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode& node) {
 
 //Specific constructor
 template<typename Data>
-BTPreOrderIterator<Data>::BTPreOrderIterator(const BinaryTree<Data> bt) {
+BTPreOrderIterator<Data>::BTPreOrderIterator(const BinaryTree<Data>& bt) {
     if (bt.Size() != 0) {
         root = &bt.Root();
         currNode = root;
@@ -396,10 +396,10 @@ BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator++() {
         if (stk.Empty()) {
             currNode = nullptr;
         } else {
-            currNode = &stk.Top();
+            currNode = stk.Top();
             if (currNode->HasRightChild() && (&currNode->RightChild() != currNode)) {
                 stk.Push(currNode);
-                currNode = currNode->RightChild();
+                currNode = &currNode->RightChild();
                 LeftMostLeaf();
             } else {
                 stk.Pop();
@@ -554,7 +554,7 @@ void BTInOrderIterator<Data>::LeftMostNode() {
     if (!Terminated()) {
         while (currNode->HasLeftChild()) {
             stk.Push(currNode);
-            currNode = currNode->LeftChild();
+            currNode = &currNode->LeftChild();
         }
     }
 }

@@ -309,7 +309,7 @@ protected:
 public:
 
   // Specific constructors
-  BTPreOrderIterator(const BinaryTree<Data>); // An iterator over a given binary tree
+  BTPreOrderIterator(const BinaryTree<Data>& ); // An iterator over a given binary tree
 
   /* ************************************************************************ */
 
