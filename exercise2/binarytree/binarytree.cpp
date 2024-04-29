@@ -53,16 +53,16 @@ bool BinaryTree<Data>::operator==(const BinaryTree<Data>& bt) const noexcept {
 
 //PreOrderTraverse
 template<typename Data>
-void BinaryTree<Data>::PreOrderTraverse(TraverseFun fun,const Node& node) const {
+void BinaryTree<Data>::PreOrderTraverse(TraverseFun fun,const Node* node) const {
     if (node != nullptr) {
-        fun(node.Element());
+        fun(node->Element());
 
-        if (node.HasLeftChild()) {
-            PreOrderTraverse(fun, node.LeftChild());
+        if (node->HasLeftChild()) {
+            PreOrderTraverse(fun, &node->LeftChild());
         }
 
-        if (node.HasRightChild()) {
-            PreOrderTraverse(fun, node.RightChild());
+        if (node->HasRightChild()) {
+            PreOrderTraverse(fun, &node->RightChild());
         }
     }
     
@@ -71,36 +71,36 @@ void BinaryTree<Data>::PreOrderTraverse(TraverseFun fun,const Node& node) const 
 
 //PostOrderTraverse
 template<typename Data>
-void BinaryTree<Data>::PostOrderTraverse(TraverseFun fun,const Node& node) const {
+void BinaryTree<Data>::PostOrderTraverse(TraverseFun fun,const Node* node) const {
     if (node != nullptr) {
 
-        if (node.HasLeftChild()) {
-            PostOrderTraverse(fun, node.LeftChild());
+        if (node->HasLeftChild()) {
+            PostOrderTraverse(fun, &node->LeftChild());
         }
 
 
-        if (node.HasRightChild()) {
-            PostOrderTraverse(fun, node.RightChild());
+        if (node->HasRightChild()) {
+            PostOrderTraverse(fun, &node->RightChild());
         }
 
-        fun(node.Element());
+        fun(node->Element());
     }
 }
 
 
 //InOrderTraverse
 template<typename Data>
-void BinaryTree<Data>::InOrderTraverse(TraverseFun fun,const Node& node) const {
+void BinaryTree<Data>::InOrderTraverse(TraverseFun fun,const Node* node) const {
     if (node != nullptr) {
        
-        if (node.HasLeftChild()) {
-            InOrderTraverse(fun, node.LeftChild());
+        if (node->HasLeftChild()) {
+            InOrderTraverse(fun, &node->LeftChild());
         }
 
-        fun(node.Element());
+        fun(node->Element());
 
-        if (node.HasRightChild()) {
-            InOrderTraverse(fun, node.RightChild());
+        if (node->HasRightChild()) {
+            InOrderTraverse(fun, &node->RightChild());
         }
     }
 
@@ -109,21 +109,21 @@ void BinaryTree<Data>::InOrderTraverse(TraverseFun fun,const Node& node) const {
 
 //BreadthTraverse
 template<typename Data>
-void BinaryTree<Data>::BreadthTraverse(TraverseFun fun, const Node& node) const {
+void BinaryTree<Data>::BreadthTraverse(TraverseFun fun, const Node* node) const {
     if (node != nullptr) {
-        lasd::QueueVec<const Node&> queue;
+        lasd::QueueVec<const Node*> queue;
         queue.Enqueue(node);
 
         while (!queue.Empty()) {
-            const Node& currentNode = queue.Head();
-            fun(currentNode.Element());
+            const Node* currentNode = queue.Head();
+            fun(currentNode->Element());
 
-            if (currentNode.HasLeftChild()) {
-                queue.Enqueue(currentNode.LeftChild());
+            if (currentNode->HasLeftChild()) {
+                queue.Enqueue(&currentNode->LeftChild());
             }
 
-            if (currentNode.HasRightChild()) {
-                queue.Enqueue(currentNode.RightChild());
+            if (currentNode->HasRightChild()) {
+                queue.Enqueue(&currentNode->RightChild());
             }
 
             queue.Dequeue();
@@ -136,16 +136,16 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun fun, const Node& node) const 
 
 //PreOrderMap
 template<typename Data>
-void MutableBinaryTree<Data>::PreOrderMap(MapFun fun, MutableNode& node) {
+void MutableBinaryTree<Data>::PreOrderMap(const MapFun fun, MutableNode* node) {
     if (node != nullptr) {
-        fun(node.Element());
+        fun(node->Element());
 
-        if (node.HasLeftChild()) {
-            PreOrderTraverse(fun, node.LeftChild());
+        if (node->HasLeftChild()) {
+            PreOrderMap(fun, &node->LeftChild());
         }
 
-        if (node.HasRightChild()) {
-            PreOrderTraverse(fun, node.RightChild());
+        if (node->HasRightChild()) {
+            PreOrderMap(fun, &node->RightChild());
         }
     }
 }
@@ -154,18 +154,18 @@ void MutableBinaryTree<Data>::PreOrderMap(MapFun fun, MutableNode& node) {
 
 //PostOrderMap
 template<typename Data>
-void MutableBinaryTree<Data>::PostOrderMap(MapFun fun, MutableNode& node) {
+void MutableBinaryTree<Data>::PostOrderMap(const MapFun fun, MutableNode* node) {
     if (node != nullptr) {
        
-        if (node.HasLeftChild()) {
-            PostOrderTraverse(fun, node.LeftChild());
+        if (node->HasLeftChild()) {
+            PostOrderMap(fun, &node->LeftChild());
         }
 
-        if (node.HasRightChild()) {
-            PostOrderTraverse(fun, node.RightChild());
+        if (node->HasRightChild()) {
+            PostOrderMap(fun, &node->RightChild());
         }
 
-        fun(node.Element());
+        fun(node->Element());
     }
 }
 
@@ -174,17 +174,17 @@ void MutableBinaryTree<Data>::PostOrderMap(MapFun fun, MutableNode& node) {
 
 //InOrderMap
 template<typename Data>
-void MutableBinaryTree<Data>::InOrderMap(MapFun fun, MutableNode& node) {
+void MutableBinaryTree<Data>::InOrderMap(const MapFun fun, MutableNode* node) {
     if (node != nullptr) {
 
-        if (node.HasLeftChild()) {
-            InOrderTraverse(fun, node.LeftChild());
+        if (node->HasLeftChild()) {
+            InOrderMap(fun, &node->LeftChild());
         }
 
-        fun(node.Element());
+        fun(node->Element());
 
-        if (node.HasRightChild()) {
-            InOrderTraverse(fun, node.RightChild());
+        if (node->HasRightChild()) {
+            InOrderMap(fun, &node->RightChild());
         }
     }
 }
@@ -192,21 +192,21 @@ void MutableBinaryTree<Data>::InOrderMap(MapFun fun, MutableNode& node) {
 
 //BreadthMap
 template<typename Data>
-void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode& node) {
+void MutableBinaryTree<Data>::BreadthMap(const MapFun fun, MutableNode* node) {
     if (node != nullptr) {
-        lasd::QueueVec<const Node&> queue;
+        lasd::QueueVec<MutableNode*> queue;
         queue.Enqueue(node);
 
         while (!queue.Empty()) {
-            MutableNode& currentNode = queue.Head();
-            fun(currentNode.Element());
+            MutableNode* currentNode = queue.Head();
+            fun(currentNode->Element());
 
-            if (currentNode.HasLeftChild()) {
-                queue.Enqueue(currentNode.LeftChild());
+            if (currentNode->HasLeftChild()) {
+                queue.Enqueue(&currentNode->LeftChild());
             }
 
-            if (currentNode.HasRightChild()) {
-                queue.Enqueue(currentNode.RightChild());
+            if (currentNode->HasRightChild()) {
+                queue.Enqueue(&currentNode->RightChild());
             }
 
             queue.Dequeue();
@@ -264,14 +264,17 @@ BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator=(BTPreOrderIterator
 }
 
 
+
+
 //Operator *
 template<typename Data>
 inline const Data& BTPreOrderIterator<Data>::operator*() const {
     if (Terminated()) {
         throw std::out_of_range("Iterator terminated !");
     }
-    return currNode->Element;
+    return currNode->Element();
 }
+
 
 
 
@@ -307,6 +310,10 @@ BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator++() {
     return *this;
 }
 
+
+
+
+
 //Reset
 template <typename Data>
 inline void BTPreOrderIterator<Data>::Reset() noexcept {
@@ -317,6 +324,8 @@ inline void BTPreOrderIterator<Data>::Reset() noexcept {
 
 /************************************************************************/
 //BTPreOrderMutableIterator 
+
+
 template<typename Data>
 inline Data& BTPreOrderMutableIterator<Data>::operator*() {
     if(this->Terminated()) {
@@ -647,10 +656,10 @@ template<typename Data>
 BTBreadthIterator<Data>& BTBreadthIterator<Data>::operator++() {
     if (!Terminated()) {
         if (currNode->HasLeftChild()) {
-            que.Enqueue(&(currNode->LeftChild()));
+            que.Enqueue(&currNode->LeftChild());
         }
         if (currNode->HasRightChild()) {
-            que.Enqueue(&(currNode->RightChild()));
+            que.Enqueue(&currNode->RightChild());
         }
         if (que.Empty()) {
             currNode = nullptr;
