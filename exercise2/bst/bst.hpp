@@ -105,7 +105,7 @@ public:
 
   // Specific member functions (inherited from TestableContainer)
 
-  // type Exists(argument) specifiers; // Override TestableContainer member
+  // type Exists(const Data&) const noexcept override; // Override TestableContainer member
 
   /* ************************************************************************ */
 
