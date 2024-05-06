@@ -13,7 +13,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class BinaryTreeLnk {
+class BinaryTreeLnk : virtual public MutableBinaryTree<Data>{
   // Must extend MutableBinaryTree<Data>
 
 private:
@@ -22,11 +22,16 @@ private:
 
 protected:
 
-  // using BinaryTree<Data>::???;
+  using BinaryTree<Data>::size;   
 
   // ...
+public:
+  using typename BinaryTree<Data>::Node;
+  using typename MutableBinaryTree<Data>::MutableNode;
 
-  struct NodeLnk { // Must extend MutableNode
+protected:
+
+  struct NodeLnk : virtual MutableNode{ // Must extend MutableNode
 
   private:
 
@@ -38,65 +43,112 @@ protected:
 
   public:
 
-    // ...
+    Data data;
+    NodeLnk * LChild = nullptr;
+    NodeLnk * RChild = nullptr;
+
+    //Default constructor
+    NodeLnk() = default;
+
+    //Specific constructors
+    NodeLnk(const Data&);
+
+    NodeLnk(Data&&) noexcept;
+
+    //Copy constructor
+    NodeLnk(const NodeLnk&);
+
+    //Move constructor
+    NodeLnk(NodeLnk&&) noexcept;
+
+    //Destructor
+    virtual ~NodeLnk();
+
+    //Copy assignment
+    NodeLnk& operator=(const NodeLnk&);
+
+    //Move assignment
+    NodeLnk& operator=(NodeLnk&&) noexcept;
+
+    //Comparison operators
+    bool operator==(const NodeLnk&) const noexcept;
+    inline bool operator!=(const NodeLnk& node) const noexcept {return !(*this == node);};
+
+    //Specific functions
+    inline const Data& Element() const noexcept override;
+    inline Data& Element() noexcept override;
+    inline bool IsLeaf() const noexcept override;
+    inline bool HasRightChild() const noexcept override;
+    inline bool HasLeftChild() const noexcept override;
+    virtual const Node& RightChild() const override;
+    virtual const Node& LeftChild() const override;
+    virtual MutableNode& RightChild() override;
+    virtual MutableNode& LeftChild() override;
 
   };
+
+  NodeLnk* root = nullptr;
 
 public:
 
   // Default constructor
-  // BinaryTreeLnk() specifiers;
+  BinaryTreeLnk() = default;
 
   /* ************************************************************************ */
 
   // Specific constructors
-  // BinaryTreeLnk(argument) specifiers; // A binary tree obtained from a TraversableContainer
-  // BinaryTreeLnk(argument) specifiers; // A binary tree obtained from a MappableContainer
+  BinaryTreeLnk(const TraversableContainer<Data>&); // A binary tree obtained from a TraversableContainer
+  BinaryTreeLnk(MappableContainer<Data>&&) noexcept; // A binary tree obtained from a MappableContainer
 
   /* ************************************************************************ */
 
   // Copy constructor
-  // BinaryTreeLnk(argument) specifiers;
+  BinaryTreeLnk(const BinaryTreeLnk&);
 
   // Move constructor
-  // BinaryTreeLnk(argument) specifiers;
+  BinaryTreeLnk(BinaryTreeLnk&&) noexcept;
 
   /* ************************************************************************ */
 
   // Destructor
-  // ~BinaryTreeLnk() specifiers;
+  virtual ~BinaryTreeLnk();
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument) specifiers;
+  BinaryTreeLnk& operator=(const BinaryTreeLnk&);
 
   // Move assignment
-  // type operator=(argument) specifiers;
+  BinaryTreeLnk& operator=(BinaryTreeLnk&&) noexcept;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers;
-  // type operator!=(argument) specifiers;
+  inline bool operator==(const BinaryTreeLnk&) const noexcept;
+  inline bool operator!=(const BinaryTreeLnk& bt) const noexcept {return !(*this == bt);};
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from BinaryTree)
 
-  // type Root() specifiers; // Override BinaryTree member (throw std::length_error when empty)
+  const Node& Root() const override; // Override BinaryTree member (throw std::length_error when empty)
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MutableBinaryTree)
 
-  // type Root() specifiers; // Override MutableBinaryTree member (throw std::length_error when empty)
+  MutableNode& Root() override; // Override MutableBinaryTree member (throw std::length_error when empty)
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
-  // type Clear() specifiers; // Override ClearableContainer member
+  void Clear() override; // Override ClearableContainer member
+
+  protected:
+
+  //Auxiliar function
+  NodeLnk* CopyTree(NodeLnk*);
 
 };
 

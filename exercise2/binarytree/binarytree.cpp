@@ -29,11 +29,8 @@ bool BinaryTree<Data>::Node::operator==(const Node& node) const noexcept {
         if(this->RightChild() == node.RightChild()) {
             return true;
         }
-    } else {                //No childs
-        return true;
     }
-
-    return false;
+    return true;    //No childs  
 }
 
 /*******************************************************************************/
@@ -399,25 +396,26 @@ const Data& BTPostOrderIterator<Data>::operator*() const {
 
 
 //Operator ++
-template<typename Data>
+template <typename Data>
 BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator++() {
-    if (!Terminated()) {
-        if (stk.Empty()) {
-            currNode = nullptr;
-        } else {
-            currNode = stk.Top();
-            if (currNode->HasRightChild() && (&currNode->RightChild() != currNode)) {
-                stk.Push(currNode);
-                currNode = &currNode->RightChild();
-                LeftMostLeaf();
-            } else {
-                stk.Pop();
-            }
-        } 
-        return *this;
+    if(Terminated()) {
+        throw std::out_of_range("Iterator Terminated!");
     }
-    throw std::out_of_range("Iterator terminated !");
+
+    if(!stk.Empty()) {
+        if(stk.Top()->HasRightChild() && (&stk.Top()->RightChild() != currNode)) {
+            currNode = &stk.Top()->RightChild();
+            LeftMostLeaf();
+        } else {
+            currNode = stk.TopNPop();
+        }
+    } else {
+        currNode = nullptr;
+    }
+    return *this;
 }
+
+
 
 
 //Reset
@@ -428,20 +426,24 @@ void BTPostOrderIterator<Data>::Reset() noexcept {
     LeftMostLeaf();
 }
 
+
+
+
 //LeftMostLeaf
 template <typename Data>
 void BTPostOrderIterator<Data>::LeftMostLeaf() {
-    while (currNode->HasLeftChild() || currNode->HasRightChild()) {
-        if (currNode->HasLeftChild()) {
-            stk.Push(currNode);
-            currNode = &currNode->LeftChild();
-        } else {
-            stk.Push(currNode);
-            currNode = &currNode->RightChild();
+    if (currNode != nullptr) {
+        while (currNode->HasLeftChild() || currNode->HasRightChild()) {
+            if (currNode->HasLeftChild()) {
+                stk.Push(currNode);
+                currNode = &currNode->LeftChild();
+            } else {
+                stk.Push(currNode);
+                currNode = &currNode->RightChild();
+            }
         }
     }
 }
-
 
 
 /********************************************************************************/
@@ -540,10 +542,10 @@ BTInOrderIterator<Data>& BTInOrderIterator<Data>::operator++() {
             }   
         }
         return *this;
+    } else {
+        throw std::out_of_range("Iterator terminated !");
     }
-    throw std::out_of_range("Iterator terminated !");
 }
-
 
 
 
@@ -603,7 +605,6 @@ BTBreadthIterator<Data>::BTBreadthIterator(const BTBreadthIterator& it) {
     currNode = it.currNode;
     que = it.que;
 }
-
 
 
 
@@ -668,8 +669,9 @@ BTBreadthIterator<Data>& BTBreadthIterator<Data>::operator++() {
             currNode = que.HeadNDequeue();
         }
         return *this;
+    } else {
+        throw std::out_of_range("Iterator terminated !");
     }
-    throw std::out_of_range("Iterator terminated !");
 }
 
 
