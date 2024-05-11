@@ -14,7 +14,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class QueueVec : virtual public Queue<Data>,virtual public Vector<Data>{
+class QueueVec : virtual public Queue<Data>,virtual protected Vector<Data>{
   // Must extend Queue<Data>,
   //             Vector<Data>
 

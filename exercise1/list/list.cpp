@@ -276,15 +276,21 @@ bool List<Data>::Remove(const Data& data){
 
     while (currNode != nullptr){
         if (currNode->element == data) {
-            if (currNode == tail){
-               precNode->next = nullptr;
+            Node* tmp = currNode;
+
+            precNode->next = currNode->next;
+            tmp->next = nullptr;
+
+            if (currNode == tail) {
                tail = precNode;
+               delete tmp;
+               size --;
+               return true;
             } else {
-                precNode->next = currNode->next;
+                delete tmp;
+                size--;
+                return true;
             }
-            delete currNode;
-            size--;
-            return true;
         } else {
             precNode = currNode;
             currNode = currNode->next;
