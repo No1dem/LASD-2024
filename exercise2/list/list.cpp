@@ -261,7 +261,7 @@ bool List<Data>::Insert(Data&& data) noexcept{
 
 //Remove
 template<typename Data>
-bool List<Data>::Remove(const Data& data){
+bool List<Data>::Remove(const Data& data) {
     if (size == 0){
         return false;
     }
@@ -276,15 +276,21 @@ bool List<Data>::Remove(const Data& data){
 
     while (currNode != nullptr){
         if (currNode->element == data) {
-            if (currNode == tail){
-               precNode->next = nullptr;
+            Node* tmp = currNode;
+
+            precNode->next = currNode->next;
+            tmp->next = nullptr;
+
+            if (currNode == tail) {
                tail = precNode;
+               delete tmp;
+               size --;
+               return true;
             } else {
-                precNode->next = currNode->next;
+                delete tmp;
+                size--;
+                return true;
             }
-            delete currNode;
-            size--;
-            return true;
         } else {
             precNode = currNode;
             currNode = currNode->next;
@@ -296,7 +302,7 @@ bool List<Data>::Remove(const Data& data){
 //Operator [] versione non-mutable
 template<typename Data>
 const Data& List<Data>::operator[](const unsigned long index) const {
-    if(size==0) {
+    if(size == 0) {
         throw std::length_error("Empty List!");
     }
 

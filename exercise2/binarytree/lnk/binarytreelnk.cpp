@@ -99,14 +99,20 @@ bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk& node) const noexcep
     if (LNRChild) {
         if (&node->LeftChild() == this->LeftChild() && &node->RightChild() == this->RightChild()) {
             return true;
+        } else {
+            return false;
         }
     } else if (LChild) {
         if (&node->LeftChild() == this->LeftChild()) {
             return true;
+        } else {
+            return false;
         }
     } else if (RChild) {
         if (&node->RightChild() == this->RightChild()) {
             return true;
+        } else {
+            return false;
         }
     }
     return true;
@@ -163,9 +169,8 @@ template <typename Data>
 const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
     if(!HasRightChild()) {
         throw std::out_of_range("No Right child !");
-    } else {
-        return *RChild;
-    }
+    } 
+    return *RChild;
 }
 
 //LeftChild
@@ -173,9 +178,8 @@ template <typename Data>
 const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
     if(!HasLeftChild()) {
         throw std::out_of_range("No Left child !");    
-    } else {
-        return *LChild;
-    }
+    } 
+    return *LChild;
 }
 
 //RightChild mutable
@@ -183,9 +187,8 @@ template <typename Data>
 MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::RightChild() {
     if(!HasRightChild()) {
         throw std::out_of_range("No Right child !");
-    } else {
-        return *RChild;
     }
+    return *RChild;
 }
 
 //LeftChild mutable
@@ -193,9 +196,8 @@ template <typename Data>
 MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
     if(!HasLeftChild()) {
         throw std::out_of_range("No Left child !"); 
-    } else {
-        return *LChild;
     }
+    return *LChild;
 }
 
 /* ************************************************************************** */
@@ -252,9 +254,11 @@ BinaryTreeLnk<Data>& BinaryTreeLnk<Data>::operator=(const BinaryTreeLnk& bt) {
     if(bt.Size() == 0) {
         Clear();
     } else {
-        BinaryTreeLnk<Data>* tmp = new BinaryTreeLnk<Data>(bt);
-        std::swap(*tmp, *this);
-        delete tmp;
+        if (this != &bt) {
+            BinaryTreeLnk<Data>* tmp = new BinaryTreeLnk<Data>(bt);
+            std::swap(*tmp, *this);
+            delete tmp;
+        }
     }
     return *this;
 }

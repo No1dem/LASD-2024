@@ -19,15 +19,21 @@ bool BinaryTree<Data>::Node::operator==(const Node& node) const noexcept {
     if (RightNLeftChild) {
         if((this->LeftChild() == node.LeftChild()) && (this->RightChild() == node.RightChild())) {   //Ricorsione
             return true;
+        } else {
+            return false;
         }
     } else if (LeftChild) {
         if(this->LeftChild() == node.LeftChild()) {
             return true;
+        } else {
+            return false;
         }
     }
     else if (RightChild) {
         if(this->RightChild() == node.RightChild()) {
             return true;
+        } else {
+            return false;
         }
     }
     return true;    //No childs  

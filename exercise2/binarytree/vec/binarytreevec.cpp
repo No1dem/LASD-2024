@@ -196,9 +196,11 @@ BinaryTreeVec<Data>::~BinaryTreeVec() {
 //Copy assignment
 template <typename Data>
 BinaryTreeVec<Data>& BinaryTreeVec<Data>::operator=(const BinaryTreeVec<Data>& bt) {
-    BinaryTreeVec<Data>* tmp = new BinaryTreeVec<Data>(bt);
-    std::swap(*this, *tmp);
-    delete tmp;
+    if (this != &bt) {
+        BinaryTreeVec<Data>* tmp = new BinaryTreeVec<Data>(bt);
+        std::swap(*this, *tmp);
+        delete tmp;
+    }
     return *this;
 }
 
