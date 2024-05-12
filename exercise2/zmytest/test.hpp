@@ -2,141 +2,92 @@
 #ifndef MYTEST_HPP
 #define MYTEST_HPP
 
+#include "../iterator/iterator.hpp"
 #include "../list/list.hpp"
-#include "../vector/vector.hpp"
-#include "../stack/stack.hpp"
-#include "../queue/queue.hpp"
-#include "../stack/lst/stacklst.hpp"
-#include "../stack/vec/stackvec.hpp"
-#include "../queue/lst/queuelst.hpp"
-#include "../queue/vec/queuevec.hpp"
+#include "../binarytree/binarytree.hpp"
+#include "../binarytree/lnk/binarytreelnk.hpp"
+#include "../binarytree/vec/binarytreevec.hpp"
+#include "../bst/bst.hpp"
 
 #include <string>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
 /* ************************************************************************** */
 
 void mytest();
-
 /*******************************************************************************/
-template <typename Data>
-void menuStack(lasd::Stack<Data>&);
+void InfoStampa();
+/*******************************************************************************/
+// template <typename Data>
+// void MenuBTPreOrderIt(lasd::BinaryTreeVec<Data>&);
+
+// template <typename Data>
+// void MenuBTPostOrderIt(lasd::BinaryTreeVec<Data>&);
+
+// template <typename Data>
+// void MenuBTInOrderIt(lasd::BinaryTreeVec<Data>&);
+
+// template <typename Data>
+// void MenuBTBreadthIt(lasd::BinaryTreeVec<Data>&);
 
 template <typename Data>
-void menuQueue(lasd::Queue<Data>&);
+void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>&);
 
-template <typename Data>
-void menuList(lasd::List<Data>&);
+// template <typename Data>
+// void MenuBinaryTreeLnk(lasd::BinaryTreeLnk<Data>&);
 
-template <typename Data>
-void menuVector(lasd::Vector<Data>&);
+// template <typename Data>
+// void MenuBinarySearchTree(lasd::BST<Data>&);
 
 
 /********************************************************************************/
-string selezionaStruttura();
-
-string selezionaDato();
+string selezionaStrutturaAlbero();
 
 unsigned long selezionaDimensione();
 
+string selezionaDato();
+
+unsigned long selezionaDimensioneBT();
 
 /********************************************************************************/
-//Popolamento
-
-//Vector
-template <typename Data>
-void popolaVector(lasd::Vector<Data>&, unsigned long);
-
-void popolaVector(lasd::Vector<int>&, unsigned long);
-
-void popolaVector(lasd::Vector<double>&, unsigned long);
-
-void popolaVector(lasd::Vector<string>&, unsigned long);
+//Popolamento 
 
 //List
-template <typename Data>
-void popolaList(lasd::List<Data>&, unsigned long);
 
-void popolaList(lasd::List<int>&, unsigned long);
+void PopolaList(lasd::List<int>&, unsigned long);
 
-void popolaList(lasd::List<double>&, unsigned long);
+void PopolaList(lasd::List<double>&, unsigned long);
 
-void popolaList(lasd::List<string>&, unsigned long);
+void PopolaList(lasd::List<string>&, unsigned long);
 
-//Stack
-template <typename Data>
-void popolaStack(lasd::Stack<Data>&, unsigned long) ;
+//BST
+void PopolaBST(lasd::BST<int>&, unsigned long);
 
-void popolaStack(lasd::Stack<int>&, unsigned long);
+void PopolaBST(lasd::BST<double>&, unsigned long);
 
-void popolaStack(lasd::Stack<double>&, unsigned long);
+void PopolaBST(lasd::BST<string>&, unsigned long);
 
-void popolaStack(lasd::Stack<string>&, unsigned long);
-
-//Queue
-template <typename Data>
-void popolaQueue(lasd::Queue<Data>&, unsigned long);
-
-void popolaQueue(lasd::Queue<int>&, unsigned long);
-
-void popolaQueue(lasd::Queue<double>&, unsigned long);
-
-void popolaQueue(lasd::Queue<string>&, unsigned long);
 
 /***************************************************************/
 //Funzioni
 template <typename Data>
-void funFront(lasd::LinearContainer<Data>&);
+void FunEmpty(lasd::BinaryTree<Data>&);
 
 template <typename Data>
-void funBack(lasd::LinearContainer<Data>&);
+void FunSize(lasd::BinaryTree<Data>&);
 
 template <typename Data>
-void funExists(lasd::LinearContainer<Data>&);
+void FunRoot(lasd::BinaryTree<Data>&);
 
 template <typename Data>
-void funSort(lasd::SortableLinearContainer<Data>&);
+void FunClear(lasd::MutableBinaryTree<Data>&);
 
-template <typename Data>
-void funPush(lasd::Stack<Data>&);
 
-template <typename Data>
-void funEnqueue(lasd::Queue<Data>&);
 
-template <typename Data>
-void funPop(lasd::Stack<Data>&);
 
-template<typename Data>
-void funDequeue(lasd::Queue<Data>&);
-
-template <typename Data>
-void funTop(lasd::Stack<Data>&);
-
-template <typename Data>
-void funHead(lasd::Queue<Data>&);
-
-template <typename Data>
-void funTopPop(lasd::Stack<Data>&);
-
-template <typename Data>
-void funHeadNDequeue(lasd::Queue<Data>&);
-
-template <typename Data>
-void funInsertAtBack(lasd::List<Data>&);
-
-template <typename Data>
-void funInsertAtFront(lasd::List<Data>&);
-
-template <typename Data>
-void funFrontNRemove(lasd::List<Data>&);
-
-template <typename Data>
-void funInsertDictionary(lasd::DictionaryContainer<Data>&);
-
-template <typename Data>
-void funRemoveDictionary(lasd::DictionaryContainer<Data>&);
 
 /**************************************************************/
 //Generatori
@@ -147,10 +98,16 @@ vector<double> generaDouble(unsigned long);
 vector<string> generaString(unsigned long);
 
 /* ************************************************************************** */
+//Stampe
 
 template <typename Data>
 void Print(const Data& data) {
   cout << data << " ";
 }
+
+
+template <typename Data>
+void PrintTree(typename lasd::MutableBinaryTree<Data>::MutableNode*, int, char);
+
 
 #endif

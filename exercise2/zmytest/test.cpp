@@ -1,372 +1,242 @@
 #include "test.hpp"
 
-#include <iostream>
-#include <random>
-#include <string>
-
 using namespace std;
 
 //Menu principale
 void mytest() {
     cout << "\n\n######## Menù Principale #########" << endl;
 
-    string alt = selezionaStruttura();
+    string alt = selezionaStrutturaAlbero();
     string tipo = selezionaDato();
-    unsigned long dim = selezionaDimensione();
+    unsigned long dim = selezionaDimensioneBT();
 
     if(alt == "1") {
         if(tipo == "1") {
-            lasd::Vector<int> vector(dim);
-            popolaVector(vector, dim);
-            menuVector(vector);
+            lasd::List<int> list;
+            PopolaList(list, dim);
+            lasd::BinaryTreeVec<int> bt(list);
+            MenuBinaryTreeVec(bt);
 
         }
         else if(tipo == "2") {
-            lasd::Vector<double> vector(dim);
-            popolaVector(vector, dim);
-            menuVector(vector);
-        }
-        else if(tipo == "3") {
-            lasd::Vector<string> vector(dim);
-            popolaVector(vector, dim);
-            menuVector(vector);
-        }
-    } else if(alt == "2") {
-        if(tipo == "1") {
-            lasd::List<int> list;
-            popolaList(list, dim);
-            menuList(list);
-        }
-        else if(tipo == "2") {
             lasd::List<double> list;
-            popolaList(list, dim);
-            menuList(list);
+            PopolaList(list, dim);
+            lasd::BinaryTreeVec<double> bt(list);
+            MenuBinaryTreeVec(bt);
         }
         else if(tipo == "3") {
             lasd::List<string> list;
-            popolaList(list, dim);
-            menuList(list);
+            PopolaList(list, dim);
+            lasd::BinaryTreeVec<string> bt(list);
+            MenuBinaryTreeVec(bt);
+        }
+    } else if(alt == "2") {
+        if(tipo == "1") {
+            
+        }
+        else if(tipo == "2") {
+            
+        }
+        else if(tipo == "3") {
+            
         }
     }
     else if(alt == "3") {
         if(tipo == "1") {
-            lasd::StackVec<int> stack;
-            popolaStack(stack, dim);
-            menuStack(stack);
+        
         }
         else if(tipo == "2") {
-            lasd::StackVec<double> stack;
-            popolaStack(stack, dim);
-            menuStack(stack);
+            
         }
         else if(tipo == "3") {
-            lasd::StackVec<string> stack;
-            popolaStack(stack, dim);
-            menuStack(stack);
+            
         }
     }
     else if(alt == "4") {
         if(tipo == "1") {
-            lasd::StackLst<int> stack;
-            popolaStack(stack, dim);
-            menuStack(stack);
+            
         }
         else if(tipo == "2") {
-            lasd::StackLst<double> stack;
-            popolaStack(stack, dim);
-            menuStack(stack);
+            
         }
         else if(tipo == "3") {
-            lasd::StackLst<std::string> stack;
-            popolaStack(stack, dim);
-            menuStack(stack);
+            
         }
     }
     else if(alt == "5") {
         if(tipo == "1") {
-            lasd::QueueVec<int> queue;
-            popolaQueue(queue, dim);
-            menuQueue(queue);
+            
         }
         else if(tipo == "2") {
-            lasd::QueueVec<double> queue;
-            popolaQueue(queue, dim);
-            menuQueue(queue);
+            
         }
         else if(tipo == "3") {
-            lasd::QueueVec<string> queue;
-            popolaQueue(queue, dim);
-            menuQueue(queue);
+            
         }
     }
     else if(alt == "6") {
             if(tipo == "1") {
-            lasd::QueueLst<int> queue;
-            popolaQueue(queue, dim);
-            menuQueue(queue);
+            
         }
         else if(tipo == "2") {
-            lasd::QueueLst<double> queue;
-            popolaQueue(queue, dim);
-            menuQueue(queue);
+            
         }
         else if(tipo == "3") {
-            lasd::QueueLst<string> queue;
-            popolaQueue(queue, dim);
-            menuQueue(queue);
+            
         } 
     }
 }
 
 
 /*************************************************************/
+//Menu strutture
+
+//BinaryTreeVec
+template <typename Data>
+void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>& bt) {
+    char choice;
+    
+    while (true) {
+        cout << "\n\n######## Menù Binary Tree ########" << endl;
+        cout << "1: Stampa     i: Info" << endl;
+        cout << "2: Size" << endl;
+        cout << "3: Empty" << endl;
+        cout << "4: Root" << endl;
+        cout << "5: Exists" << endl;
+        cout << "6: Clear" << endl;
+        cout << "7: Visita in PreOrder" << endl;
+        cout << "8: Visita in PostOrder" << endl;
+        cout << "9: Visita in InOrder" << endl;
+        cout << "a: Visita Breadth" << endl;
+        cout << "b: Menu iteratori" << endl;
+        cout << "0: Torna al menù principale" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        
+        cin >> choice;
+        cin.ignore();
+        
+        switch (choice) {
+            case '1': {
+                try {
+                    PrintTree<Data>(&bt.Root(), 0, ' ');
+                } catch (length_error& e){
+                    cout << e.what() << endl;
+                }
+
+                break;
+            }
+            case '2': {
+                FunSize(bt);
+                break;
+            }
+            case '3': {
+                FunEmpty(bt);
+                break;
+            }
+            case '4': {
+                FunRoot(bt);
+                break;
+            }
+            case '5': {
+                // Chiamata alla funzione per verificare se un elemento esiste nell'albero
+                // Esegui qui la chiamata alla funzione per verificare l'esistenza di un elemento
+                break;
+            }
+            case '6': {
+                FunClear(bt);
+                break;
+            }
+            case '7': {
+                // Chiamata alla funzione per la visita in preordine
+                // Esegui qui la chiamata alla funzione per la visita in preordine
+                break;
+            }
+            case '8': {
+                // Chiamata alla funzione per la visita in postordine
+                // Esegui qui la chiamata alla funzione per la visita in postordine
+                break;
+            }
+            case '9': {
+                // Chiamata alla funzione per la visita in ordine
+                // Esegui qui la chiamata alla funzione per la visita in ordine
+                break;
+            }
+            case 'a': {
+                // Chiamata alla funzione per la visita in ampiezza
+                // Esegui qui la chiamata alla funzione per la visita in ampiezza
+                break;
+            }
+            case 'b': {
+                // Chiamata al menù degli iteratori
+                // Esegui qui la chiamata al menù degli iteratori
+                break;
+            }
+            case '0': {
+                
+                return;
+            }
+            case 'i': {
+                InfoStampa();
+                break;
+            }
+            default: {
+                cout << "\nValore non valido, riprova:" << endl;
+                break;
+            }
+        }
+    }
+}
+
+
 
 
 
 /**************************************************************/
 //Funzioni
+
+
+//FunRoot
 template <typename Data>
-void funExists(lasd::LinearContainer<Data>& con) {
-    char ans;
-    do {
-        cout << "\nInserisci il valore da cercare: ";
-        Data data;
-        cin >> data;
-        
-        cout << (con.Exists(data) ? "L'elemento è nel container." : "L'elemento non è nel container.") << endl;
-        
-        cout << "Vuoi cercare un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
-}
-
-
-template <typename Data>
-void funEnqueue(lasd::Queue<Data>& queue) {
-    char ans;
-    
-    do {
-        cout << "\nInserisci il valore che vuoi inserire nella queue: ";
-        Data data;
-        cin >> data;
-        queue.Enqueue(data);
-        cout << " Inserito!" << endl;
-        
-        cout << "Vuoi inserire un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
-}
-
-template<typename Data>
-void funDequeue(lasd::Queue<Data>& queue) {
+void FunRoot(lasd::BinaryTree<Data>& bt) {
     try {
-        queue.Dequeue();
-        cout << "Dequeue effettuata con successo!" << endl; 
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }
-
-}
-
-
-template <typename Data>
-void funFront(lasd::LinearContainer<Data>& con) {
-    Data data;
-    try{
-        data = con.Front();
-        cout << "\nRisultato : " << data << endl;
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }
-    return;
-}
-
-
-template <typename Data>
-void funBack(lasd::LinearContainer<Data>& con) {
-    Data data;
-    try{
-        data = con.Back();
-        cout << "\nRisultato : " << data << endl;
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }
-    return;
-}
-
-
-template <typename Data>
-void funSort(lasd::SortableLinearContainer<Data>& con) {
-    if (con.Size() == 0) {
-        cout << "Il container è vuoto !";
-        return;
-    }
-    cout << "\nPrima :\n\n" << endl;
-    con.Map(&Print<Data>);
-    cout << "\nDopo :\n\n" << endl;
-    con.Sort();
-    con.Map(&Print<Data>);
-}
-
-
-template <typename Data>
-void funPush(lasd::Stack<Data>& stack) {
-    char ans;
-    do {
-        cout << "\nInserisci il valore che vuoi inserire nello stack: ";
-        Data data;
-        cin >> data;
-        stack.Push(data);
-        cout << " Inserito!" << endl;
-        
-        cout << "Vuoi inserire un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
-}
-
-
-
-template <typename Data>
-void funPop(lasd::Stack<Data>& stack) {
-    try {
-        stack.Pop();
-        cout << "Pop effettuata con successo!" << endl; 
-    } catch(length_error& e) {
+        cout << "\nLa radice dell'albero è: " << bt.Root().Element() << endl;
+    } catch (length_error& e) {
         cout << e.what() << endl;
     }
 }
 
 
-
+//FunEmpty
 template <typename Data>
-void funTop(lasd::Stack<Data>& stack) {
-    try {
-        cout << stack.Top() << " Top effettuata con successo!" << endl; 
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    } 
-}
-
-template <typename Data>
-void funHead(lasd::Queue<Data>& queue) {
-    try {
-        cout << queue.Head() << " Head effettuata con successo!" << endl; 
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }     
-}
-
-template <typename Data>
-void funTopPop(lasd::Stack<Data>& stack) {
-    try {
-        cout << stack.TopNPop() << " TopNPop effettuata con successo!" << endl; 
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }     
-}
-
-template <typename Data>
-void funHeadNDequeue(lasd::Queue<Data>& queue) {
-    try {
-        cout << queue.HeadNDequeue() << " HeadNDequeue effettuata con successo!" << endl; 
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }        
+void FunEmpty(lasd::BinaryTree<Data>& bt) {
+    bool var = bt.Empty();
+    cout << "\nL'Albero " << ((var) ? "è vuoto" : "non è vuoto")  << endl;
 }
 
 
-
+//FunClear
 template <typename Data>
-void funInsertDictionary(lasd::DictionaryContainer<Data>& con) {
-    char ans;
-    do {
-        cout << "\nInserisci il valore da inserire nel dizionario: ";
-        Data data;
-        cin >> data;
-        
-        if (con.Insert(data)) {
-            cout << " Valore inserito con successo !" << endl;
-        } else {
-            cout << " Il valore non è stato inserito !" << endl;
-        }
-        
-        cout << "Vuoi inserire un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
+void FunClear(lasd::MutableBinaryTree<Data>& bt) {
+    bt.Clear();
+    cout << "\nAlbero svuotato con successo !" << endl;
 }
 
 
+//FunSize
 template <typename Data>
-void funRemoveDictionary(lasd::DictionaryContainer<Data>& con) {
-    char ans;
-    do {
-        cout << "\nInserisci il valore da rimuovere dal dizionario: ";
-        Data data;
-        cin >> data;
-        
-        if (con.Remove(data)) {
-            cout << "Valore rimosso con successo !" << endl;
-        } else {
-            cout << "Il valore non è stato rimosso!" << endl;
-        }
-        
-        cout << "Vuoi rimuovere un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
+void FunSize(lasd::BinaryTree<Data>& bt) {
+    cout << "\nLa size dell'albero è: " << bt.Size() << endl;  
 }
 
-
-template <typename Data>
-void funFrontNRemove(lasd::List<Data>& list) {
-    try {
-        cout << list.FrontNRemove() << "La FrontNRemove è stata effettuata con successo!" << endl; 
-    } catch(length_error& e) {
-        cout << e.what() << endl;
-    }     
-}
-
-template <typename Data>
-void funInsertAtBack(lasd::List<Data>& list) {
-    char ans;
-    do {
-        cout << "\nInserisci il valore che vuoi inserire nella lista: ";
-        Data data;
-        cin >> data;
-        list.InsertAtBack(data);
-        cout << " Inserito in coda!" << endl;
-        
-        cout << "Vuoi inserire un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
-}
-
-
-template <typename Data>
-void funInsertAtFront(lasd::List<Data>& list) {
-    char ans;
-    do {
-        cout << "\nInserisci il valore che vuoi inserire nella lista: ";
-        Data data;
-        cin >> data;
-        list.InsertAtFront(data);
-        cout << " Inserito in testa!" << endl;
-        
-        cout << "Vuoi inserire un altro elemento? (y/n): ";
-        cin >> ans;
-    } while (tolower(ans) == 'y');
-}
 
 
 /*******************************************************************/
 
-string selezionaStruttura() {
+string selezionaStrutturaAlbero() {
     cout << "Scegli il tipo di struttura dati:" << endl;
-    cout << "1: Vettore" << endl;
-    cout << "2: Lista" << endl;
-    cout << "3: StackVec" << endl;
-    cout << "4: StackLst" << endl;
-    cout << "5: CodaVec" << endl;
-    cout << "6: CodaLst" << endl;
+    cout << "1: BinaryTreeVec" << endl;
+    cout << "2: BinaryTreeLnk" << endl;
+    cout << "3: BST" << endl;
     cout << "\nInserisci il numero corrispondente alla scelta: ";
 
     string scelta;
@@ -375,7 +245,7 @@ string selezionaStruttura() {
     while (!sceltaValida) {
         getline(cin, scelta);
 
-        if (scelta == "1" || scelta == "2" || scelta == "3" || scelta == "4" || scelta == "5" || scelta == "6") {
+        if (scelta == "1" || scelta == "2" || scelta == "3") {
             sceltaValida = true;
         } else {
             cout << "\nValore non valido, riprova: ";
@@ -414,6 +284,20 @@ unsigned long selezionaDimensione() {
     do { 
         cin >> dim;
         if (dim > 50000) {
+            cout << "\n\nDimensione troppo grande, riprova !\n";
+        }
+    } while (riprova == true);
+   
+    return dim;    
+}
+
+unsigned long selezionaDimensioneBT() {
+    unsigned long dim = 0;
+    cout << "\nInserisci la dimensione dell'albero: " << endl;
+    bool riprova = false;
+    do { 
+        cin >> dim;
+        if (dim > 100) {
             cout << "\n\nDimensione troppo grande, riprova !\n";
         }
     } while (riprova == true);
@@ -474,97 +358,102 @@ vector<string> generaString(unsigned long dim) {
 /******************************************************/
 
 //Popolamento
-void popolaVector(lasd::Vector<int>& vector, unsigned long dim) {
-    unsigned int j = 0;
-    std::vector<int> generatedValues = generaInt(dim);
-    for(unsigned int i=0; i<dim; i++) {
-        vector[j] = generatedValues[i];
-        j++;
-    }
-}
 
-
-void popolaVector(lasd::Vector<double>& vector, unsigned long dim) {
-    unsigned int j = 0;
-    std::vector<double> generatedValues = generaDouble(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        vector[j] = generatedValues[i];
-        ++j;
-    }
-}
-
-void popolaVector(lasd::Vector<string>& vector, unsigned long dim) {
-    unsigned int j = 0;
-    std::vector<string> generatedValues = generaString(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        vector[j] = generatedValues[i];
-        ++j;
-    }
-}
-
-void popolaList(lasd::List<int>& list, unsigned long dim) {
+//List
+void PopolaList(lasd::List<int>& list, unsigned long dim) {
     std::vector<int> generatedValues = generaInt(dim);
     for(unsigned int i = 0; i < dim; ++i) {
         list.InsertAtBack(generatedValues[i]);
     }
 }
 
-void popolaList(lasd::List<double>& list, unsigned long dim) {
+
+void PopolaList(lasd::List<double>& list, unsigned long dim) {
     std::vector<double> generatedValues = generaDouble(dim);
     for(unsigned int i = 0; i < dim; ++i) {
         list.InsertAtBack(generatedValues[i]);
     }
 }
 
-void popolaList(lasd::List<string>& list, unsigned long dim) {
+
+void PopolaList(lasd::List<string>& list, unsigned long dim) {
     std::vector<string> generatedValues = generaString(dim);
     for(unsigned int i = 0; i < dim; ++i) {
         list.InsertAtBack(generatedValues[i]);
     }
 }
 
-void popolaStack(lasd::Stack<int>& stack, unsigned long dim) {
+
+
+//BST
+void PopolaBST(lasd::BST<int>& bst,unsigned long dim) {
     std::vector<int> generatedValues = generaInt(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        stack.Push(generatedValues[i]);
+    for(unsigned long i = 0; i < dim; i++) {
+            bst.Insert(generatedValues[i]);
     }
 }
 
-void popolaStack(lasd::Stack<double>& stack, unsigned long dim) {
+
+
+void PopolaBST(lasd::BST<double>& bst, unsigned long dim) {
     std::vector<double> generatedValues = generaDouble(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        stack.Push(generatedValues[i]);
-    }
-}
-
-void popolaStack(lasd::Stack<std::string>& stack, unsigned long dim) {
-    std::vector<string> generatedValues = generaString(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        stack.Push(generatedValues[i]);
-    }
-}
-
-void popolaQueue(lasd::Queue<int>& queue, unsigned long dim) {
-    std::vector<int> generatedValues = generaInt(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        queue.Enqueue(generatedValues[i]);
-    }
-}
-
-void popolaQueue(lasd::Queue<double>& queue, unsigned long dim) {
-    std::vector<double> generatedValues = generaDouble(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        queue.Enqueue(generatedValues[i]);
-    }
-}
-
-void popolaQueue(lasd::Queue<string>& queue, unsigned long dim) {
-    std::vector<string> generatedValues = generaString(dim);
-    for(unsigned int i = 0; i < dim; ++i) {
-        queue.Enqueue(generatedValues[i]);
+    for (unsigned long i = 0; i < dim; i++) {
+        bst.Insert(generatedValues[i]);
     }
 }
 
 
+void PopolaBST(lasd::BST<std::string>& bst, unsigned long dim) {
+    std::vector<std::string> generatedValues = generaString(dim);
+    for (unsigned long i = 0; i < dim; i++) {
+        bst.Insert(generatedValues[i]);
+    }
+}
+
+
+/********************************************************************************/
+//PrintTree
+template <typename Data>
+void PrintTree(typename lasd::MutableBinaryTree<Data>::MutableNode* root, int level, char childType) {
+    if (root == nullptr) {
+        throw length_error("L'albero è vuoto.");
+    }
+
+    if (level == 0) {
+        cout << "\n\nStampa dell'albero: " << endl << endl ;
+    }
+
+    if (root != nullptr) {
+
+        for (int i = 0; i < level; ++i)
+            cout << "    ";
+
+        cout << childType << "--> " << root->Element() << endl;
+        if (root->HasLeftChild()) {
+            PrintTree<Data>(&root->LeftChild(), level + 1, 'L');
+        }
+
+        if (root->HasRightChild()) {
+            PrintTree<Data>(&root->RightChild(), level + 1, 'R');
+        }
+    }
+}
+
+
+void InfoStampa() {
+    cout << "\nLa funzione di stampa organizza i livelli dell'albero,partendo dalla radice" << endl;
+    cout << "da sinistra verso destra con uno 'shift'." << endl;
+    cout << "Esempio: \n";
+    cout << "       7      " << endl;
+    cout << "      / \\    " << endl;
+    cout << "     5   8    " << endl;
+    cout << "    /         " << endl;
+    cout << "   2          " << endl << endl;
+    cout << "Stampa:       " << endl;
+    cout << "--> 7         " << endl;
+    cout << "    L --> 5   " << endl;
+    cout << "          L --> 2    " << endl;
+    cout << "    R --> 8   " << endl;
+}
 
 /********************************************************************************/
