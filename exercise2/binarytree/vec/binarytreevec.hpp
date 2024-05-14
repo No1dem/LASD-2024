@@ -153,7 +153,7 @@ namespace lasd {
     // Specific member function (inherited from BreadthMappableContainer)
     using typename BreadthMappableContainer<Data>::MapFun;
 
-    void BreadthMap(const MapFun) override; // Override BreadthMappableContainer member
+    void BreadthMap(MapFun) override; // Override BreadthMappableContainer member
 
   protected:
     // Auxiliary functions, if necessary!

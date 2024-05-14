@@ -19,22 +19,24 @@ using namespace std;
 
 void mytest();
 /*******************************************************************************/
+
 void InfoStampa();
+
 /*******************************************************************************/
-// template <typename Data>
-// void MenuBTPreOrderIt(lasd::BinaryTreeVec<Data>&);
-
-// template <typename Data>
-// void MenuBTPostOrderIt(lasd::BinaryTreeVec<Data>&);
-
-// template <typename Data>
-// void MenuBTInOrderIt(lasd::BinaryTreeVec<Data>&);
-
-// template <typename Data>
-// void MenuBTBreadthIt(lasd::BinaryTreeVec<Data>&);
+template <typename Data>
+void MenuPreOrderIterator(lasd::BTPreOrderIterator<Data>&);
 
 template <typename Data>
-void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>&);
+void MenuPostOrderIterator(lasd::BTPostOrderIterator<Data>&);
+
+template <typename Data>
+void MenuInOrderIterator(lasd::BTInOrderIterator<Data>&);
+
+template <typename Data>
+void MenuBreadthIterator(lasd::BTBreadthIterator<Data>&);
+
+template <typename Data>
+void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>&,unsigned long);
 
 // template <typename Data>
 // void MenuBinaryTreeLnk(lasd::BinaryTreeLnk<Data>&);
@@ -46,22 +48,22 @@ void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>&);
 /********************************************************************************/
 string selezionaStrutturaAlbero();
 
-unsigned long selezionaDimensione();
+unsigned long selezionaDimensioneBT();
 
 string selezionaDato();
 
-unsigned long selezionaDimensioneBT();
+unsigned long selezionaDimensioneBST();
 
 /********************************************************************************/
 //Popolamento 
 
 //List
 
-void PopolaList(lasd::List<int>&, unsigned long);
+void PopolaBT(lasd::List<int>&, unsigned long);
 
-void PopolaList(lasd::List<double>&, unsigned long);
+void PopolaBT(lasd::List<double>&, unsigned long);
 
-void PopolaList(lasd::List<string>&, unsigned long);
+void PopolaBT(lasd::List<string>&, unsigned long);
 
 //BST
 void PopolaBST(lasd::BST<int>&, unsigned long);
@@ -84,6 +86,34 @@ void FunRoot(lasd::BinaryTree<Data>&);
 
 template <typename Data>
 void FunClear(lasd::MutableBinaryTree<Data>&);
+
+template <typename Data>
+void FunExists(lasd::BinaryTree<Data>&);
+
+template <typename Data>
+void PrintPreOrder(lasd::BinaryTree<Data>&);
+
+template <typename Data>
+void PrintPostOrder(lasd::BinaryTree<Data>&);
+
+template <typename Data>
+void PrintInOrder(lasd::BinaryTree<Data>&);
+
+template <typename Data>
+void PrintBreadth(lasd::BinaryTree<Data>&);
+
+template <typename Data>
+void FunPrintData(lasd::Iterator<Data>&);
+
+template <typename Data>
+void FunTerminatedIterator(lasd::ForwardIterator<Data>&);
+
+template <typename Data>
+void FunResetIterator(lasd::ResettableIterator<Data>&);
+
+template <typename Data>
+void FunForwardIterator(lasd::ForwardIterator<Data>&);
+
 
 
 

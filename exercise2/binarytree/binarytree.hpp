@@ -241,7 +241,7 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  inline void Map(const MapFun fun) override {
+  inline void Map(MapFun fun) override {
       PreOrderMap(fun);
   }; // Override MappableContainer member
 
@@ -249,7 +249,7 @@ public:
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  inline void PreOrderMap(const MapFun fun) override {
+  inline void PreOrderMap(MapFun fun) override {
     if (size > 0) {
       PreOrderMap(fun, &Root());
     }
@@ -259,7 +259,7 @@ public:
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  inline void PostOrderMap(const MapFun fun) override {
+  inline void PostOrderMap(MapFun fun) override {
     if (size > 0) {
       PostOrderMap(fun, &Root());
     }
@@ -269,7 +269,7 @@ public:
 
   // Specific member function (inherited from InOrderMappableContainer)
 
-  inline void InOrderMap(const MapFun fun) override {
+  inline void InOrderMap(MapFun fun) override {
     if (size > 0) {
       InOrderMap(fun, &Root());
     }
@@ -279,20 +279,20 @@ public:
 
   // Specific member function (inherited from BreadthMappableContainer)
 
-  inline void BreadthMap(const MapFun fun) override {
+  inline void BreadthMap(MapFun fun) override {
       BreadthMap(fun, &Root());
   }; // Override BreadthMappableContainer member
 
 protected:
 
   // Auxiliary functions, if necessary!
-  void PreOrderMap(const MapFun, MutableNode*);
+  void PreOrderMap(MapFun, MutableNode*);
 
-  void PostOrderMap(const MapFun, MutableNode*);
+  void PostOrderMap(MapFun, MutableNode*);
 
-  void InOrderMap(const MapFun, MutableNode*);
+  void InOrderMap(MapFun, MutableNode*);
 
-  void BreadthMap(const MapFun, MutableNode*);
+  void BreadthMap(MapFun, MutableNode*);
 };
 
 /* ************************************************************************** */

@@ -53,7 +53,7 @@ public:
 
   using MapFun = std::function<void(Data &)>;
 
-  virtual void Map(const MapFun) = 0;
+  virtual void Map(MapFun) = 0;
 
 };
 
@@ -97,13 +97,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  virtual void PreOrderMap(const MapFun) = 0;
+  virtual void PreOrderMap(MapFun) = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(const MapFun) override; // Override MappableContainer member
+  inline void Map(MapFun) override; // Override MappableContainer member
 
 };
 
@@ -147,13 +147,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  virtual void PostOrderMap(const MapFun) = 0;
+  virtual void PostOrderMap(MapFun) = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(const MapFun) override;// Override MappableContainer member
+  inline void Map(MapFun) override;// Override MappableContainer member
   
 };
 
@@ -198,13 +198,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  virtual void InOrderMap(const MapFun) = 0;
+  virtual void InOrderMap(MapFun) = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(const MapFun) override; // Override MappableContainer member
+  inline void Map(MapFun) override; // Override MappableContainer member
   
 };
 
@@ -249,13 +249,13 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void BreadthMap(const MapFun) = 0;
+  void BreadthMap(MapFun) = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  inline void Map(const MapFun) override; // Override MappableContainer member
+  inline void Map(MapFun) override; // Override MappableContainer member
   
 };
 

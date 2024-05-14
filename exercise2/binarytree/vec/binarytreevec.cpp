@@ -270,7 +270,7 @@ void BinaryTreeVec<Data>::BreadthTraverse(TraverseFun fun) const {
 
 //BreadthMap
 template <typename Data>
-void BinaryTreeVec<Data>::BreadthMap(const MapFun fun) {
+void BinaryTreeVec<Data>::BreadthMap(MapFun fun) {
     for(unsigned long i=0; i<size; i++) {
         if((*treeVec)[i] != nullptr) {
             fun((*treeVec)[i]->Element());

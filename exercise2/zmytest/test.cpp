@@ -8,27 +8,32 @@ void mytest() {
 
     string alt = selezionaStrutturaAlbero();
     string tipo = selezionaDato();
-    unsigned long dim = selezionaDimensioneBT();
+    unsigned long dim = 0;
+    if (alt == "3") {
+        dim = selezionaDimensioneBST();
+    } else {
+        dim = selezionaDimensioneBT();
+    }
 
-    if(alt == "1") {
+    if (alt == "1") {
         if(tipo == "1") {
             lasd::List<int> list;
-            PopolaList(list, dim);
+            PopolaBT(list, dim);
             lasd::BinaryTreeVec<int> bt(list);
-            MenuBinaryTreeVec(bt);
+            MenuBinaryTreeVec(bt,dim);
 
         }
         else if(tipo == "2") {
             lasd::List<double> list;
-            PopolaList(list, dim);
+            PopolaBT(list, dim);
             lasd::BinaryTreeVec<double> bt(list);
-            MenuBinaryTreeVec(bt);
+            MenuBinaryTreeVec(bt,dim);
         }
         else if(tipo == "3") {
             lasd::List<string> list;
-            PopolaList(list, dim);
+            PopolaBT(list, dim);
             lasd::BinaryTreeVec<string> bt(list);
-            MenuBinaryTreeVec(bt);
+            MenuBinaryTreeVec(bt,dim);
         }
     } else if(alt == "2") {
         if(tipo == "1") {
@@ -93,22 +98,22 @@ void mytest() {
 
 //BinaryTreeVec
 template <typename Data>
-void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>& bt) {
+void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>& bt,unsigned long dim) {
     char choice;
     
     while (true) {
-        cout << "\n\n######## Menù Binary Tree ########" << endl;
+        cout << "\n\n--------- Menù Binary Tree ---------" << endl;
         cout << "1: Stampa     i: Info" << endl;
         cout << "2: Size" << endl;
         cout << "3: Empty" << endl;
         cout << "4: Root" << endl;
         cout << "5: Exists" << endl;
         cout << "6: Clear" << endl;
-        cout << "7: Visita in PreOrder" << endl;
-        cout << "8: Visita in PostOrder" << endl;
-        cout << "9: Visita in InOrder" << endl;
-        cout << "a: Visita Breadth" << endl;
-        cout << "b: Menu iteratori" << endl;
+        cout << "a: Iterator PreOrder" << endl;
+        cout << "b: Iterator PostOrder" << endl;
+        cout << "c: Iterator InOrder" << endl;
+        cout << "d: Iterator Breadth" << endl;
+
         cout << "0: Torna al menù principale" << endl;
         cout << "\nInserisci il numero corrispondente alla scelta: ";
         
@@ -118,7 +123,11 @@ void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>& bt) {
         switch (choice) {
             case '1': {
                 try {
-                    PrintTree<Data>(&bt.Root(), 0, ' ');
+                    if (dim <= 100) {
+                        PrintTree<Data>(&bt.Root(), 0, ' ');
+                    } else {
+                        cout << "\nLa dimensione dell'albero è troppo grande per permettere una visualizzazione godibile all'utente." << endl;
+                    }
                 } catch (length_error& e){
                     cout << e.what() << endl;
                 }
@@ -138,41 +147,38 @@ void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>& bt) {
                 break;
             }
             case '5': {
-                // Chiamata alla funzione per verificare se un elemento esiste nell'albero
-                // Esegui qui la chiamata alla funzione per verificare l'esistenza di un elemento
+                FunExists(bt);
                 break;
             }
             case '6': {
                 FunClear(bt);
                 break;
             }
-            case '7': {
-                // Chiamata alla funzione per la visita in preordine
-                // Esegui qui la chiamata alla funzione per la visita in preordine
-                break;
-            }
-            case '8': {
-                // Chiamata alla funzione per la visita in postordine
-                // Esegui qui la chiamata alla funzione per la visita in postordine
-                break;
-            }
-            case '9': {
-                // Chiamata alla funzione per la visita in ordine
-                // Esegui qui la chiamata alla funzione per la visita in ordine
-                break;
-            }
             case 'a': {
-                // Chiamata alla funzione per la visita in ampiezza
-                // Esegui qui la chiamata alla funzione per la visita in ampiezza
+                PrintPreOrder(bt);
+                lasd::BTPreOrderIterator<Data> itr(bt);
+                MenuPreOrderIterator(itr);
                 break;
             }
             case 'b': {
-                // Chiamata al menù degli iteratori
-                // Esegui qui la chiamata al menù degli iteratori
+                PrintPostOrder(bt);
+                lasd::BTPostOrderIterator<Data> itr(bt);
+                MenuPostOrderIterator(itr);
+                break;
+            }
+            case 'c': {
+                PrintInOrder(bt);
+                lasd::BTInOrderIterator<Data> itr(bt);
+                MenuInOrderIterator(itr);
+                break;
+            }
+            case 'd': {
+                PrintBreadth(bt);
+                lasd::BTBreadthIterator<Data> itr(bt);
+                MenuBreadthIterator(itr);
                 break;
             }
             case '0': {
-                
                 return;
             }
             case 'i': {
@@ -188,9 +194,195 @@ void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>& bt) {
 }
 
 
+//Menu Iteratori
+
+
+//PreOrderIterator
+template <typename Data>
+void MenuPreOrderIterator(lasd::BTPreOrderIterator<Data>& itr) {
+    char choice;
+    
+    while (true) {
+        cout << "\n\n--------- Menù Iterator Pre Order ---------" << endl;
+        cout << "1: Visualizza dato" << endl;
+        cout << "2: Avanza" << endl;
+        cout << "3: Terminato" << endl;
+        cout << "4: Reset" << endl;
+        cout << "0: Torna indietro" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        
+        cin >> choice;
+        cin.ignore();
+        
+        switch (choice) {
+            case '1': {
+                FunPrintData(itr);
+                break;
+            }
+            case '2': {
+                FunForwardIterator(itr);
+                break;
+            }
+            case '3': {
+                FunTerminatedIterator(itr);
+                break;
+            }
+            case '4': {
+                FunResetIterator(itr);
+                break;
+            }
+            case '0': {
+                return;
+            }
+            default: {
+                cout << "\nValore non valido, riprova:" << endl;
+                break;
+            }
+        }
+    }
+}
 
 
 
+
+//PostOrderIterator
+template <typename Data>
+void MenuPostOrderIterator(lasd::BTPostOrderIterator<Data>& itr) {
+    char choice;
+    
+    while (true) {
+        cout << "\n\n--------- Menù Iterator Post Order ---------" << endl;
+        cout << "1: Visualizza dato" << endl;
+        cout << "2: Avanza" << endl;
+        cout << "3: Terminato" << endl;
+        cout << "4: Reset" << endl;
+        cout << "0: Torna indietro" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        
+        cin >> choice;
+        cin.ignore();
+        
+        switch (choice) {
+            case '1': {
+                FunPrintData(itr);
+                break;
+            }
+            case '2': {
+                FunForwardIterator(itr);
+                break;
+            }
+            case '3': {
+                FunTerminatedIterator(itr);
+                break;
+            }
+            case '4': {
+                FunResetIterator(itr);
+                break;
+            }
+            case '0': {
+                return;
+            }
+            default: {
+                cout << "\nValore non valido, riprova:" << endl;
+                break;
+            }
+        }
+    }
+}
+
+
+
+//InOrderIterator
+template <typename Data>
+void MenuInOrderIterator(lasd::BTInOrderIterator<Data>& itr) {
+    char choice;
+    
+    while (true) {
+        cout << "\n\n--------- Menù Iterator In Order ---------" << endl;
+        cout << "1: Visualizza dato" << endl;
+        cout << "2: Avanza" << endl;
+        cout << "3: Terminato" << endl;
+        cout << "4: Reset" << endl;
+        cout << "0: Torna indietro" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        
+        cin >> choice;
+        cin.ignore();
+        
+        switch (choice) {
+            case '1': {
+                FunPrintData(itr);
+                break;
+            }
+            case '2': {
+                FunForwardIterator(itr);
+                break;
+            }
+            case '3': {
+                FunTerminatedIterator(itr);
+                break;
+            }
+            case '4': {
+                FunResetIterator(itr);
+                break;
+            }
+            case '0': {
+                return;
+            }
+            default: {
+                cout << "\nValore non valido, riprova:" << endl;
+                break;
+            }
+        }
+    }
+}
+
+
+
+//BreadthIterator
+template <typename Data>
+void MenuBreadthIterator(lasd::BTBreadthIterator<Data>& itr) {
+    char choice;
+    
+    while (true) {
+        cout << "\n\n--------- Menù Iterator Breadth ---------" << endl;
+        cout << "1: Visualizza dato" << endl;
+        cout << "2: Avanza" << endl;
+        cout << "3: Terminato" << endl;
+        cout << "4: Reset" << endl;
+        cout << "0: Torna indietro" << endl;
+        cout << "\nInserisci il numero corrispondente alla scelta: ";
+        
+        cin >> choice;
+        cin.ignore();
+        
+        switch (choice) {
+            case '1': {
+                FunPrintData(itr);
+                break;
+            }
+            case '2': {
+                FunForwardIterator(itr);
+                break;
+            }
+            case '3': {
+                FunTerminatedIterator(itr);
+                break;
+            }
+            case '4': {
+                FunResetIterator(itr);
+                break;
+            }
+            case '0': {
+                return;
+            }
+            default: {
+                cout << "\nValore non valido, riprova:" << endl;
+                break;
+            }
+        }
+    }
+}
 /**************************************************************/
 //Funzioni
 
@@ -229,7 +421,97 @@ void FunSize(lasd::BinaryTree<Data>& bt) {
 }
 
 
+//FunExists
+template <typename Data>
+void FunExists(lasd::BinaryTree<Data>& bt) {
+    char ans;
+    do {
+        cout << "\nInserisci il valore da cercare: ";
+        Data data;
+        
+        cin >> data;
+        
+        cout << (bt.Exists(data) ? "L'elemento è nel container." : "L'elemento non è nel container.") << endl;
+        
+        cout << "Vuoi cercare un altro elemento? [y/altro]: ";
+        cin >> ans;
+    } while (tolower(ans) == 'y');
+}
 
+
+//PrintPreOrder
+template <typename Data>
+void PrintPreOrder(lasd::BinaryTree<Data>& bt) {
+        cout << "\nL'albero visitato in pre-order è: " << endl;
+        bt.PreOrderTraverse(&Print<Data>);
+        cout << endl << endl;   
+}
+
+
+//PrintPostOrder
+template <typename Data>
+void PrintPostOrder(lasd::BinaryTree<Data>& bt) {
+        cout << "\nStampo l'albero in post-order: " << endl;
+        bt.PostOrderTraverse(&Print<Data>);
+        cout << endl << endl;  
+}
+
+
+//PrintInOrder
+template <typename Data>
+void PrintInOrder(lasd::BinaryTree<Data>& bt) {
+        cout << "\nStampo l'albero in in-order: " << endl;
+        bt.InOrderTraverse(&Print<Data>);
+        cout << endl << endl;    
+}
+
+
+//PrintBreadth
+template <typename Data>
+void PrintBreadth(lasd::BinaryTree<Data>& bt) {
+        cout << "\nStampo l'albero in ampiezza: " << endl;
+        bt.BreadthTraverse(&Print<Data>);
+        cout << endl << endl;     
+}
+
+
+//Funzioni Iterator
+
+
+//FunPrintData   
+template <typename Data>
+void FunPrintData(lasd::Iterator<Data>& itr) {
+    cout << "Indirizzo puntato dall'iteratore: " << &(*itr) << "\nDato contenuto: " << (*itr) << endl;
+}
+
+template <typename Data>
+void FunTerminatedIterator(lasd::ForwardIterator<Data>& itr) {
+    if (itr.Terminated()) {
+        cout << "\nL'iteratore è terminato." << endl;
+    } else {
+        cout << "\nL'iteratore non è terminato." << endl;
+    }
+    
+}
+
+
+template <typename Data>
+void FunResetIterator(lasd::ResettableIterator<Data>& itr) { 
+        itr.Reset();
+        cout << "\nIteratore resettato con successo!" << endl;
+        FunPrintData(itr);
+}
+
+template <typename Data>
+void FunForwardIterator(lasd::ForwardIterator<Data>& itr) {
+        try {
+            ++itr;
+            cout << "\nIteratore avanzato con successo!" << endl;
+            FunPrintData(itr);
+        } catch(out_of_range& e) {
+            cout << e.what() << endl;
+        }
+}
 /*******************************************************************/
 
 string selezionaStrutturaAlbero() {
@@ -277,28 +559,32 @@ string selezionaDato() {
 }
 
 
-unsigned long selezionaDimensione() {
+unsigned long selezionaDimensioneBT() {
     unsigned long dim = 0;
-    cout << "\nInserisci la dimensione della struttura scelta: " << endl;
-    bool riprova = false;
+    cout << "\nInserisci la dimensione dell'albero binario: " << endl;
+    bool riprova;
     do { 
+        riprova = false;
         cin >> dim;
         if (dim > 50000) {
             cout << "\n\nDimensione troppo grande, riprova !\n";
+            riprova = true;
         }
     } while (riprova == true);
    
     return dim;    
 }
 
-unsigned long selezionaDimensioneBT() {
+unsigned long selezionaDimensioneBST() {
     unsigned long dim = 0;
-    cout << "\nInserisci la dimensione dell'albero: " << endl;
-    bool riprova = false;
+    cout << "\nInserisci la dimensione del BST: " << endl;
+    bool riprova;
     do { 
+        riprova = false;
         cin >> dim;
         if (dim > 100) {
             cout << "\n\nDimensione troppo grande, riprova !\n";
+            riprova = true;
         }
     } while (riprova == true);
    
@@ -360,7 +646,7 @@ vector<string> generaString(unsigned long dim) {
 //Popolamento
 
 //List
-void PopolaList(lasd::List<int>& list, unsigned long dim) {
+void PopolaBT(lasd::List<int>& list, unsigned long dim) {
     std::vector<int> generatedValues = generaInt(dim);
     for(unsigned int i = 0; i < dim; ++i) {
         list.InsertAtBack(generatedValues[i]);
@@ -368,7 +654,7 @@ void PopolaList(lasd::List<int>& list, unsigned long dim) {
 }
 
 
-void PopolaList(lasd::List<double>& list, unsigned long dim) {
+void PopolaBT(lasd::List<double>& list, unsigned long dim) {
     std::vector<double> generatedValues = generaDouble(dim);
     for(unsigned int i = 0; i < dim; ++i) {
         list.InsertAtBack(generatedValues[i]);
@@ -376,7 +662,7 @@ void PopolaList(lasd::List<double>& list, unsigned long dim) {
 }
 
 
-void PopolaList(lasd::List<string>& list, unsigned long dim) {
+void PopolaBT(lasd::List<string>& list, unsigned long dim) {
     std::vector<string> generatedValues = generaString(dim);
     for(unsigned int i = 0; i < dim; ++i) {
         list.InsertAtBack(generatedValues[i]);

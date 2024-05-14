@@ -142,7 +142,7 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun fun, const Node* node) const 
 
 //PreOrderMap
 template<typename Data>
-void MutableBinaryTree<Data>::PreOrderMap(const MapFun fun, MutableNode* node) {
+void MutableBinaryTree<Data>::PreOrderMap(MapFun fun, MutableNode* node) {
     if (node != nullptr) {
         fun(node->Element());
 
@@ -160,7 +160,7 @@ void MutableBinaryTree<Data>::PreOrderMap(const MapFun fun, MutableNode* node) {
 
 //PostOrderMap
 template<typename Data>
-void MutableBinaryTree<Data>::PostOrderMap(const MapFun fun, MutableNode* node) {
+void MutableBinaryTree<Data>::PostOrderMap(MapFun fun, MutableNode* node) {
     if (node != nullptr) {
        
         if (node->HasLeftChild()) {
@@ -180,7 +180,7 @@ void MutableBinaryTree<Data>::PostOrderMap(const MapFun fun, MutableNode* node) 
 
 //InOrderMap
 template<typename Data>
-void MutableBinaryTree<Data>::InOrderMap(const MapFun fun, MutableNode* node) {
+void MutableBinaryTree<Data>::InOrderMap(MapFun fun, MutableNode* node) {
     if (node != nullptr) {
 
         if (node->HasLeftChild()) {
@@ -198,7 +198,7 @@ void MutableBinaryTree<Data>::InOrderMap(const MapFun fun, MutableNode* node) {
 
 //BreadthMap
 template<typename Data>
-void MutableBinaryTree<Data>::BreadthMap(const MapFun fun, MutableNode* node) {
+void MutableBinaryTree<Data>::BreadthMap(MapFun fun, MutableNode* node) {
     if (node != nullptr) {
         lasd::QueueVec<MutableNode*> queue;
         queue.Enqueue(node);
