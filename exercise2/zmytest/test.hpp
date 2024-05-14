@@ -38,11 +38,11 @@ void MenuBreadthIterator(lasd::BTBreadthIterator<Data>&);
 template <typename Data>
 void MenuBinaryTreeVec(lasd::BinaryTreeVec<Data>&,unsigned long);
 
-// template <typename Data>
-// void MenuBinaryTreeLnk(lasd::BinaryTreeLnk<Data>&);
+template <typename Data>
+void MenuBinaryTreeLnk(lasd::BinaryTreeLnk<Data>&,unsigned long);
 
-// template <typename Data>
-// void MenuBinarySearchTree(lasd::BST<Data>&);
+template <typename Data>
+void MenuBinarySearchTree(lasd::BST<Data>&,unsigned long);
 
 
 /********************************************************************************/
@@ -114,9 +114,47 @@ void FunResetIterator(lasd::ResettableIterator<Data>&);
 template <typename Data>
 void FunForwardIterator(lasd::ForwardIterator<Data>&);
 
+template <typename Data>
+void FunSearchMin(lasd::BST<Data>& bst);
 
+template <typename Data>
+void FunRemoveMin(lasd::BST<Data>& bst);
 
+template <typename Data>
+void FunSearchMinNRemove(lasd::BST<Data>& bst);
 
+template <typename Data>
+void FunSearchMax(lasd::BST<Data>& bst);
+
+template <typename Data>
+void FunRemoveMax(lasd::BST<Data>& bst);
+
+template <typename Data>
+void FunSearchMaxNRemove(lasd::BST<Data>& bst);
+
+template <typename Data>
+void FunSearchPredecessor(lasd::BST<Data>&);
+
+template <typename Data>
+void FunSearchSuccessor(lasd::BST<Data>&);
+
+template <typename Data>
+void FunRemovePredecessor(lasd::BST<Data>&);
+
+template <typename Data>
+void FunRemoveSuccessor(lasd::BST<Data>&);
+
+template <typename Data>
+void FunSearchPredecessorNRemove(lasd::BST<Data>&);
+
+template <typename Data>
+void FunSearchSuccessorNRemove(lasd::BST<Data>&);
+
+template <typename Data>
+void FunInsert(lasd::BST<Data>&);
+
+template <typename Data>
+void FunRemove(lasd::BST<Data>&);
 
 
 /**************************************************************/
@@ -137,7 +175,7 @@ void Print(const Data& data) {
 
 
 template <typename Data>
-void PrintTree(typename lasd::MutableBinaryTree<Data>::MutableNode*, int, char);
+void PrintTree(const typename lasd::BinaryTree<Data>::Node*, int, char);
 
 
 #endif
