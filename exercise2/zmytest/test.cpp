@@ -4,16 +4,13 @@ using namespace std;
 
 //Menu principale
 void mytest() {
-    cout << "\n\n-------- Menù Principale ---------" << endl;
 
+    cout << "\n\n-------- Menù Principale ---------" << endl;
     string alt = selezionaStrutturaAlbero();
     string tipo = selezionaDato();
     unsigned long dim = 0;
-    if (alt == "3") {
-        dim = selezionaDimensioneBST();
-    } else {
-        dim = selezionaDimensioneBT();
-    }
+   
+    dim = selezionaDimensioneBT();
 
     if (alt == "1") {
         if(tipo == "1") {
@@ -1083,21 +1080,6 @@ unsigned long selezionaDimensioneBT() {
     return dim;    
 }
 
-unsigned long selezionaDimensioneBST() {
-    unsigned long dim = 0;
-    cout << "\nInserisci la dimensione del BST: " << endl;
-    bool riprova;
-    do { 
-        riprova = false;
-        cin >> dim;
-        if (dim > 100) {
-            cout << "\n\nDimensione troppo grande, riprova !\n";
-            riprova = true;
-        }
-    } while (riprova == true);
-   
-    return dim;    
-}
 /******************************************************/
 
 //Generatori
@@ -1137,10 +1119,11 @@ vector<string> generaString(unsigned long dim) {
     default_random_engine generator(random_device{}());
     uniform_int_distribution<int> dist(0, 51);
 
-
     for(unsigned long i = 0; i<dim; i++) {
         string str = "";
-        str = str + lettere[dist(generator)];
+        for (int j = 0; j < 3; j++) {
+            str += lettere[dist(generator)];
+        }
         vec[i]=str;
     }
     cout << "\nGenerazione casuale per il popolamento della struttura completata !\n" << endl;
@@ -1149,11 +1132,12 @@ vector<string> generaString(unsigned long dim) {
 
 
 
+
 /******************************************************/
 
 //Popolamento
 
-//List
+//BinaryTree
 void PopolaBT(lasd::List<int>& list, unsigned long dim) {
     std::vector<int> generatedValues = generaInt(dim);
     for(unsigned int i = 0; i < dim; ++i) {
@@ -1203,6 +1187,7 @@ void PopolaBST(lasd::BST<std::string>& bst, unsigned long dim) {
         bst.Insert(generatedValues[i]);
     }
 }
+
 
 
 /********************************************************************************/

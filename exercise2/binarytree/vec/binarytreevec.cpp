@@ -36,7 +36,7 @@ BinaryTreeVec<Data>::NodeVec& BinaryTreeVec<Data>::NodeVec::operator=(NodeVec&& 
 
 //Element
 template<typename Data>
-const Data& BinaryTreeVec<Data>::NodeVec::Element() const noexcept {
+inline const Data& BinaryTreeVec<Data>::NodeVec::Element() const noexcept {
     return data;
 }
 
@@ -45,7 +45,7 @@ const Data& BinaryTreeVec<Data>::NodeVec::Element() const noexcept {
 
 //Element versione mutable
 template<typename Data>
-Data& BinaryTreeVec<Data>::NodeVec::Element() noexcept {
+inline Data& BinaryTreeVec<Data>::NodeVec::Element() noexcept {
     return data;
 }
 
@@ -53,15 +53,15 @@ Data& BinaryTreeVec<Data>::NodeVec::Element() noexcept {
 
 //isLeaf
 template<typename Data>
-bool BinaryTreeVec<Data>::NodeVec::IsLeaf() const noexcept {
-    return ((2*currIndex+1) > childsVec->Size());
+inline bool BinaryTreeVec<Data>::NodeVec::IsLeaf() const noexcept {
+    return ((2*currIndex+1) >= childsVec->Size());
 }
 
 
 
 //HasRightChild
 template<typename Data>
-bool BinaryTreeVec<Data>::NodeVec::HasRightChild() const noexcept {
+inline bool BinaryTreeVec<Data>::NodeVec::HasRightChild() const noexcept {
     return ((2*currIndex+2) < childsVec->Size());
 }
 
@@ -69,7 +69,7 @@ bool BinaryTreeVec<Data>::NodeVec::HasRightChild() const noexcept {
 
 //HasLeftChild
 template<typename Data>
-bool BinaryTreeVec<Data>::NodeVec::HasLeftChild() const noexcept {
+inline bool BinaryTreeVec<Data>::NodeVec::HasLeftChild() const noexcept {
     return ((2*currIndex+1) < childsVec->Size());
 }
 

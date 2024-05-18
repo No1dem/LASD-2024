@@ -31,7 +31,7 @@ public:
 
 protected:
 
-  struct NodeLnk : virtual MutableNode{ // Must extend MutableNode
+  struct NodeLnk : virtual MutableNode { // Must extend MutableNode
 
   private:
 
