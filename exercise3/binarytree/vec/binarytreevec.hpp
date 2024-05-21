@@ -39,42 +39,47 @@ namespace lasd {
       // ...
 
     public:
-      // info
+    
       Data data;
       unsigned long currIndex = 0;
       Vector<NodeVec*> *childsVec = nullptr;
 
-      // default constructor
+      //Default constructor
       NodeVec() = default;
 
-      // specific constructor
+      //Specific constructor
       NodeVec(const Data &, unsigned long, Vector<NodeVec*> *);
 
-      // destructor
+      //Destructor
       virtual ~NodeVec() = default;
 
-      // copy assignment
+      //Copy assignment
       NodeVec &operator=(const NodeVec &);
 
-      // move assignment
+      //Move assignment
       NodeVec &operator=(NodeVec &&) noexcept;
 
-      // comparison operators
-      bool operator==(const NodeVec &node) const noexcept {
+      //Comparison operators
+      inline bool operator==(const NodeVec &node) const noexcept {
         return BinaryTree<Data>::Node::operator==(node);
       };
-      bool operator!=(const NodeVec &node) const noexcept {
+      
+      inline bool operator!=(const NodeVec &node) const noexcept {
         return BinaryTree<Data>::Node::operator!=(node);
       };
 
-      // functions
-      const Data &Element() const noexcept override;
-      Data &Element() noexcept override;
-      bool IsLeaf() const noexcept override;
-      bool HasRightChild() const noexcept override;
-      bool HasLeftChild() const noexcept override;
+      //Functions
+      inline const Data &Element() const noexcept override;
+      inline Data &Element() noexcept override;
+
+      inline bool IsLeaf() const noexcept override;
+
+      inline bool HasRightChild() const noexcept override;
+      inline bool HasLeftChild() const noexcept override;
+
       virtual const Node& RightChild() const override;
       virtual const Node& LeftChild() const override;
+
       virtual MutableNode& RightChild() override;
       virtual MutableNode& LeftChild() override;
     };
@@ -94,31 +99,32 @@ namespace lasd {
 
     /* ************************************************************************ */
 
-    // Copy constructor
+    //Copy constructor
     BinaryTreeVec(const BinaryTreeVec &);
 
-    // Move constructor
+    //Move constructor
     BinaryTreeVec(BinaryTreeVec &&) noexcept;
 
     /* ************************************************************************ */
 
-    // Destructor
+    //Destructor
     virtual ~BinaryTreeVec();
 
     /* ************************************************************************ */
 
-    // Copy assignment
+    //Copy assignment
     BinaryTreeVec &operator=(const BinaryTreeVec &);
 
-    // Move assignment
+    //Move assignment
     BinaryTreeVec &operator=(BinaryTreeVec &&) noexcept;
 
     /* ************************************************************************ */
 
-    // Comparison operators
+    //Comparison operators
     bool operator==(const BinaryTreeVec<Data> &bt) const noexcept {
       return MutableBinaryTree<Data>::operator==(bt);
     };
+    
     inline bool operator!=(const BinaryTreeVec<Data> &bt) const noexcept {
       return !(*this == bt);
     };

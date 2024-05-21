@@ -271,7 +271,6 @@ BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator=(BTPreOrderIterator
 
 
 
-
 //Operator *
 template<typename Data>
 inline const Data& BTPreOrderIterator<Data>::operator*() const {
@@ -458,11 +457,11 @@ void BTPostOrderIterator<Data>::LeftMostLeaf() {
 //Operator *
 template<typename Data>
 Data& BTPostOrderMutableIterator<Data>::operator*() {
-    if(currNode != nullptr) {
-        return const_cast<Data&>(currNode->Element());
-    } else {
+    if (this->Terminated()) {
         throw std::out_of_range("Iterator terminated !");
     }
+
+    return const_cast<Data&>(currNode->Element());
 }
 
 /*******************************************************************************/
@@ -524,11 +523,10 @@ BTInOrderIterator<Data>& BTInOrderIterator<Data>::operator=(BTInOrderIterator&& 
 //Operator *
 template<typename Data>
 const Data& BTInOrderIterator<Data>::operator*() const {
-    if(!Terminated()) {
-      return currNode->Element();
-    } else {
-      throw std::out_of_range("Iterator terminated !");
-    }
+    if(Terminated()) {
+        throw std::out_of_range("Iterator terminated !");
+    } 
+    return currNode->Element();
 }
 
 

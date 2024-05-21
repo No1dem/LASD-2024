@@ -49,7 +49,7 @@ protected:
   std::uniform_int_distribution<unsigned long> distb = std::uniform_int_distribution<unsigned long>(0, prime-1);
   
   static const Hashable<Data> hash;
-  unsigned long tablesize = 128;
+  unsigned long tablesize = 127;
 
   // Default constructor
   HashTable() {
@@ -72,6 +72,7 @@ protected:
     std::swap(bcoeff, ht.bcoeff);
     std::swap(tablesize, ht.tablesize);
   }
+
 public:
 
   // Destructor
@@ -80,22 +81,22 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument); // Copy assignment of abstract types should not be possible.
+  HashTable& operator=(const HashTable&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  // type operator=(argument); // Move assignment of abstract types should not be possible.
+  HashTable& operator=(HashTable&&) noexcept = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers; // Comparison of abstract hashtable is possible but not required.
-  // type operator!=(argument) specifiers; // Comparison of abstract hashtable is possible but not required.
+  bool operator==(const HashTable&) const noexcept = delete; // Comparison of abstract hashtable is possible but not required.
+  bool operator!=(const HashTable&) const noexcept = delete; // Comparison of abstract hashtable is possible but not required.
 
 protected:
 
   // Auxiliary member functions
 
-  // type HashKey(argument) specifiers;
+  virtual unsigned long HashKey(const unsigned long) const noexcept;
 
 };
 
