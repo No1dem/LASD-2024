@@ -28,7 +28,7 @@ public:
 /* ************************************************************************** */
 
 template <typename Data>
-class HashTable : virtual public ResizableContainer,virtual public DictionaryContainer {
+class HashTable : virtual public ResizableContainer,virtual public DictionaryContainer<Data> {
                   // Must extend ResizableContainer,
                   //             DictionaryContainer<Data>
 
@@ -49,11 +49,11 @@ protected:
   std::uniform_int_distribution<unsigned long> distb = std::uniform_int_distribution<unsigned long>(0, prime-1);
   
   static const Hashable<Data> hash;
-  unsigned long tablesize = 127;
+  unsigned long tablesize = 128;
 
   // Default constructor
   HashTable() {
-    acoeff = dista(generator);
+    acoeff = dista(generator) | 1;
     bcoeff = distb(generator);
   }
 

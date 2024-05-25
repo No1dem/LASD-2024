@@ -2,7 +2,7 @@
 namespace lasd {
 
 /* ************************************************************************** */
-//InsertAll versione Non-Mutable
+//InsertAll 
 template<typename Data>
 inline bool DictionaryContainer<Data>::InsertAll(const TraversableContainer<Data>& TravCont) {
     bool check = true;
@@ -14,7 +14,7 @@ inline bool DictionaryContainer<Data>::InsertAll(const TraversableContainer<Data
 }
 
 
-//InsertAll versione Mutable
+//InsertAll 
 template<typename Data>
 inline bool DictionaryContainer<Data>::InsertAll(MappableContainer<Data>&& MapCont) noexcept {
     bool check = true;
@@ -36,7 +36,7 @@ inline bool DictionaryContainer<Data>::RemoveAll(const TraversableContainer<Data
     return check;
 }
 
-//InsertSome versione Non-Mutable
+//InsertSome 
 template<typename Data>
 inline bool DictionaryContainer<Data>::InsertSome(const TraversableContainer<Data>& TravCont){
     bool check = false;
@@ -47,7 +47,7 @@ inline bool DictionaryContainer<Data>::InsertSome(const TraversableContainer<Dat
     return check;
 }
 
-//InsertSome versione Mutable 
+//InsertSome 
 template<typename Data>
 inline bool DictionaryContainer<Data>::InsertSome(MappableContainer<Data>&& MapCont) noexcept {
     bool check = false;

@@ -108,9 +108,12 @@ void stestHashTableInt(uint & testnum, uint & testerr) {
     cout << endl << "Begin of HashTableOpnAdr<int> Test:" << endl;
     stestHashTableInt(htopnadr, vec, loctestnum, loctesterr);
     cout << "\n";
-
+    cout<<"\n\nciao1\n\n";
     lasd::HashTableClsAdr<int> cophtclsadr(htclsadr);
+    cout<<"\n\nciao2\n\n";
     EqualHT(loctestnum, loctesterr, cophtclsadr, htclsadr);
+        cout<<"\n\nciao3\n\n";
+
     htclsadr.Clear();
     NonEqualHT(loctestnum, loctesterr, cophtclsadr, htclsadr);
     htclsadr = std::move(cophtclsadr);

@@ -5,7 +5,7 @@
 /* ************************************************************************** */
 
 #include "../hashtable.hpp"
-#include "../vector/vector.hpp"
+#include "../../vector/vector.hpp"
 
 /* ************************************************************************** */
 
@@ -19,9 +19,18 @@ class HashTableOpnAdr : virtual public HashTable<Data> {
 
 private:
 
-  // ...
+  enum Status {
+     Empty,
+     Full,
+     Removed
+  };
 
 protected:
+  static const unsigned long MIN_TABLESIZE = 128;
+  static const unsigned long MAX_TABLESIZE = 4194304;
+  static const unsigned long MAX_FILLPERCENTAGE = 50;
+  static const unsigned long MIN_FILLPERCENTAGE = 10;
+
 
   using HashTable<Data>::size;
   using HashTable<Data>::hash;
@@ -31,14 +40,15 @@ protected:
   using HashTable<Data>::distb;
   using HashTable<Data>::generator;
   using HashTable<Data>::tablesize;
+  
   using HashTable<Data>::HashKey;
   using HashTable<Data>::Insert;
   using HashTable<Data>::InsertAll;
 
 
   Vector<Data> table;
-  Vector<char> status;  //'E' empty       'R' Removed      'F' Full
-  double capacity = 0;
+  Vector<Status> flag;  
+  double fillpercentage = 0.0; 
 
 public:
 
@@ -50,9 +60,9 @@ public:
   // Specific constructors
   HashTableOpnAdr(unsigned long); // A hash table of a given size
   HashTableOpnAdr(const TraversableContainer<Data>&); // A hash table obtained from a TraversableContainer
-  HashTableOpnAdr(const TraversableContainer<Data>&, unsigned long); // A hash table of a given size obtained from a TraversableContainer
-  HashTableOpnAdr(MappableContainer<Data>&&) noexcept; // A hash table obtained from a MappableContainer
-  HashTableOpnAdr(MappableContainer<Data>&&, unsigned long) noexcept; // A hash table of a given size obtained from a MappableContainer
+  HashTableOpnAdr(unsigned long, const TraversableContainer<Data>&); // A hash table of a given size obtained from a TraversableContainer
+  HashTableOpnAdr(MappableContainer<Data>&&); // A hash table obtained from a MappableContainer
+  HashTableOpnAdr(unsigned long, MappableContainer<Data>&&); // A hash table of a given size obtained from a MappableContainer
 
   /* ************************************************************************ */
 
@@ -79,7 +89,7 @@ public:
 
   // Comparison operators
   bool operator==(const HashTableOpnAdr<Data>&) const noexcept;
-  bool operator!=(const HashTableOpnAdr<Data>&) const noexcept;
+  inline bool operator!=(const HashTableOpnAdr<Data>& ht) const noexcept {return !(*this == ht);};
 
   /* ************************************************************************ */
 
@@ -115,6 +125,8 @@ protected:
   virtual unsigned long Find(const Data&, unsigned long) const noexcept;
   virtual unsigned long FindEmpty(const Data&, unsigned long) const noexcept;
   virtual bool Remove(const Data&, unsigned long);
+  unsigned long NextPowerOf2(unsigned long) const noexcept;
+  bool CheckResize(unsigned long);
  
 };
 
