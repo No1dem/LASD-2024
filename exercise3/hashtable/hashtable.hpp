@@ -10,6 +10,8 @@
 
 #include "../container/dictionary.hpp"
 
+#define MAX_TABLESIZE 10000000161531
+
 /* ************************************************************************** */
 
 namespace lasd {

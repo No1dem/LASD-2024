@@ -12,7 +12,7 @@ int main() {
     cout << "\nBenvenuto nel test della libreria di: Antonio De Martino\nMatricola: N86004701" << endl;
     while (true) {
         cout << "--------Test LASD 2024--------" << endl;
-        cout << " \n  °Esercizio 2°\n";
+        cout << " \n  °Esercizio 3°\n";
         cout << "1: Test personale " << endl;
         cout << "2: Test professore" << endl;
         cout << "0: Esci" << endl;

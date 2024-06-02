@@ -6,8 +6,7 @@ namespace lasd {
 //Default constructor
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr() {
-    BST<Data> bst = new BST<Data>[tablesize]{}; 
-    table = bst;
+    table = new BST<Data>[tablesize]{}; 
 }
 
 
@@ -64,7 +63,7 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long sizeIN, MappableContainer<D
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(const HashTableClsAdr<Data>& ht) : HashTable<Data>(ht) {
     table = new BST<Data>[tablesize]{};
-    for (unsigned long i = 0; i < tablesize; ++i) {    //****************************!""$"$"$"$"$
+    for (unsigned long i = 0; i < tablesize; ++i) {  
         table[i] = ht.table[i]; 
     }
 }
@@ -120,20 +119,18 @@ bool HashTableClsAdr<Data>::operator==(const HashTableClsAdr<Data>& ht) const no
     if(ht.size == size) {
 
         for (unsigned long i = 0 ; i < tablesize ; i++) {
-            if (!table[i].Empty()) {
-                table[i].Traverse(
-                    [&ht,&res](const Data& data) {
-                        if(!ht.Exists(data)) {
-                            res = false;
-                            return;
-                        }
+            table[i].Traverse(
+                [&ht,&res](const Data& data) {
+                    if(!ht.Exists(data)) {
+                        res = false;
+                        return;
                     }
-                );
-
-                if (res == false) {
-                    return false;
                 }
-            }
+            );
+
+            if (res == false) {
+                return false;
+            }  
         }
         return true;
     }
@@ -186,6 +183,7 @@ bool HashTableClsAdr<Data>::Remove(const Data& data) {
 }
 
 
+
 //Exists
 template <typename Data>
 bool HashTableClsAdr<Data>::Exists(const Data& data) const noexcept {
@@ -203,6 +201,11 @@ bool HashTableClsAdr<Data>::Exists(const Data& data) const noexcept {
 //Resize
 template <typename Data>
 void HashTableClsAdr<Data>::Resize(const unsigned long sizeIN) {
+    if (sizeIN == 0) {
+        Clear();
+        return;
+    }
+
     unsigned long newTableSize = NextPrime(sizeIN);
     BST<Data>* tmp = new BST<Data>[newTableSize] {};
     
@@ -211,10 +214,8 @@ void HashTableClsAdr<Data>::Resize(const unsigned long sizeIN) {
     std::swap(tmp, table);
     std::swap(newTableSize, tablesize);
 
-    for(unsigned long i = 0; i < newTableSize; i++){
-        if (!tmp[i].Empty()){
+    for(unsigned long i = 0; i < newTableSize; i++) {
             InsertAll(tmp[i]);
-        }
     }
 
     delete[] tmp;
@@ -234,14 +235,14 @@ void HashTableClsAdr<Data>::Clear() {
 
 //NextPrime
 template <typename Data>
-unsigned long HashTableClsAdr<Data>::NextPrime(unsigned long size) const noexcept {
-    for (unsigned long i = 2; i <= size/2; ++i) {
-        if (size % i == 0) {
-            size++;
+unsigned long HashTableClsAdr<Data>::NextPrime(unsigned long num) const noexcept {
+    for (unsigned long i = 2; i <= num/2; ++i) {
+        if (num % i == 0) {
+            num++;
             i = 2;
         }
     }
-    return size;
+    return num;
 }
 
 /* ************************************************************************** */

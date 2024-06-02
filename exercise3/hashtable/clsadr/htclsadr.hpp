@@ -23,7 +23,6 @@ private:
 
 protected:
   static const unsigned long MIN_TABLESIZE = 127;
-  static const unsigned long MAX_TABLESIZE = 4194007;
 
   using HashTable<Data>::size;
   using HashTable<Data>::tablesize;

@@ -8,10 +8,7 @@ namespace lasd
     template <typename Data>
     HashTableOpnAdr<Data>::HashTableOpnAdr() {
         tablesize = MIN_TABLESIZE;
-        // size = 0;
-
-        // acoeff = dista(generator) | 1;
-        // bcoeff = distb(generator);
+        size = 0;
 
         table.Resize(tablesize);
         flag.Resize(tablesize);
@@ -23,15 +20,12 @@ namespace lasd
         fillpercentage = (static_cast<double>(size) / static_cast<double>(tablesize)) * 100;
     }
 
-    // Specific constructors
 
+    // Specific constructors
     template <typename Data>
     HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long sizeIN) {
         tablesize = NextPowerOf2(sizeIN);
-        // size = 0; 
-
-        // acoeff = dista(generator) | 1;
-        // bcoeff = distb(generator);
+        size = 0; 
 
         table.Resize(tablesize);
         flag.Resize(tablesize);
@@ -42,26 +36,36 @@ namespace lasd
 
         fillpercentage = (static_cast<double>(size) / static_cast<double>(tablesize)) * 100;
     }
+
+
 
     template <typename Data>
     HashTableOpnAdr<Data>::HashTableOpnAdr(const TraversableContainer<Data> &TravCon) : HashTableOpnAdr() {
         InsertAll(TravCon);
     }
 
+
+
     template <typename Data>
     HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long sizeIN, const TraversableContainer<Data> &TravCon) : HashTableOpnAdr(sizeIN) {
         InsertAll(TravCon);
     }
+
+
 
     template <typename Data>
     HashTableOpnAdr<Data>::HashTableOpnAdr(MappableContainer<Data> &&MapCon) : HashTableOpnAdr() {
         InsertAll(std::move(MapCon));
     }
 
+
+
     template <typename Data>
     HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long sizeIN, MappableContainer<Data> &&MapCon) : HashTableOpnAdr(sizeIN) {
         InsertAll(std::move(MapCon));
     }
+
+
 
     // Copy Constructor
     template <typename Data>
@@ -87,6 +91,8 @@ namespace lasd
         std::swap(fillpercentage, ht.fillpercentage);
     }
 
+
+
     // Copy Assignemnt
     template <typename Data>
     HashTableOpnAdr<Data> &HashTableOpnAdr<Data>::operator=(const HashTableOpnAdr<Data> &ht) {
@@ -96,6 +102,8 @@ namespace lasd
         }
         return *this;
     }
+
+
 
     // Move Assignment
     template <typename Data>
@@ -111,6 +119,8 @@ namespace lasd
         }
         return *this;
     }
+
+
 
     // Operator ==
     template <typename Data>
@@ -227,16 +237,16 @@ namespace lasd
 
     //Resize
     template <typename Data>
-    void HashTableOpnAdr<Data>::Resize(unsigned long siz) {
-        if (size == 0) {
+    void HashTableOpnAdr<Data>::Resize(unsigned long sizeIN) {
+        if (sizeIN == 0) {
             Clear();
             return;
         }
     
-        if(!CheckResize(siz)) {
+        if (!CheckResize(sizeIN)) {
             return;
         }
-        unsigned long newSize = NextPowerOf2(siz);
+        unsigned long newSize = NextPowerOf2(sizeIN);
 
         if(newSize == tablesize) {
             return;
@@ -244,8 +254,8 @@ namespace lasd
 
         HashTableOpnAdr<Data> tmp(newSize);
 
-        for(unsigned long i = 0; i < tablesize; i++) {
-            if(flag[i] == Full) {
+        for (unsigned long i = 0; i < tablesize; i++) {
+            if (flag[i] == Full) {
                 tmp.Insert(table[i]);
             }
         }
@@ -343,13 +353,13 @@ namespace lasd
         unsigned long newsize = MIN_TABLESIZE;
 
         if (sizeIN >= MAX_TABLESIZE) {
-            return MAX_TABLESIZE;
+            return MAX_2POW;
         }
 
         while (newsize < sizeIN) {
 
             if (newsize > MAX_TABLESIZE) {
-                return MAX_TABLESIZE;
+                return MAX_2POW;
             }
 
             newsize = newsize << 1;

@@ -120,7 +120,9 @@ public:
   // Specific member function (inherited from PreOrderTraversableContainer)
 
   inline void PreOrderTraverse(TraverseFun fun) const override {
+    if (!this->Empty()) {
       PreOrderTraverse(fun, &Root());
+    }
   }; // Override PreOrderTraversableContainer member
 
   /* ************************************************************************ */
@@ -128,7 +130,9 @@ public:
   // Specific member function (inherited from PostOrderTraversableContainer)
 
   inline void PostOrderTraverse(TraverseFun fun) const override {
+    if (!this->Empty()) {
       PostOrderTraverse(fun, &Root());
+    }
   }; // Override PostOrderTraversableContainer member
 
   /* ************************************************************************ */
@@ -136,7 +140,9 @@ public:
   // Specific member function (inherited from InOrderTraversableContainer)
 
   inline void InOrderTraverse(TraverseFun fun) const override {
+    if (!this->Empty()) {
       InOrderTraverse(fun, &Root());
+    }
   }; // Override InOrderTraversableContainer member
 
   /* ************************************************************************ */
@@ -144,7 +150,9 @@ public:
   // Specific member function (inherited from BreadthTraversableContainer)
 
   inline void BreadthTraverse(TraverseFun fun) const override {
-    BreadthTraverse(fun, &Root());
+    if (!this->Empty()) {
+      BreadthTraverse(fun, &Root());
+    }
   }; // Override BreadthTraversableContainer member
 
 protected:
@@ -183,12 +191,18 @@ private:
 protected:
     using Container::size;
     using typename BinaryTree<Data>::Node;
+    using BinaryTree<Data>::Root;
+
+    
 
 public:
 
     struct MutableNode: Node {
                         // Must extend Node
-
+    using BinaryTree<Data>::Node::RightChild;
+    using BinaryTree<Data>::Node::LeftChild;
+    using BinaryTree<Data>::Node::Element;
+    
     friend class MutableBinaryTree<Data>;
 
     /* ********************************************************************** */
@@ -280,7 +294,9 @@ public:
   // Specific member function (inherited from BreadthMappableContainer)
 
   inline void BreadthMap(MapFun fun) override {
+    if (size > 0) {
       BreadthMap(fun, &Root());
+    }
   }; // Override BreadthMappableContainer member
 
 protected:

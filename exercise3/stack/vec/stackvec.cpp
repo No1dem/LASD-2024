@@ -1,7 +1,7 @@
 
 namespace lasd {
 
-/* *****************prova********************************************************* */
+/* ************************************************************************** */
 
 template<typename Data>
 StackVec<Data>::StackVec(const TraversableContainer<Data>& TravCon) : Vector<Data>::Vector(TravCon) {

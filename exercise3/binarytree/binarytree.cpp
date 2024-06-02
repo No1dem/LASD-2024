@@ -237,18 +237,18 @@ BTPreOrderIterator<Data>::BTPreOrderIterator(const BinaryTree<Data>& bt) {
 //Copy constructor 
 template<typename Data>
 BTPreOrderIterator<Data>::BTPreOrderIterator(const BTPreOrderIterator<Data>& iterator) {
-        root = iterator.root;
-        currNode = iterator.currNode;
-        stk = iterator.stk;
+    root = iterator.root;
+    currNode = iterator.currNode;
+    stk = iterator.stk;
 }
 
 
 //Move constructor
 template<typename Data>
 BTPreOrderIterator<Data>::BTPreOrderIterator(BTPreOrderIterator<Data>&& iterator) noexcept {
-        std::swap(root, iterator.root);
-        std::swap(currNode, iterator.currNode);
-        std::swap(stk, iterator.stk);
+    std::swap(root, iterator.root);
+    std::swap(currNode, iterator.currNode);
+    std::swap(stk, iterator.stk);
 }
 
 // Copy assignment

@@ -27,7 +27,7 @@ private:
 
 protected:
   static const unsigned long MIN_TABLESIZE = 128;
-  static const unsigned long MAX_TABLESIZE = 4194304;
+  static const unsigned long MAX_2POW = 8796093022208;
   static const unsigned long MAX_FILLPERCENTAGE = 50;
   static const unsigned long MIN_FILLPERCENTAGE = 10;
 
