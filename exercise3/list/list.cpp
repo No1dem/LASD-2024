@@ -77,7 +77,7 @@ List<Data>& List<Data>::operator=(const List<Data>& list){
         std::swap(*this, tmp);
     }
     return *this;
-}
+} 
 
 
 //Move assignment
@@ -396,26 +396,32 @@ void List<Data>::PreOrderTraverse(TraverseFun fun, Node* currNode) const {
 
 template <typename Data>
 void List<Data>::PostOrderTraverse(TraverseFun fun, Node* currNode) const {
-  if (currNode == nullptr)
+  if (currNode == nullptr) {
     return;
+  }
+
   PostOrderTraverse(fun, currNode->next);
   fun(currNode->element);
 }
 
 
 template <typename Data>
-void List<Data>::PreOrderMap(MapFun fun, Node* currNode) const {
-  if (currNode == nullptr)
+void List<Data>::PreOrderMap(MapFun fun, Node* currNode) {
+  if (currNode == nullptr) {
     return;
+  }
+
   fun(currNode->element);
   PreOrderMap(fun, currNode->next);
 }
 
 
 template <typename Data>
-void List<Data>::PostOrderMap(MapFun fun, Node* currNode) const {
-  if (currNode == nullptr)
+void List<Data>::PostOrderMap(MapFun fun, Node* currNode) {
+  if (currNode == nullptr) {
     return;
+  }
+  
   PostOrderMap(fun, currNode->next);
   fun(currNode->element);
 }

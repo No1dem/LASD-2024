@@ -71,7 +71,9 @@ protected:
     NodeLnk& operator=(NodeLnk&&) noexcept;
 
     //Comparison operators
-    bool operator==(const NodeLnk&) const noexcept;
+    bool operator==(const NodeLnk& node) const noexcept {
+      return BinaryTree<Data>::Node::operator==(node);
+    };
     inline bool operator!=(const NodeLnk& node) const noexcept {return !(*this == node);};
 
     //Specific functions

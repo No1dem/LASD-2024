@@ -19,9 +19,9 @@ int main() {
     // throw overflow_error("An overflow occurred!");
     // throw underflow_error("An underflow occurred!");
 
-    // throw bad_alloc(); // Just an example, do not throw this exception.
+    throw bad_alloc(); // Just an example, do not throw this exception.
 
-    throw 25;
+    // throw 25;
 
   }
   catch (length_error & exc) {

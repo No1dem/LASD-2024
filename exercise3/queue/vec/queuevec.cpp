@@ -38,8 +38,7 @@ inline QueueVec<Data>::QueueVec(MappableContainer<Data>&& MapCon) noexcept {
 
 //Copy constructor
 template <typename Data>
-inline QueueVec<Data>::QueueVec(const QueueVec<Data>& queue) : Vector<Data>(queue) {
-    head = queue.head;
+inline QueueVec<Data>::QueueVec(const QueueVec<Data>& queue) : Vector<Data>(queue) {   
     tail = queue.tail;
     sentinel = queue.sentinel;
 }
@@ -81,11 +80,11 @@ inline QueueVec<Data>& QueueVec<Data>::operator=(QueueVec<Data>&& qv) noexcept {
 //Operatore ==
 template<typename Data>
 bool QueueVec<Data>::operator==(const QueueVec<Data>& qv) const noexcept {
-    if (Size() != qv.Size()){
+    if (Size() != qv.Size()) {
         return false;
     }
 
-    if(Size() == 0 && qv.Size() == 0){
+    if(Size() == 0 && qv.Size() == 0) {
         return true;
     }
 
@@ -131,13 +130,14 @@ inline void QueueVec<Data>::Dequeue() {
         throw std::length_error("Queue is empty!");
     }
 
-    if (Size() < size/4){
+    if (Size() < size/REDUCE_THRESHOLD){
         DecreaseSize();
     }
 
-    sentinel = head++;
+    sentinel = head++;  //sentinel = head; 
+                        //head++;
 
-    if(head == size) {
+    if(head == size) {  //Se head ha superato size-1 deve tornare a 0 
         head = 0;
     }
 }
@@ -179,6 +179,7 @@ void QueueVec<Data>::Enqueue(Data&& data) noexcept {
     if(tail == sentinel) {
         IncreaseSize();
     }
+
     Elements[tail] = std::move(data);
     tail++;
 
@@ -214,21 +215,27 @@ void QueueVec<Data>::Clear() {
 //IncreaseSize
 template<typename Data>
 void QueueVec<Data>::IncreaseSize(){
-    if(tail<head) {
+    if(tail < head) {
         Data* tmp = new Data[INCREASE_FACTOR*size] {};
         unsigned long i = 0;
+
         for(unsigned long j = head; j<size; ++j) {
             std::swap(Elements[j], tmp[i++]);
         }
+
         for(unsigned long j = 0; j<tail; ++j) {
             std::swap(Elements[j], tmp[i++]);
         }
+        
         std::swap(Elements, tmp);
+
         head = 0;
         tail = i;
         size = size*INCREASE_FACTOR;
         sentinel = size-1;
+
         delete[] tmp;
+
     } else {
         Vector<Data>::Resize(size*INCREASE_FACTOR);
         sentinel = size-1;
@@ -259,10 +266,12 @@ void QueueVec<Data>::DecreaseSize() {
     }
 
     std::swap(Elements, tmp);
+
     head = 0;
     tail = i;
     size = size/DECREASE_FACTOR;
     sentinel = size-1;
+    
     delete[] tmp;
 }
 

@@ -115,7 +115,7 @@ const Data& BST<Data>::Max() const {
 
 
 
-//MaxNDelete
+//MaxNRemove
 template <typename Data>
 Data BST<Data>::MaxNRemove() {
     if (this->Empty()) {
@@ -315,7 +315,7 @@ Data BST<Data>::DataNDelete(NodeLnk* node) {
 
 
 
-//Detach 
+//Detach
 template <typename Data>
 typename BST<Data>::NodeLnk* BST<Data>::Detach(NodeLnk*& node) noexcept{
     if(node != nullptr) {
@@ -480,7 +480,7 @@ typename BST<Data>::NodeLnk* const* BST<Data>::FindPointerToPredecessor(NodeLnk*
 //FindPointerToPredecessor mutable
 template <typename Data>
 typename BST<Data>::NodeLnk** BST<Data>::FindPointerToPredecessor(NodeLnk*& node, const Data& dataIN) noexcept{
-    return const_cast<NodeLnk**>(static_cast<const BST<Data>*> (this)->FindPointerToPredecessor(node, dataIN));
+    return const_cast<NodeLnk**>(static_cast<const BST<Data>*>(this)->FindPointerToPredecessor(node, dataIN));
 }
 
 

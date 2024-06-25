@@ -84,7 +84,9 @@ template<typename Data>
 bool Vector<Data>::operator==(const Vector<Data>& vector) const noexcept{
     if(size != vector.size) {
         return false;
-    } for(unsigned long index = 0; index < size; index++) {
+    } 
+    
+    for(unsigned long index = 0; index < size; index++) {
         if(Elements[index]!= vector.Elements[index]) {
             return false;
         }

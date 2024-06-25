@@ -279,7 +279,7 @@ public:
 
   // Specific member function (inherited from BreadthMappableContainer)
 
-  inline void BreadthMap(MapFun fun) override {
+  inline void BreadthMap(MapFun fun) override {                    //**Dimenticato size > 0
       BreadthMap(fun, &Root());
   }; // Override BreadthMappableContainer member
 

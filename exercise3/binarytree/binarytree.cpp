@@ -312,10 +312,6 @@ BTPreOrderIterator<Data>& BTPreOrderIterator<Data>::operator++() {
 }
 
 
-
-
-
-
 //Reset
 template <typename Data>
 inline void BTPreOrderIterator<Data>::Reset() noexcept {
@@ -380,7 +376,6 @@ BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator=(const BTPostOrde
 
 
 
-
 //Move assignment
 template<typename Data>
 BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator=(BTPostOrderIterator&& it) noexcept {
@@ -389,6 +384,7 @@ BTPostOrderIterator<Data>& BTPostOrderIterator<Data>::operator=(BTPostOrderItera
     std::swap(stk, it.stk);
     return *this;
 }
+
 
 //Operator *
 template<typename Data>

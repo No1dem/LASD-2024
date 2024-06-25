@@ -217,9 +217,9 @@ protected:
 
   void PostOrderTraverse(TraverseFun, Node*) const;
 
-  void PreOrderMap(MapFun, Node*) const;
+  void PreOrderMap(MapFun, Node*);
 
-  void PostOrderMap(MapFun, Node*) const;
+  void PostOrderMap(MapFun, Node*);
 
 };
 

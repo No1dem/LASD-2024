@@ -3,7 +3,7 @@
 #define QUEUEVEC_HPP
 
 /* ************************************************************************** */
-
+#include <iostream>
 #include "../queue.hpp"
 #include "../../vector/vector.hpp"
 
@@ -20,11 +20,11 @@ class QueueVec : virtual public Queue<Data>,virtual protected Vector<Data>{
 
 private:
 
-static const unsigned long DEFAULT_SIZE = 4;
-static const unsigned long INCREASE_FACTOR = 2;
-static const unsigned long DECREASE_FACTOR = 2;
+  static const unsigned long DEFAULT_SIZE = 4;
+  static const unsigned long INCREASE_FACTOR = 2;
+  static const unsigned long DECREASE_FACTOR = 2;
+  static const unsigned long REDUCE_THRESHOLD = 4;
   
-
 protected:
 
   using Vector<Data>::size;

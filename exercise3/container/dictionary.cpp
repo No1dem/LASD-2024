@@ -7,7 +7,7 @@ template<typename Data>
 inline bool DictionaryContainer<Data>::InsertAll(const TraversableContainer<Data>& TravCont) {
     bool check = true;
     TravCont.Traverse([this, &check](const Data& dato){
-        check = Insert(dato);
+        check &= Insert(dato);
     }
     );
     return check;
@@ -19,7 +19,7 @@ template<typename Data>
 inline bool DictionaryContainer<Data>::InsertAll(MappableContainer<Data>&& MapCont) noexcept {
     bool check = true;
     MapCont.Map([this, &check](Data& dato){
-        check = Insert(std::move(dato));
+        check &= Insert(std::move(dato));
     }
     );
     return check;
@@ -30,7 +30,7 @@ template<typename Data>
 inline bool DictionaryContainer<Data>::RemoveAll(const TraversableContainer<Data>& TravCont) {
     bool check = true;
     TravCont.Traverse([this, &check](const Data& dato){
-        check = Remove(dato);
+        check &= Remove(dato);
     }
     );
     return check;

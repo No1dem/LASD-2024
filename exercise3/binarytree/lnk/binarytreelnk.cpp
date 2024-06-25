@@ -54,6 +54,7 @@ BinaryTreeLnk<Data>::NodeLnk::~NodeLnk() {
 }
 
 
+
 //Copy assignment
 template <typename Data>
 BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(const NodeLnk& node) {
@@ -74,7 +75,6 @@ BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(const Node
 
 
 
-
 //Move assignment
 template <typename Data>
 typename BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(NodeLnk&& node) noexcept {
@@ -85,38 +85,38 @@ typename BinaryTreeLnk<Data>::NodeLnk& BinaryTreeLnk<Data>::NodeLnk::operator=(N
 }
 
 
-//Operator ==
-template <typename Data>
-bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk& node) const noexcept {
-    if(data != node.data) {
-        return false;
-    }
+// //Operator ==
+// template <typename Data>
+// bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk& node) const noexcept {
+//     if(data != node.data) {
+//         return false;
+//     }
 
-    bool LChild = node->HasLeftChild();
-    bool RChild = node->HasRightChild();
-    bool LNRChild = LChild && RChild;
+//     bool LChild = node->HasLeftChild();
+//     bool RChild = node->HasRightChild();
+//     bool LNRChild = LChild && RChild;
 
-    if (LNRChild) {
-        if (&node->LeftChild() == this->LeftChild() && &node->RightChild() == this->RightChild()) {
-            return true;
-        } else {
-            return false;
-        }
-    } else if (LChild) {
-        if (&node->LeftChild() == this->LeftChild()) {
-            return true;
-        } else {
-            return false;
-        }
-    } else if (RChild) {
-        if (&node->RightChild() == this->RightChild()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    return true;
-}
+//     if (LNRChild) {
+//         if (&node->LeftChild() == this->LeftChild() && &node->RightChild() == this->RightChild()) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     } else if (LChild) {
+//         if (&node->LeftChild() == this->LeftChild()) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     } else if (RChild) {
+//         if (&node->RightChild() == this->RightChild()) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
 
 
 //Specific function
@@ -221,6 +221,7 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(const TraversableContainer<Data>& TravCon) {
 }
 
 
+
 //MappableContainer
 template <typename Data>
 BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data>&& MapCon) noexcept {
@@ -230,11 +231,10 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data>&& MapCon) noexcept {
     MapCon.Map([&que](Data& data) {
         NodeLnk*& tmp = *que.HeadNDequeue();
         tmp = new NodeLnk(std::move(data));
-        que.Enqueue(&tmp->left);
-        que.Enqueue(&tmp->right);
+        que.Enqueue(&tmp->LChild);
+        que.Enqueue(&tmp->RChild);
     });
 }
-
 
 
 
@@ -246,6 +246,7 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(const BinaryTreeLnk& bt) {
         root = CopyTree(bt.root);
     }
 }
+
 
 
 //Copy assignment
@@ -264,6 +265,7 @@ BinaryTreeLnk<Data>& BinaryTreeLnk<Data>::operator=(const BinaryTreeLnk& bt) {
 }
 
 
+
 //Move assignment
 template <typename Data>
 BinaryTreeLnk<Data>& BinaryTreeLnk<Data>::operator=(BinaryTreeLnk&& bt) noexcept {
@@ -271,6 +273,7 @@ BinaryTreeLnk<Data>& BinaryTreeLnk<Data>::operator=(BinaryTreeLnk&& bt) noexcept
     std::swap(size, bt.size);
     return *this;
 }
+
 
 
 //Move constructor
@@ -282,12 +285,12 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(BinaryTreeLnk&& bt) noexcept {
     
 
 
-
 //Destructor
 template <typename Data>
 BinaryTreeLnk<Data>::~BinaryTreeLnk() {
     Clear();
 }
+
 
 
 //Operator ==
@@ -307,6 +310,8 @@ const BinaryTree<Data>::Node& BinaryTreeLnk<Data>::Root() const {
     return *root;
 }
 
+
+
 //Root mutable 
 template <typename Data>
 MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::Root() {
@@ -315,6 +320,7 @@ MutableBinaryTree<Data>::MutableNode& BinaryTreeLnk<Data>::Root() {
     }
     return *root;
 }
+
 
 
 //Clear

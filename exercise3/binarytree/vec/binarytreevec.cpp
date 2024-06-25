@@ -23,6 +23,8 @@ BinaryTreeVec<Data>::NodeVec& BinaryTreeVec<Data>::NodeVec::operator=(const Node
     return *this;
 }
 
+
+
 //Move assignment
 template<typename Data>
 BinaryTreeVec<Data>::NodeVec& BinaryTreeVec<Data>::NodeVec::operator=(NodeVec&& node) noexcept {
@@ -96,6 +98,7 @@ const BinaryTree<Data>::Node& BinaryTreeVec<Data>::NodeVec::LeftChild() const {
 }
 
 
+
 //RightChild mutable
 template <typename Data>
 MutableBinaryTree<Data>::MutableNode& BinaryTreeVec<Data>::NodeVec::RightChild() {
@@ -106,7 +109,6 @@ MutableBinaryTree<Data>::MutableNode& BinaryTreeVec<Data>::NodeVec::RightChild()
     return *childsVec->operator[](2*currIndex+2);
 
 }
-
 
 
 
@@ -123,7 +125,7 @@ MutableBinaryTree<Data>::MutableNode& BinaryTreeVec<Data>::NodeVec::LeftChild() 
 /* ************************************************************************** */
 //BinaryTreeVec
 
-
+ 
 
 //Specific constructors
 
@@ -204,6 +206,8 @@ BinaryTreeVec<Data>& BinaryTreeVec<Data>::operator=(const BinaryTreeVec<Data>& b
     return *this;
 }
 
+
+
 //Move assignment
 template <typename Data>
 BinaryTreeVec<Data>& BinaryTreeVec<Data>::operator=(BinaryTreeVec<Data>&& bt) noexcept {
@@ -263,8 +267,6 @@ void BinaryTreeVec<Data>::BreadthTraverse(TraverseFun fun) const {
         }
     }
 }
-
-
 
 
 

@@ -33,7 +33,6 @@ public:
   // Destructor
   virtual ~TraversableContainer() = default;
 
-
   /* ************************************************************************ */
 
   // Copy assignment
@@ -66,7 +65,7 @@ public:
 
   // Specific member function (inherited from TestableContainer)
 
-  inline bool Exists(const Data& ) const noexcept override; // Override TestableContainer member
+  inline bool Exists(const Data&) const noexcept override; // Override TestableContainer member
   
 };
 

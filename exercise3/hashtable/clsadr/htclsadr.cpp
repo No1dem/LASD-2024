@@ -215,7 +215,7 @@ void HashTableClsAdr<Data>::Resize(const unsigned long sizeIN) {
     std::swap(newTableSize, tablesize);
 
     for(unsigned long i = 0; i < newTableSize; i++) {
-            InsertAll(tmp[i]);
+        InsertAll(tmp[i]);
     }
 
     delete[] tmp;

@@ -197,7 +197,7 @@ protected:
 
 public:
 
-    struct MutableNode: Node {
+  struct MutableNode: Node {
                         // Must extend Node
     using BinaryTree<Data>::Node::RightChild;
     using BinaryTree<Data>::Node::LeftChild;

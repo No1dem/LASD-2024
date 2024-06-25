@@ -141,6 +141,14 @@ void stestBinaryTreeFloat(lasd::MutableBinaryTree<double> & bt, uint & testnum, 
     itr3.Reset();
     lasd::BTInOrderIterator<double> newitr3(move(itr3));
     itr3.Reset();
+    ++itr3;
+    cout<<"\n\n\nProva 3\n\n";
+
+    GetItrValue(loctestnum, loctesterr, newitr3, false, 0.3);
+    GetItrValue(loctestnum, loctesterr, newitr3, true, 2.1);
+    ++newitr3;
+    GetItrValue(loctestnum, loctesterr, newitr3, true, 0.3);
+
 
     lasd::BTPostOrderIterator<double> itr4(bt);
     GetItrValue(loctestnum, loctesterr, itr4, true, 2.1);
@@ -156,9 +164,24 @@ void stestBinaryTreeFloat(lasd::MutableBinaryTree<double> & bt, uint & testnum, 
     Terminated(loctestnum, loctesterr, itr4, false);
     ++itr4;
     GetItrValue(loctestnum, loctesterr, itr4, true, 0.3);
+    cout << "Ciaoooo\n\n" << endl;
     itr4.Reset();
     lasd::BTPostOrderIterator<double> newitr4(move(itr4));
+    cout <<"\n\n\n AAAAAAAAAA PROVAAAAAAAAAAA\n\n\n";
     itr4.Reset();
+    cout << "1" << endl;
+    Terminated(loctestnum, loctesterr, itr4, true);
+    cout << "2" << endl;
+    GetItrValue(loctestnum, loctesterr, itr4, false, 2.1);
+
+
+    GetItrValue(loctestnum, loctesterr, newitr4, true, 2.1);
+    Terminated(loctestnum, loctesterr, newitr4, false);
+    ++newitr4;
+    GetItrValue(loctestnum, loctesterr, newitr4, true, 0.3);
+    newitr4.Reset();
+    GetItrValue(loctestnum, loctesterr, newitr4, true, 2.1);
+
   }
   catch (...) {
     loctestnum++; loctesterr++;

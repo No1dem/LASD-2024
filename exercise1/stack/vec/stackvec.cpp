@@ -104,9 +104,10 @@ inline Data& StackVec<Data>::Top() {
 //Pop
 template <typename Data> 
 inline void StackVec<Data>::Pop() {
-  if (top == 0) {
-    throw std::length_error("The stack is empty");
-  }
+    if (top == 0) {
+        throw std::length_error("The stack is empty");
+    }
+    
     DecreaseSize();
     top--;
 }

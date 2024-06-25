@@ -34,7 +34,7 @@ public:
   Container& operator=(const Container&) = delete; // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  Container& operator=(const Container&&) noexcept = delete; // Move assignment of abstract types is not possible.
+  Container& operator=(Container&&) noexcept = delete; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -121,8 +121,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  ResizableContainer operator==(const ResizableContainer&) const noexcept = delete; // Comparison of abstract types is not possible.
-  ResizableContainer operator!=(const ResizableContainer&) const noexcept = delete; // Comparison of abstract types is not possible.
+  bool operator==(const ResizableContainer&) const noexcept = delete; // Comparison of abstract types is not possible.
+  bool operator!=(const ResizableContainer&) const noexcept = delete; // Comparison of abstract types is not possible.
 
   /* ************************************************************************ */
 
